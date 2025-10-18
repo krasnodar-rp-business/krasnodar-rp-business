@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRASNODAR RP | Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            margin-top: 80px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Filters */
+        .filters {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-color: #667eea;
+        }
+
+        /* Business Grid */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .business-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .business-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .business-id {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .business-status {
+            background: #00d26a;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .status-sold {
+            background: #ff4757;
+        }
+
+        .business-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .business-fullname {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .business-description {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .business-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .business-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .business-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .buy-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .buy-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 2% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
+
+        .close:hover {
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .admin-section {
+            margin-bottom: 2rem;
+        }
+
+        .admin-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .applications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .application-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .application-id {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .application-status {
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #ffa502;
+            color: #000;
+        }
+
+        .status-completed {
+            background: #00d26a;
+            color: #000;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn-complete {
+            background: #00d26a;
+            color: white;
+        }
+
+        .btn-free {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #ff4757;
+            color: white;
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+        }
+
+        .success-message h3 {
+            color: #00d26a;
+            margin-bottom: 1rem;
+        }
+
+        .app-id-display {
+            background: rgba(0, 210, 106, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid #00d26a;
+            word-break: break-all;
+        }
+
+        .app-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .instructions {
+            text-align: left;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .instructions ol {
+            margin-left: 1.5rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Login Form */
+        .login-form {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .login-form h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+        }
+
+        /* Business Management */
+        .business-management {
+            margin-top: 2rem;
+        }
+
+        .business-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .business-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .business-info {
+            flex: 1;
+        }
+
+        .business-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>KRASNODAR RolePlay</h1>
+                <span>Премиум marketplace</span>
+            </div>
+            <nav class="nav">
+                <a href="#businesses" class="nav-link">Бизнесы</a>
+                <a href="#stats" class="nav-link">Статистика</a>
+                <a href="#admin" class="nav-link">Админка</a>
+                <a href="#faq" class="nav-link">Правила</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title">ЭЛИТНАЯ НЕДВИЖИМОСТЬ HAMBURG</h2>
+            <p class="hero-subtitle">25+ премиум бизнесов для вашего RolePlay опыта</p>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section id="stats" class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number" id="totalBusinesses">25+</span>
+                <span class="stat-label">Бизнесов в продаже</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="soldBusinesses">12</span>
+                <span class="stat-label">Уже продано</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">45M+</span>
+                <span class="stat-label">Общий оборот</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Поддержка</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="container">
+        <div class="filters">
+            <div class="filter-group">
+                <span>Уровень:</span>
+                <button class="filter-btn active" data-level="all">Все</button>
+                <button class="filter-btn" data-level="1">M0-1</button>
+                <button class="filter-btn" data-level="2">M0-2</button>
+                <button class="filter-btn" data-level="3">M0-3</button>
+                <button class="filter-btn" data-level="4">M0-4</button>
+                <button class="filter-btn" data-level="5">M0-5</button>
+            </div>
+            <div class="filter-group">
+                <span>Статус:</span>
+                <button class="filter-btn active" data-status="all">Все</button>
+                <button class="filter-btn" data-status="available">Свободны</button>
+                <button class="filter-btn" data-status="sold">Проданы</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Businesses Section -->
+    <section id="businesses" class="container">
+        <div class="business-grid" id="businessGrid">
+            <!-- Бизнесы будут добавляться через JavaScript -->
+        </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="admin" class="container">
+        <div class="admin-panel">
+            <h2 style="color: #667eea; margin-bottom: 2rem;">📊 Панель администратора</h2>
+            
+            <div id="adminLoginForm" class="login-form">
+                <h3>🔐 Вход в админ-панель</h3>
+                <div class="form-group">
+                    <label for="adminPassword">Пароль:</label>
+                    <input type="password" id="adminPassword" placeholder="Введите пароль">
+                </div>
+                <button class="btn-primary" onclick="loginToAdmin()">Войти</button>
+            </div>
+            
+            <div id="adminContent" style="display: none;">
+                <div class="admin-section">
+                    <h3>Заявки на покупку</h3>
+                    <div class="applications-list" id="applicationsList">
+                        <!-- Заявки будут здесь -->
+                    </div>
+                </div>
+
+                <div class="admin-section business-management">
+                    <h3>Управление бизнесами</h3>
+                    <div class="business-list" id="businessList">
+                        <!-- Список бизнесов для управления -->
+                    </div>
+                </div>
+                
+                <button class="btn-primary" onclick="logoutAdmin()" style="margin-top: 1rem;">Выйти</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="container">
+        <div class="business-card">
+            <h3 style="color: #667eea; margin-bottom: 1rem;">📋 Правила покупки бизнесов</h3>
+            <div class="business-details">
+                <div class="detail-item">
+                    <span>💰 Налоги:</span>
+                    <span>Еженедельная оплата за обслуживание</span>
+                </div>
+                <div class="detail-item">
+                    <span>⏰ Просрочки:</span>
+                    <span>+1к к оплате за каждый день просрочки</span>
+                </div>
+                <div class="detail-item">
+                    <span>🚫 Изъятие:</span>
+                    <span>11+ дней без оплаты → бизнес изымается</span>
+                </div>
+                <div class="detail-item">
+                    <span>🏠 Требования:</span>
+                    <span>Некоторые бизнесы требуют наличие дома</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 KRASNODAR RolePlay. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Buy Modal -->
+    <div id="buyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalForm">
+                <h3>Покупка бизнеса</h3>
+                <form id="buyForm">
+                    <input type="hidden" id="businessId">
+                    <div class="form-group">
+                        <label for="discordId">Ваш Discord ID:</label>
+                        <input type="text" id="discordId" required placeholder="Например: username#1234">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Контакт для связи:</label>
+                        <input type="text" id="contact" required placeholder="Telegram или другой мессенджер">
+                    </div>
+                    <button type="submit" class="btn-primary">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ВСЕ 27 бизнесов - ПОЛНЫЙ список
+        const businesses = [
+            {
+                id: 1, name: "Казино", fullName: "ООО КРГ. Казино", level: "4", businessNumber: "16", status: "available",
+                price: "2.500.000", weeklyIncome: "260.000", tax: "15.000", owner: "Отсутствует",
+                description: "Место где можно пополнить свой счёт, ну или же проиграть..) Куча азартных игр, алкоголя и никотина, все это вы можете встретить в нашем бизнесе Азартных Игр. Станьте владельцем казино, чтобы заработать миллионы и стать успешным.(Или же разориться, вдруг кому то повезет на джекпот)."
+            },
+            {
+                id: 2, name: "Склад", fullName: "ООО КРГ. Склад", level: "3", businessNumber: "22", status: "available",
+                price: "200.000", weeklyIncome: "55.000", tax: "2.000", owner: "Отсутствует",
+                description: "Для этого обьекта отсуствует какое-либо описание.."
+            },
+            {
+                id: 3, name: "Банк", fullName: "ООО КРГ. Банк", level: "5", businessNumber: "1", status: "available",
+                price: "3.000.000", weeklyIncome: "350.000", tax: "10.000", owner: "отсутствует",
+                description: "Один из самых крупных бизнесов города Hamburg. Станьте владельцем данного объекта чтобы контролировать все платежи и электронные действия переводов. Ваша задача - охранять самое ценное; деньги, которыми жаждует полакомиться каждый криминал района."
+            },
+            {
+                id: 4, name: "Электроснабжение", fullName: "ООО КРГ. Центр электроснабжения", level: "5", businessNumber: "21", status: "available",
+                price: "2.800.000", weeklyIncome: "290.000", tax: "25.000", owner: "отсутствует",
+                description: "Для этого объекта отсутствует какое-либо описание.."
+            },
+            {
+                id: 5, name: "Отельный комплекс", fullName: "ООО КРГ. Отельный комплекс", level: "4", businessNumber: "17", status: "available",
+                price: "1.000.000", weeklyIncome: "150.000", tax: "10.000", owner: "отсутствует",
+                description: "Отличное место для того чтобы остановиться на пару дней, если у вас нету дома."
+            },
+            {
+                id: 6, name: "Заправка Gas-N-Go", fullName: "ООО КРГ. Заправка Gas-N-Go", level: "2", businessNumber: "14", status: "sold",
+                price: "600.000", weeklyIncome: "70.000", tax: "5.000", owner: "1096807300838211615",
+                description: "Для этого бизнеса отсутствует какое-либо описание.."
+            },
+            {
+                id: 7, name: "Стрип-клуб", fullName: "ООО КРГ. Стрип-клуб", level: "4", businessNumber: "27", status: "sold",
+                price: "900.000", weeklyIncome: "150.000", tax: "15.000", owner: "528654724585488414",
+                description: "Элитное заведение для искушённой публики, где искусство соблазна встречается с высоким уровнем сервиса. Идеальное место для деловых встреч и приватного отдыха.",
+                note: "Требуется наличие дома"
+            },
+            {
+                id: 8, name: "Магазин одежды", fullName: "ООО КРГ. Магазин одежды", level: "2", businessNumber: "9", status: "sold",
+                price: "280.000", weeklyIncome: "75.000", tax: "6.000", owner: "1188447108236316804",
+                description: "Качестваенная, и красивая одежда на любой вкус и бюджет."
+            },
+            {
+                id: 9, name: "Фермерский магазин", fullName: "ООО КРГ. Фермерский магазин", level: "1", businessNumber: "10", status: "sold",
+                price: "240.000", weeklyIncome: "30.000", tax: "3.000", owner: "1188447108236316804",
+                description: "Для этого бизнеса отсутствует како-либо описание.."
+            },
+            {
+                id: 10, name: "Магазин инструментов", fullName: "ООО КРГ. Магазин инструментов", level: "1", businessNumber: "6", status: "sold",
+                price: "300.000", weeklyIncome: "50.000", tax: "5.000", owner: "1188447108236316804",
+                description: "Для этого бизнеса отсутствует какое-либо описание.."
+            },
+            {
+                id: 11, name: "Подземная Парковка", fullName: "ООО КРГ. Подземная Парковка", level: "2", businessNumber: "5", status: "sold",
+                price: "175.000", weeklyIncome: "40.000", tax: "4.500", owner: "1188447108236316804",
+                description: "Подземная парковка - лучший вариант защитить свое транспортное средство если вы надолго уезжаете. Хорошая охраняемость, чистая теретория и удобные парковочные места. Станьте владельцем подземной парковки чтобы поддерживать объект."
+            },
+            {
+                id: 12, name: "Заправка Арес", fullName: "ООО КРГ. Заправка Арес", level: "2", businessNumber: "13", status: "sold",
+                price: "400.000", weeklyIncome: "85.000", tax: "5.000", owner: "1188447108236316804",
+                description: "Для этого бизнеса отсутствует какое-либо описание.."
+            },
+            {
+                id: 13, name: "Грузовая компания", fullName: "ООО КРГ. Грузовая компания", level: "3", businessNumber: "8", status: "sold",
+                price: "600.000", weeklyIncome: "75.000", tax: "5.000", owner: "1188447108236316804",
+                description: "Компания занимающаяся грузовыми перевозками, забирая товары а порта и развозя по всему городу."
+            },
+            {
+                id: 14, name: "Автобусная Компания", fullName: "ООО КРГ. Автобусная Компания", level: "3", businessNumber: "7", status: "sold",
+                price: "700.000", weeklyIncome: "85.000", tax: "6.000", owner: "1188447108236316804",
+                description: "Автобусная компания место где управляеться все маршруты автобусов и время поездок. Станьте владельцем этой компании чтобы снабжать граждан временным транспортом."
+            },
+            {
+                id: 15, name: "Центр водоснабжения", fullName: "ООО КРГ. Центр водоснабжения", level: "5", businessNumber: "20", status: "sold",
+                price: "2.000.000", weeklyIncome: "260.000", tax: "25.000", owner: "1188447108236316804",
+                description: "Для этого обьекта отсуствует какое-либо описание.."
+            },
+            {
+                id: 16, name: "Кальянная", fullName: "ООО КРГ. Кальянная", level: "2", businessNumber: "25", status: "sold",
+                price: "200.000", weeklyIncome: "65.000", tax: "3.000", owner: "816658515082346497",
+                description: "Для этого обьекта отсуствует какое-либо описание.."
+            },
+            {
+                id: 17, name: "Erwin's Клуб", fullName: "ООО КРГ. Erwin's Клуб", level: "3", businessNumber: "3", status: "sold",
+                price: "400.000", weeklyIncome: "90.000", tax: "10.000", owner: "816658515082346497",
+                description: "Прекрасный клуб города. Ночные тусовки, качественный алкоголь, и главное - веселья. Клуб открыт 24/7, с большим количеством вкусняшек и молодежной музыки. Станьте владельцем клуба чтобы контролировать его роботу. Уверен, этот клуб станет очень популярен в нашем городе."
+            },
+            {
+                id: 18, name: "Дрочильня", fullName: "ООО КРГ. Дрочильня", level: "2", businessNumber: "26", status: "sold",
+                price: "300.000", weeklyIncome: "90.000", tax: "8.000", owner: "742378481920376843",
+                description: "Уединённое заведение для взрослых, где каждый найдет способ расслабиться без лишних глаз и вопросов.",
+                note: "Требуется наличие дома"
+            },
+            {
+                id: 19, name: "Заправка Оссо", fullName: "ООО КРГ. Заправка Оссо", level: "2", businessNumber: "15", status: "sold",
+                price: "300.000", weeklyIncome: "55.000", tax: "5.000", owner: "528654724585488414",
+                description: "Для этого бизнеса отсутствует какое-либо описание.."
+            },
+            {
+                id: 20, name: "Ларек", fullName: "ООО КРГ. Ларек", level: "1", businessNumber: "23", status: "sold",
+                price: "175.000", weeklyIncome: "42.000", tax: "2.000", owner: "528654724585488414",
+                description: "Для этого обьекта отсуствует какое-либо описание.."
+            },
+            {
+                id: 21, name: "Ресторанный комплекс", fullName: "ООО КРГ. Ресторанный комплекс", level: "3", businessNumber: "19", status: "sold",
+                price: "500.000", weeklyIncome: "80.000", tax: "10.000", owner: "1262559706317197393",
+                description: "Вкусные блюда и отличная подача."
+            },
+            {
+                id: 22, name: "Автосалон", fullName: "ООО КРГ. Автосалон", level: "4", businessNumber: "6", status: "available",
+                price: "1.500.000", weeklyIncome: "105.000", tax: "5.000", owner: "Отсутствует",
+                description: "Автосалон - Место где вы можете купить любой автомобиль, на любой вкус и сумму. Эксклюзивные авто, спорткары, и семейные машины. Станьте владельцем автосалона чтобы пополнять город лучшими транспортными средствами страны."
+            },
+            {
+                id: 23, name: "Аптека", fullName: "ООО КРГ. Аптека", level: "2", businessNumber: "24", status: "sold",
+                price: "200.000", weeklyIncome: "52.000", tax: "2.000", owner: "742378481920376843",
+                description: "Для этого обьекта отсуствует какое-либо описание.."
+            },
+            {
+                id: 24, name: "Ювелирный магазин", fullName: "ООО КРГ. Магазин ювелирных изделий", level: "4", businessNumber: "2", status: "sold",
+                price: "800.000", weeklyIncome: "90.000", tax: "7.500", owner: "742378481920376843",
+                description: "Лучшее место для покупки ювелирных изделий. Кольца, серьги, браслеты, часы лимитированных коллекций, и многое другое что есть тут. Специальные серийные номера, которые добавляют ещё больше цены к украшениям. Красивые стенды, и подход. Станьте владельцем ювелирного магазина, чтобы продавать невероятно красивые изделие которые заполнят весь город своим блеском и красотой."
+            },
+            {
+                id: 25, name: "Порт", fullName: "ООО КРГ. Порт", level: "4", businessNumber: "4", status: "sold",
+                price: "2.000.000", weeklyIncome: "110.000", tax: "7.500", owner: "742378481920376843",
+                description: "Порт - так же как и банк один из самых масштабных объектов в городе. Поставка самых различных товаров, от продуктов до серьезной техники и транспортных средств. Управление контейнерами, погрузкой, и отправкой. Станьте владельцем этого бизнеса чтобы выполнять все эти обязанности и получаить огромную зарплату за каждую выполненную работу."
+            },
+            {
+                id: 26, name: "Недостроенный ТРЦ", fullName: "ООО КРГ. Недостроенный Торговый Центр", level: "5", businessNumber: "18", status: "sold",
+                price: "500.000", weeklyIncome: "45.000", tax: "20.500", owner: "742378481920376843",
+                description: "Станьте владельцем этого недостроенного торгового центра, чтобы достроить его и зарабатывать миллионы!"
+            },
+            {
+                id: 27, name: "Торговые автоматы", fullName: "ООО КРГ. Тогровые автоматы", level: "1", businessNumber: "12", status: "sold",
+                price: "400.000", weeklyIncome: "65.000", tax: "2.500", owner: "643132158839619642",
+                description: "Для этого бизнеса отсутствует какое-либо описание.."
+            }
+        ];
+
+        // Конфигурация
+        const ADMIN_PASSWORD = "EexfAgdK";
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/example-hash";
+
+        // Загрузка бизнесов на страницу
+        function loadBusinesses(filterLevel = 'all', filterStatus = 'all') {
+            const grid = document.getElementById('businessGrid');
+            if (!grid) {
+                console.error('Element businessGrid not found');
+                return;
+            }
+            
+            grid.innerHTML = '';
+            
+            const filteredBusinesses = businesses.filter(business => {
+                const levelMatch = filterLevel === 'all' || business.level === filterLevel;
+                const statusMatch = filterStatus === 'all' || business.status === filterStatus;
+                return levelMatch && statusMatch;
+            });
+            
+            filteredBusinesses.forEach(business => {
+                const businessCard = document.createElement('div');
+                businessCard.className = 'business-card';
+                businessCard.innerHTML = `
+                    <div class="business-header">
+                        <span class="business-id">M0-${business.level} | #${business.businessNumber}</span>
+                        <span class="business-status ${business.status === 'sold' ? 'status-sold' : ''}">
+                            ${business.status === 'sold' ? 'Продано' : 'На продаже'}
+                        </span>
+                    </div>
+                    <h3 class="business-name">${business.name}</h3>
+                    <p class="business-fullname">${business.fullName}</p>
+                    <p class="business-description">${business.description}</p>
+                    <div class="business-details">
+                        <div class="detail-item">
+                            <span>Цена:</span>
+                            <span>$${business.price}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Доход в неделю:</span>
+                            <span>$${business.weeklyIncome}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Налоги в неделю:</span>
+                            <span>$${business.tax}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Владелец:</span>
+                            <span>${business.owner === 'Отсутствует' || business.owner === 'отсутствует' ? 'Свободен' : 'ID: ' + business.owner}</span>
+                        </div>
+                        ${business.note ? `<div class="detail-item">
+                            <span>📌 Примечание:</span>
+                            <span>${business.note}</span>
+                        </div>` : ''}
+                    </div>
+                    <div class="business-meta">
+                        <div class="business-price">$${business.price}</div>
+                        <button class="buy-btn" onclick="openBuyModal(${business.id})" ${business.status === 'sold' ? 'disabled' : ''}>
+                            ${business.status === 'sold' ? 'Продано' : 'Купить'}
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(businessCard);
+            });
+
+            updateStats();
+        }
+
+        // Обновление статистики
+        function updateStats() {
+            const totalAvailable = businesses.filter(b => b.status === 'available').length;
+            const totalSold = businesses.filter(b => b.status === 'sold').length;
+            
+            const totalBusinessesEl = document.getElementById('totalBusinesses');
+            const soldBusinessesEl = document.getElementById('soldBusinesses');
+            
+            if (totalBusinessesEl) totalBusinessesEl.textContent = totalAvailable;
+            if (soldBusinessesEl) soldBusinessesEl.textContent = totalSold;
+        }
+
+        // Аутентификация в админке
+        function loginToAdmin() {
+            const passwordInput = document.getElementById('adminPassword');
+            if (!passwordInput) return;
+            
+            const password = passwordInput.value;
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('adminLoginForm').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+                loadApplications();
+                loadBusinessManagement();
+            } else {
+                alert('Неверный пароль!');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminLoginForm').style.display = 'block';
+            document.getElementById('adminContent').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // Загрузка заявок в админку
+        function loadApplications() {
+            const applicationsList = document.getElementById('applicationsList');
+            if (!applicationsList) return;
+            
+            const applications = JSON.parse(localStorage.getItem('businessApplications') || '[]');
+            
+            applicationsList.innerHTML = '';
+            
+            if (applications.length === 0) {
+                applicationsList.innerHTML = '<p>Нет активных заявок</p>';
+                return;
+            }
+            
+            applications.forEach((app, index) => {
+                const appItem = document.createElement('div');
+                appItem.className = 'application-item';
+                appItem.innerHTML = `
+                    <div class="application-header">
+                        <span class="application-id">${app.id}</span>
+                        <span class="application-status ${app.status === 'completed' ? 'status-completed' : 'status-pending'}">
+                            ${app.status === 'completed' ? 'Завершено' : 'В обработке'}
+                        </span>
+                    </div>
+                    <div><strong>Бизнес:</strong> ${app.business}</div>
+                    <div><strong>Discord:</strong> ${app.discordId}</div>
+                    <div><strong>Контакт:</strong> ${app.contact}</div>
+                    <div><strong>Время:</strong> ${app.timestamp}</div>
+                    ${app.status !== 'completed' ? `
+                    <div class="admin-actions">
+                        <button class="admin-btn btn-complete" onclick="completeApplication(${index}, '${app.discordId}')">
+                            Подтвердить покупку
+                        </button>
+                        <button class="admin-btn btn-delete" onclick="deleteApplication(${index})">
+                            Удалить
+                        </button>
+                    </div>
+                    ` : ''}
+                `;
+                applicationsList.appendChild(appItem);
+            });
+        }
+
+        // Загрузка управления бизнесами
+        function loadBusinessManagement() {
+            const businessList = document.getElementById('businessList');
+            if (!businessList) return;
+            
+            businessList.innerHTML = '';
+            
+            businesses.forEach((business, index) => {
+                const businessItem = document.createElement('div');
+                businessItem.className = 'business-item';
+                businessItem.innerHTML = `
+                    <div class="business-info">
+                        <strong>${business.name}</strong> (M0-${business.level}) - 
+                        <span style="color: ${business.status === 'available' ? '#00d26a' : '#ff4757'}">
+                            ${business.status === 'available' ? 'Свободен' : 'Продано'}
+                        </span>
+                        ${business.status === 'sold' ? ` - Владелец: ${business.owner}` : ''}
+                    </div>
+                    <div class="business-actions">
+                        ${business.status === 'sold' ? 
+                            `<button class="admin-btn btn-free" onclick="freeBusiness(${index})">
+                                Освободить
+                            </button>` : 
+                            `<button class="admin-btn btn-complete" onclick="markAsSold(${index})">
+                                Отметить проданным
+                            </button>`
+                        }
+                    </div>
+                `;
+                businessList.appendChild(businessItem);
+            });
+        }
+
+        // Освободить бизнес (сделать доступным)
+        function freeBusiness(businessIndex) {
+            if (confirm(`Вы уверены, что хотите освободить бизнес "${businesses[businessIndex].name}"?`)) {
+                businesses[businessIndex].status = 'available';
+                businesses[businessIndex].owner = 'Отсутствует';
+                
+                // Сохраняем изменения
+                localStorage.setItem('businesses', JSON.stringify(businesses));
+                
+                // Обновляем интерфейсы
+                loadBusinesses();
+                loadBusinessManagement();
+                updateStats();
+                
+                alert(`✅ Бизнес "${businesses[businessIndex].name}" теперь свободен для покупки`);
+            }
+        }
+
+        // Отметить бизнес как проданный
+        function markAsSold(businessIndex) {
+            const newOwner = prompt(`Введите Discord ID нового владельца для бизнеса "${businesses[businessIndex].name}":`);
+            if (newOwner) {
+                businesses[businessIndex].status = 'sold';
+                businesses[businessIndex].owner = newOwner;
+                
+                // Сохраняем изменения
+                localStorage.setItem('businesses', JSON.stringify(businesses));
+                
+                // Обновляем интерфейсы
+                loadBusinesses();
+                loadBusinessManagement();
+                updateStats();
+                
+                alert(`✅ Бизнес "${businesses[businessIndex].name}" отмечен как проданный владельцу ${newOwner}`);
+            }
+        }
+
+        // Подтверждение покупки
+        function completeApplication(appIndex, discordId) {
+            const applications = JSON.parse(localStorage.getItem('businessApplications') || '[]');
+            const application = applications[appIndex];
+            
+            // Находим бизнес в заявке
+            const businessIndex = businesses.findIndex(b => b.name === application.business);
+            if (businessIndex !== -1) {
+                // Обновляем статус бизнеса
+                businesses[businessIndex].status = 'sold';
+                businesses[businessIndex].owner = discordId;
+                
+                // Сохраняем обновленные бизнесы
+                localStorage.setItem('businesses', JSON.stringify(businesses));
+                
+                // Обновляем интерфейс
+                loadBusinesses();
+                loadBusinessManagement();
+            }
+            
+            // Помечаем заявку как завершенную
+            applications[appIndex].status = 'completed';
+            localStorage.setItem('businessApplications', JSON.stringify(applications));
+            
+            // Перезагружаем список заявок
+            loadApplications();
+            
+            alert(`✅ Покупка подтверждена! Бизнес "${application.business}" теперь принадлежит ${discordId}`);
+        }
+
+        // Удаление заявки
+        function deleteApplication(appIndex) {
+            const applications = JSON.parse(localStorage.getItem('businessApplications') || '[]');
+            applications.splice(appIndex, 1);
+            localStorage.setItem('businessApplications', JSON.stringify(applications));
+            loadApplications();
+        }
+
+        // Фильтрация
+        function setupFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    if (!parent) return;
+                    
+                    const filterType = parent.querySelector('span')?.textContent;
+                    const filterValue = this.dataset.level || this.dataset.status;
+                    
+                    // Удаляем активный класс у всех кнопок в группе
+                    parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    // Добавляем активный класс текущей кнопке
+                    this.classList.add('active');
+                    
+                    if (filterType === 'Уровень:') {
+                        const statusFilter = document.querySelector('[data-status].active')?.dataset.status || 'all';
+                        loadBusinesses(filterValue, statusFilter);
+                    } else {
+                        const levelFilter = document.querySelector('[data-level].active')?.dataset.level || 'all';
+                        loadBusinesses(levelFilter, filterValue);
+                    }
+                });
+            });
+        }
+
+        // Модальное окно покупки
+        function openBuyModal(businessId) {
+            const business = businesses.find(b => b.id === businessId);
+            const modal = document.getElementById('buyModal');
+            const businessIdInput = document.getElementById('businessId');
+            
+            if (!business || !modal || !businessIdInput) return;
+            
+            businessIdInput.value = businessId;
+            modal.style.display = 'block';
+            
+            const modalTitle = modal.querySelector('h3');
+            if (modalTitle) {
+                modalTitle.textContent = `Покупка: ${business.name}`;
+            }
+        }
+
+        // Закрытие модального окна
+        function setupModal() {
+            const modal = document.getElementById('buyModal');
+            const closeBtn = modal?.querySelector('.close');
+            
+            if (!closeBtn) return;
+            
+            closeBtn.onclick = function() {
+                modal.style.display = 'none';
+                resetModal();
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                    resetModal();
+                }
+            }
+        }
+
+        // Сброс модального окна
+        function resetModal() {
+            const form = document.getElementById('buyForm');
+            const modalForm = document.getElementById('modalForm');
+            if (!form || !modalForm) return;
+            
+            form.style.display = 'block';
+            form.reset();
+            
+            // Удаляем успешное сообщение если есть
+            const successMsg = modalForm.querySelector('.success-message');
+            if (successMsg) {
+                successMsg.remove();
+            }
+        }
+
+        // Обработка формы покупки
+        function setupForm() {
+            const form = document.getElementById('buyForm');
+            if (!form) return;
+            
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                
+                const businessId = document.getElementById('businessId')?.value;
+                const discordId = document.getElementById('discordId')?.value;
+                const contact = document.getElementById('contact')?.value;
+                
+                if (!businessId || !discordId || !contact) {
+                    alert('Заполните все поля!');
+                    return;
+                }
+                
+                const business = businesses.find(b => b.id === parseInt(businessId));
+                if (!business) {
+                    alert('Бизнес не найден!');
+                    return;
+                }
+                
+                // Создаем заявку
+                const applicationData = {
+                    id: generateApplicationId(),
+                    business: business.name,
+                    price: business.price,
+                    discordId: discordId,
+                    contact: contact,
+                    timestamp: new Date().toLocaleString('ru-RU'),
+                    status: 'pending'
+                };
+
+                // Сохраняем заявку
+                saveApplication(applicationData);
+                
+                // Отправляем в Discord
+                sendToDiscord(applicationData);
+                
+                // Показываем успешное сообщение
+                showApplicationSuccess(applicationData);
+            };
+        }
+
+        // Генерация ID заявки
+        function generateApplicationId() {
+            return 'APP-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
+        }
+
+        // Сохранение заявки
+        function saveApplication(data) {
+            const applications = JSON.parse(localStorage.getItem('businessApplications') || '[]');
+            applications.push(data);
+            localStorage.setItem('businessApplications', JSON.stringify(applications));
+            loadApplications();
+        }
+
+        // Отправка в Discord
+        function sendToDiscord(applicationData) {
+            if (DISCORD_WEBHOOK_URL.includes('example-hash')) return;
+            
+            const embed = {
+                title: "📋 Новая заявка на покупку бизнеса",
+                color: 0x667eea,
+                fields: [
+                    {
+                        name: "Номер заявки",
+                        value: applicationData.id,
+                        inline: true
+                    },
+                    {
+                        name: "Бизнес",
+                        value: applicationData.business,
+                        inline: true
+                    },
+                    {
+                        name: "Цена",
+                        value: `$${applicationData.price}`,
+                        inline: true
+                    },
+                    {
+                        name: "Discord ID",
+                        value: applicationData.discordId,
+                        inline: true
+                    },
+                    {
+                        name: "Контакт",
+                        value: applicationData.contact,
+                        inline: true
+                    },
+                    {
+                        name: "Время",
+                        value: applicationData.timestamp,
+                        inline: true
+                    }
+                ],
+                timestamp: new Date().toISOString()
+            };
+
+            fetch(DISCORD_WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ embeds: [embed] })
+            }).catch(error => console.error('Ошибка отправки в Discord:', error));
+        }
+
+        // Показ успешного сообщения
+        function showApplicationSuccess(appData) {
+            const form = document.getElementById('buyForm');
+            const modalForm = document.getElementById('modalForm');
+            
+            if (!form || !modalForm) return;
+            
+            // Скрываем форму
+            form.style.display = 'none';
+            
+            // Создаем сообщение об успехе
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.innerHTML = `
+                <h3>✅ Заявка создана!</h3>
+                
+                <div class="app-id-display">
+                    <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Номер заявки:</div>
+                    <div style="font-size: 1.2rem; font-weight: bold; color: #00d26a; margin: 0.5rem 0;">${appData.id}</div>
+                </div>
+                
+                <div class="app-details">
+                    <div><strong>Бизнес:</strong> ${appData.business}</div>
+                    <div><strong>Сумма:</strong> $${appData.price}</div>
+                </div>
+                
+                <div class="instructions">
+                    <h4 style="color: #667eea; margin-bottom: 1rem;">📝 Инструкция по оплате:</h4>
+                    <ol>
+                        <li>Оплати <strong>$${appData.price}</strong> через UnbelievaBoat</li>
+                        <li>Напиши администратору в Discord номер заявки: <strong>${appData.id}</strong></li>
+                        <li>Жди подтверждения и получения роли</li>
+                    </ol>
+                </div>
+                
+                <button onclick="closeModalAndReset()" class="btn-primary">Понятно</button>
+            `;
+            
+            modalForm.appendChild(successDiv);
+        }
+
+        // Закрытие модалки и сброс
+        function closeModalAndReset() {
+            const modal = document.getElementById('buyModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            resetModal();
+        }
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
+            
+            // Загружаем сохраненные бизнесы или используем стандартные
+            const savedBusinesses = localStorage.getItem('businesses');
+            if (savedBusinesses) {
+                try {
+                    businesses = JSON.parse(savedBusinesses);
+                } catch (e) {
+                    console.error('Error parsing saved businesses:', e);
+                }
+            } else {
+                localStorage.setItem('businesses', JSON.stringify(businesses));
+            }
+            
+            loadBusinesses();
+            setupFilters();
+            setupModal();
+            setupForm();
+            
+            // Плавная прокрутка
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            console.log('Initialization complete');
+        });
+
+        // Делаем функции глобальными для onclick атрибутов
+        window.loginToAdmin = loginToAdmin;
+        window.logoutAdmin = logoutAdmin;
+        window.openBuyModal = openBuyModal;
+        window.completeApplication = completeApplication;
+        window.deleteApplication = deleteApplication;
+        window.freeBusiness = freeBusiness;
+        window.markAsSold = markAsSold;
+        window.closeModalAndReset = closeModalAndReset;
+    </script>
+</body>
+</html>
