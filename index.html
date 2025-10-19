@@ -552,6 +552,27 @@
             display: flex;
             gap: 0.5rem;
         }
+        
+        /* Sync Status */
+        .sync-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            border: 1px solid rgba(102, 126, 234, 0.5);
+        }
+        
+        .sync-success {
+            color: #00d26a;
+        }
+        
+        .sync-error {
+            color: #ff4757;
+        }
     </style>
 </head>
 <body>
@@ -717,6 +738,11 @@
         </div>
     </div>
 
+    <!-- Sync Status -->
+    <div id="syncStatus" class="sync-status" style="display: none;">
+        <span id="syncMessage"></span>
+    </div>
+
     <script>
         // ВСЕ 27 бизнесов - ПОЛНЫЙ список
         let businesses = [
@@ -862,12 +888,104 @@
         // Конфигурация
         const ADMIN_PASSWORD = "EexfAgdK";
         const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/krasnodar-rp-business";
+        const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwj-LwQ3-khNWFRjSQASabaRN18AeLqZwrj-4DhuDZ4SgcBLl5ilMfp1ZGVX28Joo_XMQ/exec";
 
         // Ключи для localStorage
         const STORAGE_KEYS = {
             BUSINESSES: 'krasnodar_businesses',
-            APPLICATIONS: 'krasnodar_applications'
+            APPLICATIONS: 'krasnodar_applications',
+            LAST_SYNC: 'krasnodar_last_sync'
         };
+
+        // Функции для работы с Google Sheets
+        async function syncWithGoogleSheets() {
+            try {
+                showSyncStatus('🔄 Синхронизация с Google Sheets...', 'sync');
+                
+                const response = await fetch(`${GOOGLE_SHEETS_URL}?action=get_applications`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Сохраняем заявки из Google Sheets
+                    saveApplications(result.data);
+                    
+                    // Обновляем время последней синхронизации
+                    localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
+                    
+                    // Обновляем интерфейс если админ авторизован
+                    if (document.getElementById('adminContent').style.display !== 'none') {
+                        loadApplications();
+                    }
+                    
+                    showSyncStatus('✅ Синхронизация завершена', 'success');
+                    console.log('✅ Синхронизация с Google Sheets завершена');
+                } else {
+                    showSyncStatus('❌ Ошибка синхронизации', 'error');
+                }
+            } catch (error) {
+                console.error('❌ Ошибка синхронизации:', error);
+                showSyncStatus('❌ Ошибка подключения', 'error');
+            }
+        }
+
+        async function addApplicationToSheets(applicationData) {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'add_application',
+                        data: applicationData
+                    })
+                });
+                
+                const result = await response.json();
+                return result.success;
+            } catch (error) {
+                console.error('❌ Ошибка добавления заявки:', error);
+                return false;
+            }
+        }
+
+        async function updateApplicationInSheets(appId, status) {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'update_application',
+                        appId: appId,
+                        status: status
+                    })
+                });
+                
+                const result = await response.json();
+                return result.success;
+            } catch (error) {
+                console.error('❌ Ошибка обновления заявки:', error);
+                return false;
+            }
+        }
+
+        function showSyncStatus(message, type) {
+            const syncStatus = document.getElementById('syncStatus');
+            const syncMessage = document.getElementById('syncMessage');
+            
+            if (!syncStatus || !syncMessage) return;
+            
+            syncMessage.textContent = message;
+            syncStatus.className = `sync-status ${type === 'success' ? 'sync-success' : type === 'error' ? 'sync-error' : ''}`;
+            syncStatus.style.display = 'block';
+            
+            // Автоматически скрываем через 3 секунды
+            setTimeout(() => {
+                syncStatus.style.display = 'none';
+            }, 3000);
+        }
 
         // Загрузка данных из localStorage
         function loadFromStorage() {
@@ -882,6 +1000,12 @@
             } else {
                 saveBusinesses();
             }
+            
+            // Запускаем синхронизацию с Google Sheets
+            syncWithGoogleSheets();
+            
+            // Устанавливаем периодическую синхронизацию каждые 30 секунд
+            setInterval(syncWithGoogleSheets, 30000);
         }
 
         // Сохранение бизнесов
@@ -1131,7 +1255,7 @@
         }
 
         // Подтверждение покупки
-        function completeApplication(appId) {
+        async function completeApplication(appId) {
             const applications = getApplications();
             const appIndex = applications.findIndex(app => app.id === appId);
             
@@ -1156,6 +1280,13 @@
             applications[appIndex].status = 'completed';
             saveApplications(applications);
             
+            // Синхронизируем с Google Sheets
+            const syncSuccess = await updateApplicationInSheets(appId, 'completed');
+            
+            if (syncSuccess) {
+                console.log('✅ Статус заявки обновлен в Google Sheets');
+            }
+            
             // Перезагружаем список заявок
             loadApplications();
             
@@ -1163,11 +1294,19 @@
         }
 
         // Удаление заявки
-        function deleteApplication(appId) {
+        async function deleteApplication(appId) {
             if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
                 const applications = getApplications();
                 const filteredApplications = applications.filter(app => app.id !== appId);
                 saveApplications(filteredApplications);
+                
+                // Синхронизируем с Google Sheets
+                const syncSuccess = await updateApplicationInSheets(appId, 'deleted');
+                
+                if (syncSuccess) {
+                    console.log('✅ Заявка удалена из Google Sheets');
+                }
+                
                 loadApplications();
             }
         }
@@ -1258,7 +1397,7 @@
             const form = document.getElementById('buyForm');
             if (!form) return;
             
-            form.onsubmit = function(e) {
+            form.onsubmit = async function(e) {
                 e.preventDefault();
                 
                 const businessId = document.getElementById('businessId')?.value;
@@ -1292,10 +1431,19 @@
                     status: 'pending'
                 };
 
-                // Сохраняем заявку (синхронизированно для всех)
+                // Сохраняем заявку локально
                 const applications = getApplications();
                 applications.push(applicationData);
                 saveApplications(applications);
+                
+                // Отправляем в Google Sheets
+                const sheetsSuccess = await addApplicationToSheets(applicationData);
+                
+                if (sheetsSuccess) {
+                    console.log('✅ Заявка добавлена в Google Sheets');
+                } else {
+                    console.warn('⚠️ Не удалось добавить заявку в Google Sheets');
+                }
                 
                 // Отправляем в Discord
                 sendToDiscord(applicationData);
