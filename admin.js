@@ -94,7 +94,7 @@ function loadBusinessManagement() {
             <div class="business-info">
                 <strong>${business.name}</strong> (M0-${business.level}) - 
                 <span style="color: ${business.status === 'available' ? '#00d26a' : '#ff4757'}">
-                    ${business.status === 'available' ? 'Свободен' : 'Продано'}
+                    ${business.status === 'available' ? 'Свободен' : 'Розданы'}
                 </span>
                 ${business.status === 'sold' ? ` - Владелец: ${business.owner}` : ''}
             </div>
@@ -121,7 +121,7 @@ async function freeBusiness(businessId) {
         business.status = 'available';
         business.owner = 'Отсутствует';
         
-        await saveDataWithSync();
+        await saveData();
         loadBusinesses();
         loadBusinessManagement();
         updateStats();
@@ -139,7 +139,7 @@ async function markAsSold(businessId) {
         business.status = 'sold';
         business.owner = newOwner;
         
-        await saveDataWithSync();
+        await saveData();
         loadBusinesses();
         loadBusinessManagement();
         updateStats();
@@ -163,7 +163,7 @@ async function completeApplication(appId) {
     
     applications[appIndex].status = 'completed';
     
-    await saveDataWithSync();
+    await saveData();
     
     loadBusinesses();
     loadBusinessManagement();
@@ -177,7 +177,7 @@ async function deleteApplication(appId) {
     if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
         applications = applications.filter(app => app.id !== appId);
         
-        await saveDataWithSync();
+        await saveData();
         loadApplications();
     }
 }
