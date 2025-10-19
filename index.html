@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KRASNODAR RP | Marketplace</title>
     <style>
+        /* Все стили остаются такими же */
         * {
             margin: 0;
             padding: 0;
@@ -906,10 +907,10 @@
             try {
                 showSyncStatus('🔄 Синхронизация с Google Sheets...', 'sync');
                 
-                // Используем JSONP для обхода CORS
+                // Загружаем ВСЕ данные из Google Sheets
                 const timestamp = new Date().getTime();
                 const script = document.createElement('script');
-                script.src = `${GOOGLE_SHEETS_URL}?action=get_applications&callback=handleSheetsResponse&_=${timestamp}`;
+                script.src = `${GOOGLE_SHEETS_URL}?action=get_all_data&callback=handleAllDataResponse&_=${timestamp}`;
                 document.head.appendChild(script);
                 
             } catch (error) {
@@ -918,22 +919,32 @@
             }
         }
 
-        // Обработчик ответа от Google Sheets
-        window.handleSheetsResponse = function(result) {
+        // Обработчик всех данных из Google Sheets
+        window.handleAllDataResponse = function(result) {
             if (result && result.success) {
+                // Обновляем бизнесы из Google Sheets
+                if (result.data.businesses) {
+                    businesses = result.data.businesses;
+                    saveBusinesses();
+                    loadBusinesses();
+                    updateStats();
+                }
+                
                 // Сохраняем заявки из Google Sheets
-                saveApplications(result.data);
+                if (result.data.applications) {
+                    saveApplications(result.data.applications);
+                    
+                    // Обновляем интерфейс если админ авторизован
+                    if (document.getElementById('adminContent').style.display !== 'none') {
+                        loadApplications();
+                    }
+                }
                 
                 // Обновляем время последней синхронизации
                 localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
                 
-                // Обновляем интерфейс если админ авторизован
-                if (document.getElementById('adminContent').style.display !== 'none') {
-                    loadApplications();
-                }
-                
                 showSyncStatus('✅ Синхронизация завершена', 'success');
-                console.log('✅ Синхронизация с Google Sheets завершена');
+                console.log('✅ Все данные синхронизированы с Google Sheets');
             } else {
                 showSyncStatus('❌ Ошибка синхронизации', 'error');
             }
@@ -941,19 +952,16 @@
 
         async function addApplicationToSheets(applicationData) {
             try {
-                // Создаем форму для отправки данных (обход CORS)
-                const formData = new FormData();
-                formData.append('action', 'add_application');
-                formData.append('data', JSON.stringify(applicationData));
-                
                 const response = await fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `action=add_application&data=${encodeURIComponent(JSON.stringify(applicationData))}`
                 });
                 
-                // При no-cors мы не можем прочитать ответ, но запрос отправляется
-                return true;
+                const result = await response.json();
+                return result.success;
             } catch (error) {
                 console.error('❌ Ошибка добавления заявки:', error);
                 return false;
@@ -962,22 +970,36 @@
 
         async function updateApplicationInSheets(appId, status) {
             try {
-                // Создаем форму для отправки данных (обход CORS)
-                const formData = new FormData();
-                formData.append('action', 'update_application');
-                formData.append('appId', appId);
-                formData.append('status', status);
-                
                 const response = await fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `action=update_application&appId=${appId}&status=${status}`
                 });
                 
-                // При no-cors мы не можем прочитать ответ, но запрос отправляется
-                return true;
+                const result = await response.json();
+                return result.success;
             } catch (error) {
                 console.error('❌ Ошибка обновления заявки:', error);
+                return false;
+            }
+        }
+
+        async function updateBusinessInSheets(businessId, updates) {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `action=update_business&businessId=${businessId}&updates=${encodeURIComponent(JSON.stringify(updates))}`
+                });
+                
+                const result = await response.json();
+                return result.success;
+            } catch (error) {
+                console.error('❌ Ошибка обновления бизнеса:', error);
                 return false;
             }
         }
@@ -998,39 +1020,39 @@
             }, 3000);
         }
 
-        // Загрузка данных из localStorage
+        // Загрузка данных
         function loadFromStorage() {
-            // Загружаем бизнесы
+            // Загружаем бизнесы из localStorage как резервный вариант
             const savedBusinesses = localStorage.getItem(STORAGE_KEYS.BUSINESSES);
             if (savedBusinesses) {
                 try {
                     businesses = JSON.parse(savedBusinesses);
+                loadBusinesses();
+                    updateStats();
                 } catch (e) {
                     console.error('Ошибка загрузки бизнесов:', e);
                 }
-            } else {
-                saveBusinesses();
             }
             
-            // Запускаем синхронизацию с Google Sheets
+            // Сразу запускаем синхронизацию с Google Sheets
             syncWithGoogleSheets();
             
-            // Устанавливаем периодическую синхронизацию каждые 20 секунд
-            setInterval(syncWithGoogleSheets, 20000);
+            // Устанавливаем периодическую синхронизацию каждые 15 секунд
+            setInterval(syncWithGoogleSheets, 15000);
         }
 
-        // Сохранение бизнесов
+        // Сохранение бизнесов в localStorage (резервное)
         function saveBusinesses() {
             localStorage.setItem(STORAGE_KEYS.BUSINESSES, JSON.stringify(businesses));
         }
 
-        // Получение заявок
+        // Получение заявок из localStorage (резервное)
         function getApplications() {
             const applications = localStorage.getItem(STORAGE_KEYS.APPLICATIONS);
             return applications ? JSON.parse(applications) : [];
         }
 
-        // Сохранение заявок
+        // Сохранение заявок в localStorage (резервное)
         function saveApplications(applications) {
             localStorage.setItem(STORAGE_KEYS.APPLICATIONS, JSON.stringify(applications));
         }
@@ -1139,7 +1161,7 @@
             refreshInterval = setInterval(() => {
                 loadApplications();
                 syncWithGoogleSheets(); // Дополнительная синхронизация при открытой админке
-            }, 5000); // Обновлять каждые 5 секунд
+            }, 5000);
         }
 
         function stopAutoRefresh() {
@@ -1232,7 +1254,7 @@
         }
 
         // Освободить бизнес (сделать доступным)
-        function freeBusiness(businessId) {
+        async function freeBusiness(businessId) {
             const business = businesses.find(b => b.id === businessId);
             if (!business) return;
             
@@ -1240,17 +1262,28 @@
                 business.status = 'available';
                 business.owner = 'Отсутствует';
                 
+                // Сохраняем локально
                 saveBusinesses();
                 loadBusinesses();
                 loadBusinessManagement();
                 updateStats();
+                
+                // Синхронизируем с Google Sheets
+                const syncSuccess = await updateBusinessInSheets(businessId, {
+                    status: 'available',
+                    owner: 'Отсутствует'
+                });
+                
+                if (syncSuccess) {
+                    console.log('✅ Бизнес обновлен в Google Sheets');
+                }
                 
                 alert(`✅ Бизнес "${business.name}" теперь свободен для покупки`);
             }
         }
 
         // Отметить бизнес как проданный
-        function markAsSold(businessId) {
+        async function markAsSold(businessId) {
             const business = businesses.find(b => b.id === businessId);
             if (!business) return;
             
@@ -1259,10 +1292,21 @@
                 business.status = 'sold';
                 business.owner = newOwner;
                 
+                // Сохраняем локально
                 saveBusinesses();
                 loadBusinesses();
                 loadBusinessManagement();
                 updateStats();
+                
+                // Синхронизируем с Google Sheets
+                const syncSuccess = await updateBusinessInSheets(businessId, {
+                    status: 'sold',
+                    owner: newOwner
+                });
+                
+                if (syncSuccess) {
+                    console.log('✅ Бизнес обновлен в Google Sheets');
+                }
                 
                 alert(`✅ Бизнес "${business.name}" отмечен как проданный владельцу ${newOwner}`);
             }
@@ -1284,17 +1328,24 @@
                 business.status = 'sold';
                 business.owner = application.discordId;
                 
+                // Сохраняем локально
                 saveBusinesses();
                 loadBusinesses();
                 loadBusinessManagement();
                 updateStats();
+                
+                // Синхронизируем бизнес с Google Sheets
+                await updateBusinessInSheets(business.id, {
+                    status: 'sold',
+                    owner: application.discordId
+                });
             }
             
             // Помечаем заявку как завершенную
             applications[appIndex].status = 'completed';
             saveApplications(applications);
             
-            // Синхронизируем с Google Sheets
+            // Синхронизируем заявку с Google Sheets
             const syncSuccess = await updateApplicationInSheets(appId, 'completed');
             
             if (syncSuccess) {
@@ -1455,6 +1506,8 @@
                 
                 if (sheetsSuccess) {
                     console.log('✅ Заявка добавлена в Google Sheets');
+                    // Сразу синхронизируем после отправки заявки
+                    setTimeout(syncWithGoogleSheets, 1000);
                 } else {
                     console.warn('⚠️ Не удалось добавить заявку в Google Sheets');
                 }
@@ -1464,9 +1517,6 @@
                 
                 // Показываем успешное сообщение
                 showApplicationSuccess(applicationData);
-                
-                // Сразу синхронизируем после отправки заявки
-                setTimeout(syncWithGoogleSheets, 1000);
             };
         }
 
@@ -1620,7 +1670,7 @@
         window.freeBusiness = freeBusiness;
         window.markAsSold = markAsSold;
         window.closeModalAndReset = closeModalAndReset;
-        window.handleSheetsResponse = handleSheetsResponse;
+        window.handleAllDataResponse = handleAllDataResponse;
     </script>
 </body>
 </html>
