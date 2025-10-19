@@ -1,19 +1,4 @@
 // Функции пользовательского интерфейса
-function showSyncStatus(message, type) {
-    const syncStatus = document.getElementById('syncStatus');
-    const syncMessage = document.getElementById('syncMessage');
-    
-    if (!syncStatus || !syncMessage) return;
-    
-    syncMessage.textContent = message;
-    syncStatus.className = `sync-status ${type === 'success' ? 'sync-success' : type === 'error' ? 'sync-error' : ''}`;
-    syncStatus.style.display = 'block';
-    
-    setTimeout(() => {
-        syncStatus.style.display = 'none';
-    }, 3000);
-}
-
 function loadBusinesses(filterLevel = 'all', filterStatus = 'all') {
     const grid = document.getElementById('businessGrid');
     if (!grid) return;
@@ -21,7 +6,7 @@ function loadBusinesses(filterLevel = 'all', filterStatus = 'all') {
     grid.innerHTML = '';
     
     if (businesses.length === 0) {
-        grid.innerHTML = '<div class="loading">Нет данных о бизнесах</div>';
+        grid.innerHTML = '<div class="loading">🔄 Загрузка бизнесов...</div>';
         return;
     }
     
@@ -38,7 +23,7 @@ function loadBusinesses(filterLevel = 'all', filterStatus = 'all') {
             <div class="business-header">
                 <span class="business-id">M0-${business.level} | #${business.businessNumber}</span>
                 <span class="business-status ${business.status === 'sold' ? 'status-sold' : ''}">
-                    ${business.status === 'sold' ? 'Продано' : 'На продаже'}
+                    ${business.status === 'sold' ? 'Розданы' : 'Свободны'}
                 </span>
             </div>
             <h3 class="business-name">${business.name}</h3>
@@ -65,7 +50,7 @@ function loadBusinesses(filterLevel = 'all', filterStatus = 'all') {
             <div class="business-meta">
                 <div class="business-price">${business.price}</div>
                 <button class="buy-btn" onclick="openBuyModal(${business.id})" ${business.status === 'sold' ? 'disabled' : ''}>
-                    ${business.status === 'sold' ? 'Продано' : 'Купить'}
+                    ${business.status === 'sold' ? 'Розданы' : 'Купить'}
                 </button>
             </div>
         `;
@@ -209,7 +194,7 @@ function setupForm() {
 
         applications.push(applicationData);
         
-        const saveSuccess = await saveDataWithSync();
+        const saveSuccess = await saveData();
         
         if (saveSuccess) {
             console.log('✅ Заявка сохранена');
