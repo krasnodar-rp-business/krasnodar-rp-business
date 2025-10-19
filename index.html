@@ -902,47 +902,54 @@
             try {
                 showSyncStatus('🔄 Синхронизация с Google Sheets...', 'sync');
                 
-                const response = await fetch(`${GOOGLE_SHEETS_URL}?action=get_applications`);
-                const result = await response.json();
+                // Используем JSONP для обхода CORS
+                const timestamp = new Date().getTime();
+                const script = document.createElement('script');
+                script.src = `${GOOGLE_SHEETS_URL}?action=get_applications&callback=handleSheetsResponse&_=${timestamp}`;
+                document.head.appendChild(script);
                 
-                if (result.success) {
-                    // Сохраняем заявки из Google Sheets
-                    saveApplications(result.data);
-                    
-                    // Обновляем время последней синхронизации
-                    localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
-                    
-                    // Обновляем интерфейс если админ авторизован
-                    if (document.getElementById('adminContent').style.display !== 'none') {
-                        loadApplications();
-                    }
-                    
-                    showSyncStatus('✅ Синхронизация завершена', 'success');
-                    console.log('✅ Синхронизация с Google Sheets завершена');
-                } else {
-                    showSyncStatus('❌ Ошибка синхронизации', 'error');
-                }
             } catch (error) {
                 console.error('❌ Ошибка синхронизации:', error);
                 showSyncStatus('❌ Ошибка подключения', 'error');
             }
         }
 
+        // Обработчик ответа от Google Sheets
+        window.handleSheetsResponse = function(result) {
+            if (result && result.success) {
+                // Сохраняем заявки из Google Sheets
+                saveApplications(result.data);
+                
+                // Обновляем время последней синхронизации
+                localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
+                
+                // Обновляем интерфейс если админ авторизован
+                if (document.getElementById('adminContent').style.display !== 'none') {
+                    loadApplications();
+                }
+                
+                showSyncStatus('✅ Синхронизация завершена', 'success');
+                console.log('✅ Синхронизация с Google Sheets завершена');
+            } else {
+                showSyncStatus('❌ Ошибка синхронизации', 'error');
+            }
+        }
+
         async function addApplicationToSheets(applicationData) {
             try {
+                // Создаем форму для отправки данных (обход CORS)
+                const formData = new FormData();
+                formData.append('action', 'add_application');
+                formData.append('data', JSON.stringify(applicationData));
+                
                 const response = await fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'add_application',
-                        data: applicationData
-                    })
+                    body: formData,
+                    mode: 'no-cors'
                 });
                 
-                const result = await response.json();
-                return result.success;
+                // При no-cors мы не можем прочитать ответ, но запрос отправляется
+                return true;
             } catch (error) {
                 console.error('❌ Ошибка добавления заявки:', error);
                 return false;
@@ -951,20 +958,20 @@
 
         async function updateApplicationInSheets(appId, status) {
             try {
+                // Создаем форму для отправки данных (обход CORS)
+                const formData = new FormData();
+                formData.append('action', 'update_application');
+                formData.append('appId', appId);
+                formData.append('status', status);
+                
                 const response = await fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'update_application',
-                        appId: appId,
-                        status: status
-                    })
+                    body: formData,
+                    mode: 'no-cors'
                 });
                 
-                const result = await response.json();
-                return result.success;
+                // При no-cors мы не можем прочитать ответ, но запрос отправляется
+                return true;
             } catch (error) {
                 console.error('❌ Ошибка обновления заявки:', error);
                 return false;
@@ -1603,6 +1610,7 @@
         window.freeBusiness = freeBusiness;
         window.markAsSold = markAsSold;
         window.closeModalAndReset = closeModalAndReset;
+        window.handleSheetsResponse = handleSheetsResponse;
     </script>
 </body>
 </html>
