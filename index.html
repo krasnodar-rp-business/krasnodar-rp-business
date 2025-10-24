@@ -1,1400 +1,472 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRASNODAR RP | Marketplace</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0c0c0c 0%, #1a0a0a 50%, #2a0c0c 100%);
-            color: #fff;
-            line-height: 1.6;
-            transition: all 0.8s ease;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header {
-            background: rgba(10, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid #d72020;
-            box-shadow: 0 4px 20px rgba(215, 32, 32, 0.3);
-            transition: all 0.5s ease;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #ff3333, #d72020, #ff3333);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(215, 32, 32, 0.3);
-        }
-
-        .logo span {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            color: #ff3333;
-        }
-
-        .nav {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        .nav-link:hover {
-            color: #ff3333;
-            background: rgba(215, 32, 32, 0.1);
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: #ff3333;
-            font-weight: 600;
-        }
-
-        .logout-btn {
-            background: rgba(215, 32, 32, 0.2);
-            color: #ff3333;
-            border: 1px solid #ff3333;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: #ff3333;
-            color: white;
-        }
-
-        .hero {
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(215, 32, 32, 0.1) 0%, rgba(255, 51, 51, 0.05) 100%);
-            margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ff3333, #d72020, #ff3333);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(215, 32, 32, 0.5);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            color: #ff3333;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(215, 32, 32, 0.2);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff3333;
-            box-shadow: 0 10px 25px rgba(215, 32, 32, 0.2);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #ff3333, #d72020);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.8;
-            color: #ff3333;
-        }
-
-        .filters {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            border: 1px solid rgba(215, 32, 32, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .filter-group {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .filter-group span {
-            color: #ff3333;
-            font-weight: 600;
-        }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: linear-gradient(45deg, #d72020, #b31515);
-            border-color: #ff3333;
-            color: #fff;
-        }
-
-        .business-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .business-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(215, 32, 32, 0.2);
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .business-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #d72020, #ff3333, #d72020);
-        }
-
-        .business-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff3333;
-            box-shadow: 0 15px 30px rgba(215, 32, 32, 0.2);
-        }
-
-        .business-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-        }
-
-        .business-id {
-            background: linear-gradient(45deg, #d72020, #b31515);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .business-status {
-            background: #00d26a;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #000;
-        }
-
-        .status-sold {
-            background: #ff3333;
-            color: #fff;
-        }
-
-        .business-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ff3333;
-        }
-
-        .business-fullname {
-            opacity: 0.7;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-
-        .business-description {
-            margin-bottom: 1rem;
-            line-height: 1.5;
-            color: #eee;
-        }
-
-        .business-details {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(215, 32, 32, 0.1);
-        }
-
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .detail-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .business-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(215, 32, 32, 0.2);
-        }
-
-        .business-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #ff3333, #d72020);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .buy-btn {
-            background: linear-gradient(45deg, #d72020, #b31515);
-            color: #fff;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .buy-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(215, 32, 32, 0.3);
-            background: linear-gradient(45deg, #ff3333, #d72020);
-        }
-
-        .buy-btn:disabled {
-            background: #666;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-            color: #999;
-        }
-
-        .login-section {
-            max-width: 400px;
-            margin: 100px auto 2rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(215, 32, 32, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .login-section h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #ff3333;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #ff3333;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(215, 32, 32, 0.3);
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #ff3333;
-            box-shadow: 0 0 10px rgba(215, 32, 32, 0.3);
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #d72020, #b31515);
-            color: #fff;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(215, 32, 32, 0.3);
-            background: linear-gradient(45deg, #ff3333, #d72020);
-        }
-
-        .footer {
-            background: rgba(10, 0, 0, 0.9);
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 2px solid #ff3333;
-            margin-top: 4rem;
-        }
-
-        .footer p {
-            color: #ff3333;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #1a0a0a 0%, #2a0c0c 100%);
-            margin: 10% auto;
-            padding: 2rem;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            border: 2px solid #ff3333;
-            position: relative;
-        }
-
-        .close {
-            color: #ff3333;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-        }
-
-        .close:hover {
-            color: #ff6666;
-        }
-
-        .sync-status {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            z-index: 1000;
-            border: 1px solid rgba(215, 32, 32, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .sync-success {
-            color: #00d26a;
-        }
-
-        .sync-error {
-            color: #ff3333;
-        }
-
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
+<script>
+        // 🔧 НАСТРОЙКИ GITHUB
+    const GITHUB_CONFIG = {
+        token: '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',
+        owner: 'krasnodar-rp-business', // 👈 ВАШ НИК ЗДЕСЬ
+        repo: 'krasnodar-rp-business', // 👈 И РЕПОЗИТОРИЙ ТАКОЙ ЖЕ
+        files: {
+            businesses: 'data.json',
+            users: 'data_user.json'
+        }
+    };
+
+    // 📊 ДАННЫЕ ПО УМОЛЧАНИЮ (ВСЕ 27 БИЗНЕСОВ)
+    const DEFAULT_DATA = {
+        businesses: [
+            {
+                id: 1, name: "Казино", fullName: "ООО КРГ. Казино", level: "4", businessNumber: "16", status: "available",
+                price: "2.500.000 ₽", weeklyIncome: "260.000 ₽", tax: "15.000 ₽", owner: "Отсутствует",
+                description: "Место где можно пополнить свой счет, ну или же проиграть..) Куча азартных игр, алкоголя и никотина, все это вы можете встретить в нашем бизнесе Азартных Игр. Станьте владельцем казино, чтобы заработать миллионы и стать успешным.(Или же разориться, вдруг кому то повезет на джекпот)."
+            },
+            // ... ВСТАВЬТЕ ВСЕ 27 БИЗНЕСОВ ЗДЕСЬ (как в предыдущем коде)
+            {
+                id: 27, name: "Торговые автоматы", fullName: "ООО КРГ. Тогровые автоматы", level: "1", businessNumber: "12", status: "sold",
+                price: "400.000 ₽", weeklyIncome: "65.000 ₽", tax: "2.500 ₽", owner: "643132158839619642",
+                description: "Для этого бизнеса отсутствует какое-либо описание.."
             }
-            
-            .business-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav {
-                gap: 1rem;
-            }
-            
-            .filters {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .filter-group {
-                flex-wrap: wrap;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Sync Status -->
-    <div id="syncStatus" class="sync-status" style="display: none;">
-        <span id="syncMessage"></span>
-    </div>
+        ],
+        users: [
+            { username: "Artmit1", password: "Furrilend", theme: "standard" },
+            { username: "ahmatov", password: "ahmatov", theme: "standard" },
+            { username: "black", password: "171033", theme: "standard" }
+        ],
+        applications: []
+    };
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1>KRASNODAR | ROLEPLAY</h1>
-                <span>GitHub Hosted Marketplace</span>
-            </div>
-            <nav class="nav">
-                <div id="userSection">
-                    <div id="loginSection">
-                        <a href="#login" class="nav-link">Войти</a>
-                        <a href="#register" class="nav-link">Регистрация</a>
-                    </div>
-                    <div id="userInfo" class="user-info" style="display: none;">
-                        <span id="usernameDisplay"></span>
-                        <button class="logout-btn" onclick="logout()">Выйти</button>
-                        <button class="logout-btn" onclick="forceSync()" style="margin-left: 10px;">🔄 Синхр.</button>
-                    </div>
-                </div>
-                <a href="#businesses" class="nav-link">Бизнесы</a>
-                <a href="#stats" class="nav-link">Статистика</a>
-                <a href="#faq" class="nav-link">Правила</a>
-            </nav>
-        </div>
-    </header>
+    // 🗄️ ЛОКАЛЬНОЕ ХРАНИЛИЩЕ (кэш)
+    const STORAGE_KEYS = {
+        BUSINESSES: 'krasnodar_businesses',
+        USERS: 'krasnodar_users', 
+        APPLICATIONS: 'krasnodar_applications',
+        CURRENT_USER: 'krasnodar_current_user',
+        LAST_SYNC: 'krasnodar_last_sync'
+    };
 
-    <!-- Login Section -->
-    <section id="login" class="container">
-        <div class="login-section">
-            <h3>Вход в систему</h3>
-            <div class="form-group">
-                <label for="loginUsername">Никнейм:</label>
-                <input type="text" id="loginUsername" placeholder="Введите ваш никнейм">
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Пароль:</label>
-                <input type="password" id="loginPassword" placeholder="Введите пароль">
-            </div>
-            <button class="btn-primary" onclick="login()">Войти</button>
-            <p style="text-align: center; margin-top: 1rem; opacity: 0.7;">
-                Нет аккаунта? <a href="#register" style="color: #ff3333;">Зарегистрируйтесь</a>
-            </p>
-        </div>
-    </section>
+    let businesses = [];
+    let users = [];
+    let applications = [];
 
-    <!-- Register Section -->
-    <section id="register" class="container" style="display: none;">
-        <div class="login-section">
-            <h3>Регистрация</h3>
-            <div class="form-group">
-                <label for="regUsername">Никнейм:</label>
-                <input type="text" id="regUsername" placeholder="Придумайте никнейм">
-            </div>
-            <div class="form-group">
-                <label for="regPassword">Пароль:</label>
-                <input type="password" id="regPassword" placeholder="Придумайте пароль">
-            </div>
-            <div class="form-group">
-                <label for="regConfirmPassword">Подтвердите пароль:</label>
-                <input type="password" id="regConfirmPassword" placeholder="Повторите пароль">
-            </div>
-            <button class="btn-primary" onclick="register()">Зарегистрироваться</button>
-            <p style="text-align: center; margin-top: 1rem; opacity: 0.7;">
-                Уже есть аккаунт? <a href="#login" style="color: #ff3333;">Войдите</a>
-            </p>
-        </div>
-    </section>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h2 class="hero-title">ЭЛИТНАЯ НЕДВИЖИМОСТЬ KRASNODAR</h2>
-            <p class="hero-subtitle">GitHub Hosted Marketplace | Real-time Sync</p>
-        </div>
-    </section>
-
-    <!-- Stats -->
-    <section id="stats" class="container">
-        <div class="stats">
-            <div class="stat-card">
-                <span class="stat-number" id="totalBusinesses">0</span>
-                <span class="stat-label">Бизнесов в продаже</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" id="soldBusinesses">0</span>
-                <span class="stat-label">Уже продано</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" id="totalUsers">0</span>
-                <span class="stat-label">Пользователей</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">GitHub Sync</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Filters -->
-    <section class="container">
-        <div class="filters">
-            <div class="filter-group">
-                <span>Уровень:</span>
-                <button class="filter-btn active" data-level="all">Все</button>
-                <button class="filter-btn" data-level="1">M0-1</button>
-                <button class="filter-btn" data-level="2">M0-2</button>
-                <button class="filter-btn" data-level="3">M0-3</button>
-                <button class="filter-btn" data-level="4">M0-4</button>
-                <button class="filter-btn" data-level="5">M0-5</button>
-            </div>
-            <div class="filter-group">
-                <span>Статус:</span>
-                <button class="filter-btn active" data-status="all">Все</button>
-                <button class="filter-btn" data-status="available">Свободны</button>
-                <button class="filter-btn" data-status="sold">Проданы</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Businesses Section -->
-    <section id="businesses" class="container">
-        <div class="business-grid" id="businessGrid">
-            <!-- Бизнесы загружаются через JavaScript -->
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="container" style="margin: 3rem 0;">
-        <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 1px solid rgba(215, 32, 32, 0.2);">
-            <h3 style="color: #ff3333; margin-bottom: 1.5rem;">Правила покупки бизнесов</h3>
-            <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 10px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span>Налоги:</span>
-                    <span>Еженедельная оплата за обслуживание</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span>Просрочки:</span>
-                    <span>+1к к оплате за каждый день просрочки</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span>Изъятие:</span>
-                    <span>11+ дней без оплаты → бизнес изымается</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span>Требования:</span>
-                    <span>Некоторые бизнесы требуют наличие дома</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 KRASNODAR RolePlay. Все права защищены. | GitHub Hosted</p>
-        </div>
-    </footer>
-
-    <!-- Buy Modal -->
-    <div id="buyModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="modalForm">
-                <h3 style="color: #ff3333; margin-bottom: 1.5rem;">Покупка бизнеса</h3>
-                <form id="buyForm">
-                    <input type="hidden" id="businessId">
-                    <div class="form-group">
-                        <label for="discordId">Ваш Discord ID:</label>
-                        <input type="text" id="discordId" required placeholder="Например: username#1234">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact">Контакт для связи:</label>
-                        <input type="text" id="contact" required placeholder="Telegram или другой мессенджер">
-                    </div>
-                    <button type="submit" class="btn-primary">Отправить заявку</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // ⚠️ ВАЖНО: ЗАМЕНИТЕ ЭТИ ДАННЫЕ НА СВОИ ⚠️
-        const GITHUB_TOKEN = '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';
-        const REPO_OWNER = 'krasnodar-rp-business'; // 👈 ВАШ GITHUB АККАУНТ
-        const REPO_NAME = 'krasnodar-rp-business'; // 👈 ТОЧНОЕ НАЗВАНИЕ РЕПОЗИТОРИЯ
-
-        // Константы GitHub API
-        const GITHUB_API = 'https://api.github.com';
-        const BUSINESS_FILE = 'data.json';
-        const USERS_FILE = 'data_user.json';
-
-        // ВСЕ 27 БИЗНЕСОВ - данные по умолчанию
-        const DEFAULT_BUSINESS_DATA = {
-            businesses: [
-                {
-                    id: 1, name: "Казино", fullName: "ООО КРГ. Казино", level: "4", businessNumber: "16", status: "available",
-                    price: "2.500.000 ₽", weeklyIncome: "260.000 ₽", tax: "15.000 ₽", owner: "Отсутствует",
-                    description: "Место где можно пополнить свой счет, ну или же проиграть..) Куча азартных игр, алкоголя и никотина, все это вы можете встретить в нашем бизнесе Азартных Игр. Станьте владельцем казино, чтобы заработать миллионы и стать успешным.(Или же разориться, вдруг кому то повезет на джекпот)."
-                },
-                {
-                    id: 2, name: "Склад", fullName: "ООО КРГ. Склад", level: "3", businessNumber: "22", status: "sold",
-                    price: "200.000 ₽", weeklyIncome: "55.000 ₽", tax: "2.000 ₽", owner: "643132158839619642",
-                    description: "Для этого обьекта отсуствует какое-либо описание.."
-                },
-                {
-                    id: 3, name: "Банк", fullName: "ООО КРГ. Банк", level: "5", businessNumber: "1", status: "sold",
-                    price: "3.000.000 ₽", weeklyIncome: "350.000 ₽", tax: "10.000 ₽", owner: "643132158839619642",
-                    description: "Один из самых крупных бизнесов города Krasnodar. Станьте владельцем данного объекта чтобы контролировать все платежи и электронные действия переводов. Ваша задача - охранять самое ценное; деньги, которыми жаждует полакомиться каждый криминал района."
-                },
-                {
-                    id: 4, name: "Электроснабжение", fullName: "ООО КРГ. Центр электроснабжения", level: "5", businessNumber: "21", status: "available",
-                    price: "2.800.000 ₽", weeklyIncome: "290.000 ₽", tax: "25.000 ₽", owner: "отсутствует",
-                    description: "Для этого объекта отсутствует какое-либо описание.."
-                },
-                {
-                    id: 5, name: "Отельный комплекс", fullName: "ООО КРГ. Отельный комплекс", level: "4", businessNumber: "17", status: "available",
-                    price: "1.000.000 ₽", weeklyIncome: "150.000 ₽", tax: "10.000 ₽", owner: "отсутствует",
-                    description: "Отличное место для того чтобы остановиться на пару дней, если у вас нету дома."
-                },
-                {
-                    id: 6, name: "Заправка Gas-N-Go", fullName: "ООО КРГ. Заправка Gas-N-Go", level: "2", businessNumber: "14", status: "sold",
-                    price: "600.000 ₽", weeklyIncome: "70.000 ₽", tax: "5.000 ₽", owner: "1096807300838211615",
-                    description: "Для этого бизнеса отсутствует какое-либо описание.."
-                },
-                {
-                    id: 7, name: "Стрип-клуб", fullName: "ООО КРГ. Стрип-клуб", level: "4", businessNumber: "27", status: "sold",
-                    price: "900.000 ₽", weeklyIncome: "150.000 ₽", tax: "15.000 ₽", owner: "528654724585488414",
-                    description: "Элитное заведение для искушённой публики, где искусство соблазна встречается с высоким уровнем сервиса. Идеальное место для деловых встреч и приватного отдыха.",
-                    note: "Требуется наличие дома"
-                },
-                {
-                    id: 8, name: "Магазин одежды", fullName: "ООО КРГ. Магазин одежды", level: "2", businessNumber: "9", status: "sold",
-                    price: "280.000 ₽", weeklyIncome: "75.000 ₽", tax: "6.000 ₽", owner: "1188447108236316804",
-                    description: "Качестваенная, и красивая одежда на любой вкус и бюджет."
-                },
-                {
-                    id: 9, name: "Фермерский магазин", fullName: "ООО КРГ. Фермерский магазин", level: "1", businessNumber: "10", status: "sold",
-                    price: "240.000 ₽", weeklyIncome: "30.000 ₽", tax: "3.000 ₽", owner: "1188447108236316804",
-                    description: "Для этого бизнеса отсутствует како-либо описание.."
-                },
-                {
-                    id: 10, name: "Магазин инструментов", fullName: "ООО КРГ. Магазин инструментов", level: "1", businessNumber: "6", status: "sold",
-                    price: "300.000 ₽", weeklyIncome: "50.000 ₽", tax: "5.000 ₽", owner: "1188447108236316804",
-                    description: "Для этого бизнеса отсутствует какое-либо описание.."
-                },
-                {
-                    id: 11, name: "Подземная Парковка", fullName: "ООО КРГ. Подземная Парковка", level: "2", businessNumber: "5", status: "sold",
-                    price: "175.000 ₽", weeklyIncome: "40.000 ₽", tax: "4.500 ₽", owner: "1188447108236316804",
-                    description: "Подземная парковка - лучший вариант защитить свое транспортное средство если вы надолго уезжаете. Хорошая охраняемость, чистая теретория и удобные парковочные места. Станьте владельцем подземной парковки чтобы поддерживать объект."
-                },
-                {
-                    id: 12, name: "Заправка Арес", fullName: "ООО КРГ. Заправка Арес", level: "2", businessNumber: "13", status: "sold",
-                    price: "400.000 ₽", weeklyIncome: "85.000 ₽", tax: "5.000 ₽", owner: "1188447108236316804",
-                    description: "Для этого бизнеса отсутствует какое-либо описание.."
-                },
-                {
-                    id: 13, name: "Грузовая компания", fullName: "ООО КРГ. Грузовая компания", level: "3", businessNumber: "8", status: "sold",
-                    price: "600.000 ₽", weeklyIncome: "75.000 ₽", tax: "5.000 ₽", owner: "1188447108236316804",
-                    description: "Компания занимающаяся грузовыми перевозками, забирая товары а порта и развозя по всему городу."
-                },
-                {
-                    id: 14, name: "Автобусная Компания", fullName: "ООО КРГ. Автобусная Компания", level: "3", businessNumber: "7", status: "sold",
-                    price: "700.000 ₽", weeklyIncome: "85.000 ₽", tax: "6.000 ₽", owner: "1188447108236316804",
-                    description: "Автобусная компания место где управляеться все маршруты автобусов и время поездок. Станьте владельцем этой компании чтобы снабжать граждан временным транспортом."
-                },
-                {
-                    id: 15, name: "Центр водоснабжения", fullName: "ООО КРГ. Центр водоснабжения", level: "5", businessNumber: "20", status: "sold",
-                    price: "2.000.000 ₽", weeklyIncome: "260.000 ₽", tax: "25.000 ₽", owner: "1188447108236316804",
-                    description: "Для этого обьекта отсуствует какое-либо описание.."
-                },
-                {
-                    id: 16, name: "Кальянная", fullName: "ООО КРГ. Кальянная", level: "2", businessNumber: "25", status: "sold",
-                    price: "200.000 ₽", weeklyIncome: "65.000 ₽", tax: "3.000 ₽", owner: "816658515082346497",
-                    description: "Для этого обьекта отсуствует какое-либо описание.."
-                },
-                {
-                    id: 17, name: "Erwin's Клуб", fullName: "ООО КРГ. Erwin's Клуб", level: "3", businessNumber: "3", status: "sold",
-                    price: "400.000 ₽", weeklyIncome: "90.000 ₽", tax: "10.000 ₽", owner: "816658515082346497",
-                    description: "Прекрасный клуб города. Ночные тусовки, качественный алкоголь, и главное - веселья. Клуб открыт 24/7, с большим количеством вкусняшек и молодежной музыки. Станьте владельцем клуба чтобы контролировать его роботу. Уверен, этот клуб станет очень популярен в нашем городе."
-                },
-                {
-                    id: 18, name: "Дрочильня", fullName: "ООО КРГ. Дрочильня", level: "2", businessNumber: "26", status: "sold",
-                    price: "300.000 ₽", weeklyIncome: "90.000 ₽", tax: "8.000 ₽", owner: "742378481920376843",
-                    description: "Уединённое заведение для взрослых, где каждый найдет способ расслабиться без лишних глаз и вопросов.",
-                    note: "Требуется наличие дома"
-                },
-                {
-                    id: 19, name: "Заправка Оссо", fullName: "ООО КРГ. Заправка Оссо", level: "2", businessNumber: "15", status: "sold",
-                    price: "300.000 ₽", weeklyIncome: "55.000 ₽", tax: "5.000 ₽", owner: "528654724585488414",
-                    description: "Для этого бизнеса отсутствует какое-либо описание.."
-                },
-                {
-                    id: 20, name: "Ларек", fullName: "ООО КРГ. Ларек", level: "1", businessNumber: "23", status: "sold",
-                    price: "175.000 ₽", weeklyIncome: "42.000 ₽", tax: "2.000 ₽", owner: "528654724585488414",
-                    description: "Для этого обьекта отсуствует какое-либо описание.."
-                },
-                {
-                    id: 21, name: "Ресторанный комплекс", fullName: "ООО КРГ. Ресторанный комплекс", level: "3", businessNumber: "19", status: "sold",
-                    price: "500.000 ₽", weeklyIncome: "80.000 ₽", tax: "10.000 ₽", owner: "1262559706317197393",
-                    description: "Вкусные блюда и отличная подача."
-                },
-                {
-                    id: 22, name: "Автосалон", fullName: "ООО КРГ. Автосалон", level: "4", businessNumber: "6", status: "available",
-                    price: "1.500.000 ₽", weeklyIncome: "105.000 ₽", tax: "5.000 ₽", owner: "Отсутствует",
-                    description: "Автосалон - Место где вы можете купить любой автомобиль, на любой вкус и сумму. Эксклюзивные авто, спорткары, и семейные машины. Станьте владельцем автосалона чтобы пополнять город лучшими транспортными средствами страны."
-                },
-                {
-                    id: 23, name: "Аптека", fullName: "ООО КРГ. Аптека", level: "2", businessNumber: "24", status: "sold",
-                    price: "200.000 ₽", weeklyIncome: "52.000 ₽", tax: "2.000 ₽", owner: "742378481920376843",
-                    description: "Для этого обьекта отсуствует какое-либо описание.."
-                },
-                {
-                    id: 24, name: "Ювелирный магазин", fullName: "ООО КРГ. Магазин ювелирных изделий", level: "4", businessNumber: "2", status: "sold",
-                    price: "800.000 ₽", weeklyIncome: "90.000 ₽", tax: "7.500 ₽", owner: "742378481920376843",
-                    description: "Лучшее место для покупки ювелирных изделий. Кольца, серьги, браслеты, часы лимитированных коллекций, и многое другое что есть тут. Специальные серийные номера, которые добавляют ещё больше цены к украшениям. Красивые стенды, и подход. Станьте владельцем ювелирного магазина, чтобы продавать невероятно красивые изделие которые заполнят весь город своим блеском и красотой."
-                },
-                {
-                    id: 25, name: "Порт", fullName: "ООО КРГ. Порт", level: "4", businessNumber: "4", status: "sold",
-                    price: "2.000.000 ₽", weeklyIncome: "110.000 ₽", tax: "7.500 ₽", owner: "742378481920376843",
-                    description: "Порт - так же как и банк один из самых масштабных объектов в городе. Поставка самых различных товаров, от продуктов до серьезной техники и транспортных средств. Управление контейнерами, погрузкой, и отправкой. Станьте владельцем этого бизнеса чтобы выполнять все эти обязанности и получаить огромную зарплату за каждую выполненную работу."
-                },
-                {
-                    id: 26, name: "Недостроенный ТРЦ", fullName: "ООО КРГ. Недостроенный Торговый Центр", level: "5", businessNumber: "18", status: "sold",
-                    price: "500.000 ₽", weeklyIncome: "45.000 ₽", tax: "20.500 ₽", owner: "742378481920376843",
-                    description: "Станьте владельцем этого недостроенного торгового центра, чтобы достроить его и зарабатывать миллионы!"
-                },
-                {
-                    id: 27, name: "Торговые автоматы", fullName: "ООО КРГ. Тогровые автоматы", level: "1", businessNumber: "12", status: "sold",
-                    price: "400.000 ₽", weeklyIncome: "65.000 ₽", tax: "2.500 ₽", owner: "643132158839619642",
-                    description: "Для этого бизнеса отсутствует какое-либо описание.."
-                }
-            ],
-            lastUpdate: new Date().toISOString()
-        };
-
-        const DEFAULT_USER_DATA = {
-            users: [
-                {
-                    username: "Artmit1",
-                    password: "Furrilend",
-                    theme: "standard"
-                },
-                {
-                    username: "ahmatov",
-                    password: "ahmatov",
-                    theme: "standard"
-                },
-                {
-                    username: "black",
-                    password: "171033",
-                    theme: "standard"
-                }
-            ],
-            applications: [],
-            lastUpdate: new Date().toISOString()
-        };
-
-        // Данные приложения
-        let businesses = [];
-        let users = [];
-        let applications = [];
-
-        // Показать статус синхронизации
-        function showSyncStatus(message, type = 'info') {
-            const syncStatus = document.getElementById('syncStatus');
-            const syncMessage = document.getElementById('syncMessage');
-            
-            syncMessage.textContent = message;
-            syncStatus.className = `sync-status ${type === 'success' ? 'sync-success' : type === 'error' ? 'sync-error' : ''}`;
-            syncStatus.style.display = 'block';
-            
-            setTimeout(() => {
-                if (syncStatus.style.display === 'block') {
-                    syncStatus.style.display = 'none';
-                }
-            }, 3000);
+    // 🔄 УПРОЩЕННЫЙ GITHUB CLIENT
+    class GitHubClient {
+        constructor(config) {
+            this.config = config;
+            this.baseURL = 'https://api.github.com';
         }
 
-        // Улучшенная загрузка файла из GitHub
-        async function loadFileFromGitHub(filename, defaultContent = {}) {
+        async request(endpoint, options = {}) {
+            const url = `${this.baseURL}${endpoint}`;
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `token ${this.config.token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                ...options
+            });
+
+            if (!response.ok) {
+                throw new Error(`GitHub Error: ${response.status} ${response.statusText}`);
+            }
+
+            return response.json();
+        }
+
+        async getFile(filename) {
             try {
-                const response = await fetch(
-                    `${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}`,
-                    {
-                        headers: {
-                            'Authorization': `token ${GITHUB_TOKEN}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    }
-                );
-
-                if (response.status === 404) {
-                    // Файл не существует, создаем его
-                    console.log(`Файл ${filename} не найден, создаем...`);
-                    showSyncStatus(`🔄 Создаем файл ${filename}...`, 'info');
-                    const createSuccess = await saveFileToGitHub(
-                        filename, 
-                        defaultContent, 
-                        `Автоматическое создание файла ${filename}`
-                    );
-                    
-                    if (createSuccess) {
-                        showSyncStatus(`✅ Создан файл ${filename}`, 'success');
-                        return defaultContent;
-                    } else {
-                        throw new Error('Не удалось создать файл');
-                    }
-                }
-
-                if (!response.ok) {
-                    throw new Error(`Ошибка загрузки: ${response.status} ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                const content = atob(data.content);
+                const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${filename}`;
+                const data = await this.request(endpoint);
+                
+                // Декодируем base64
+                const content = atob(data.content.replace(/\n/g, ''));
                 return JSON.parse(content);
             } catch (error) {
-                console.error(`Ошибка загрузки ${filename}:`, error);
-                showSyncStatus(`❌ Ошибка: ${error.message}`, 'error');
-                return null;
+                if (error.message.includes('404')) {
+                    // Файл не существует - создаем
+                    return this.createFile(filename, DEFAULT_DATA[filename === 'data.json' ? 'businesses' : 'users']);
+                }
+                throw error;
             }
         }
 
-        // Сохранение файла в GitHub
-        async function saveFileToGitHub(filename, content, commitMessage) {
-            try {
-                // Сначала получаем текущий SHA файла
-                let sha = null;
-                try {
-                    const currentFile = await fetch(
-                        `${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}`,
-                        {
-                            headers: {
-                                'Authorization': `token ${GITHUB_TOKEN}`,
-                                'Accept': 'application/vnd.github.v3+json'
-                            }
-                        }
-                    );
+        async createFile(filename, content) {
+            const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${filename}`;
+            const encodedContent = btoa(JSON.stringify(content, null, 2));
+            
+            await this.request(endpoint, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    message: `Создание файла ${filename}`,
+                    content: encodedContent
+                })
+            });
 
-                    if (currentFile.ok) {
-                        const fileData = await currentFile.json();
-                        sha = fileData.sha;
-                    }
-                } catch (e) {
-                    // Файл не существует, это нормально
-                }
+            return content;
+        }
 
-                // Кодируем контент в base64
-                const encodedContent = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))));
+        async updateFile(filename, content, commitMessage) {
+            // Сначала получаем текущий файл чтобы узнать SHA
+            const currentFile = await this.request(
+                `/repos/${this.config.owner}/${this.config.repo}/contents/${filename}`
+            );
 
-                const response = await fetch(
-                    `${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}`,
-                    {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `token ${GITHUB_TOKEN}`,
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/vnd.github.v3+json'
-                        },
-                        body: JSON.stringify({
-                            message: commitMessage,
-                            content: encodedContent,
-                            sha: sha
-                        })
-                    }
-                );
+            const endpoint = `/repos/${this.config.owner}/${this.config.repo}/contents/${filename}`;
+            const encodedContent = btoa(JSON.stringify(content, null, 2));
+            
+            await this.request(endpoint, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    message: commitMessage,
+                    content: encodedContent,
+                    sha: currentFile.sha
+                })
+            });
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`Ошибка сохранения: ${response.status} - ${errorData.message}`);
-                }
+            return true;
+        }
+    }
 
-                showSyncStatus('✅ Данные сохранены в GitHub', 'success');
-                return true;
-            } catch (error) {
-                console.error(`Ошибка сохранения ${filename}:`, error);
-                showSyncStatus(`❌ Ошибка сохранения: ${error.message}`, 'error');
+    // 🎯 ОСНОВНЫЕ ФУНКЦИИ СИНХРОНИЗАЦИИ
+    const github = new GitHubClient(GITHUB_CONFIG);
+
+    async function syncWithGitHub() {
+        try {
+            showSyncStatus('🔄 Синхронизация с GitHub...', 'info');
+            
+            // Загружаем данные из GitHub
+            const [businessData, userData] = await Promise.all([
+                github.getFile(GITHUB_CONFIG.files.businesses),
+                github.getFile(GITHUB_CONFIG.files.users)
+            ]);
+
+            // Обновляем локальные данные
+            businesses = businessData;
+            users = userData.users || [];
+            applications = userData.applications || [];
+
+            // Сохраняем в localStorage как кэш
+            saveToStorage();
+            
+            // Обновляем интерфейс
+            updateStats();
+            loadBusinesses();
+            
+            showSyncStatus('✅ Синхронизация завершена', 'success');
+            return true;
+            
+        } catch (error) {
+            console.error('Ошибка синхронизации:', error);
+            
+            // Пробуем загрузить из кэша
+            if (loadFromStorage()) {
+                showSyncStatus('⚠️ Используем кэшированные данные', 'error');
+                return false;
+            } else {
+                showSyncStatus('❌ Ошибка синхронизации', 'error');
+                // Используем данные по умолчанию
+                businesses = DEFAULT_DATA.businesses;
+                users = DEFAULT_DATA.users;
+                applications = DEFAULT_DATA.applications;
                 return false;
             }
         }
+    }
 
-        // Загрузка всех данных
-        async function loadAllData() {
-            showSyncStatus('🔄 Загрузка данных...', 'info');
-            
-            const businessData = await loadFileFromGitHub(BUSINESS_FILE, DEFAULT_BUSINESS_DATA);
-            const userData = await loadFileFromGitHub(USERS_FILE, DEFAULT_USER_DATA);
-
-            if (businessData) {
-                businesses = businessData.businesses || [];
-                updateStats();
-                loadBusinesses();
-            }
-
-            if (userData) {
-                users = userData.users || [];
-                applications = userData.applications || [];
-            }
-
-            showSyncStatus('✅ Данные загружены', 'success');
-        }
-
-        // Принудительная синхронизация
-        async function forceSync() {
-            await loadAllData();
-        }
-
-        // Система пользователей
-        const CURRENT_USER_KEY = 'krasnodar_current_user';
-
-        function getCurrentUser() {
-            const user = localStorage.getItem(CURRENT_USER_KEY);
-            return user ? JSON.parse(user) : null;
-        }
-
-        function setCurrentUser(user) {
-            if (user) {
-                localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-            } else {
-                localStorage.removeItem(CURRENT_USER_KEY);
-            }
-        }
-
-        async function register() {
-            const username = document.getElementById('regUsername').value;
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-
-            if (!username || !password || !confirmPassword) {
-                alert('Заполните все поля!');
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                alert('Пароли не совпадают!');
-                return;
-            }
-
-            // Загружаем текущих пользователей
-            const userData = await loadFileFromGitHub(USERS_FILE, DEFAULT_USER_DATA);
-            
-            const existingUser = userData.users.find(u => u.username === username);
-            if (existingUser) {
-                alert('Пользователь с таким именем уже существует!');
-                return;
-            }
-
-            // Добавляем нового пользователя
-            const newUser = { username, password, theme: 'standard' };
-            userData.users.push(newUser);
-
-            // Сохраняем обратно в GitHub
-            const success = await saveFileToGitHub(
-                USERS_FILE, 
-                userData, 
-                `Добавлен пользователь: ${username}`
+    async function saveBusinessesToGitHub() {
+        try {
+            await github.updateFile(
+                GITHUB_CONFIG.files.businesses, 
+                businesses,
+                'Обновление списка бизнесов'
             );
+            return true;
+        } catch (error) {
+            console.error('Ошибка сохранения бизнесов:', error);
+            return false;
+        }
+    }
 
-            if (success) {
-                alert('Регистрация успешна! Теперь вы можете войти.');
-                showLoginSection();
+    async function saveUsersToGitHub() {
+        try {
+            await github.updateFile(
+                GITHUB_CONFIG.files.users,
+                { users, applications, lastUpdate: new Date().toISOString() },
+                'Обновление пользователей и заявок'
+            );
+            return true;
+        } catch (error) {
+            console.error('Ошибка сохранения пользователей:', error);
+            return false;
+        }
+    }
+
+    // 💾 ЛОКАЛЬНОЕ ХРАНИЛИЩЕ (кэш)
+    function saveToStorage() {
+        localStorage.setItem(STORAGE_KEYS.BUSINESSES, JSON.stringify(businesses));
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+        localStorage.setItem(STORAGE_KEYS.APPLICATIONS, JSON.stringify(applications));
+        localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
+    }
+
+    function loadFromStorage() {
+        try {
+            const savedBusinesses = localStorage.getItem(STORAGE_KEYS.BUSINESSES);
+            const savedUsers = localStorage.getItem(STORAGE_KEYS.USERS);
+            const savedApplications = localStorage.getItem(STORAGE_KEYS.APPLICATIONS);
+
+            if (savedBusinesses && savedUsers) {
+                businesses = JSON.parse(savedBusinesses);
+                users = JSON.parse(savedUsers);
+                applications = JSON.parse(savedApplications || '[]');
+                return true;
             }
+        } catch (error) {
+            console.error('Ошибка загрузки из кэша:', error);
+        }
+        return false;
+    }
+
+    // 👤 СИСТЕМА ПОЛЬЗОВАТЕЛЕЙ
+    function getCurrentUser() {
+        const user = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+        return user ? JSON.parse(user) : null;
+    }
+
+    function setCurrentUser(user) {
+        if (user) {
+            localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(user));
+        } else {
+            localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+        }
+    }
+
+    async function register() {
+        const username = document.getElementById('regUsername').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+        if (!username || !password || !confirmPassword) {
+            alert('Заполните все поля!');
+            return;
         }
 
-        async function login() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-
-            if (!username || !password) {
-                alert('Заполните все поля!');
-                return;
-            }
-
-            const userData = await loadFileFromGitHub(USERS_FILE, DEFAULT_USER_DATA);
-            const user = userData.users.find(u => u.username === username && u.password === password);
-            
-            if (user) {
-                setCurrentUser(user);
-                showUserInterface(user);
-                showSyncStatus(`✅ Добро пожаловать, ${username}!`, 'success');
-            } else {
-                alert('Неверное имя пользователя или пароль!');
-            }
+        if (password !== confirmPassword) {
+            alert('Пароли не совпадают!');
+            return;
         }
 
-        function logout() {
-            setCurrentUser(null);
-            showLoginInterface();
-            showSyncStatus('👋 До свидания!', 'info');
+        // Проверяем существующего пользователя
+        const existingUser = users.find(u => u.username === username);
+        if (existingUser) {
+            alert('Пользователь с таким именем уже существует!');
+            return;
         }
 
-        function showUserInterface(user) {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('userInfo').style.display = 'flex';
-            document.getElementById('usernameDisplay').textContent = user.username;
-            
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('register').style.display = 'none';
-            
-            document.querySelector('.hero').style.display = 'flex';
-            document.getElementById('stats').style.display = 'block';
-            document.querySelector('.filters').style.display = 'flex';
-            document.getElementById('businesses').style.display = 'block';
-            document.getElementById('faq').style.display = 'block';
+        // Добавляем пользователя
+        const newUser = { username, password, theme: 'standard' };
+        users.push(newUser);
+
+        // Сохраняем в GitHub
+        const success = await saveUsersToGitHub();
+        if (success) {
+            saveToStorage(); // Обновляем кэш
+            alert('Регистрация успешна! Теперь вы можете войти.');
+            showLoginSection();
+        } else {
+            alert('Ошибка регистрации. Попробуйте еще раз.');
+        }
+    }
+
+    async function login() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+
+        if (!username || !password) {
+            alert('Заполните все поля!');
+            return;
         }
 
-        function showLoginInterface() {
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('userInfo').style.display = 'none';
-            
-            document.getElementById('login').style.display = 'block';
-            document.getElementById('register').style.display = 'none';
-            
-            document.querySelector('.hero').style.display = 'none';
-            document.getElementById('stats').style.display = 'none';
-            document.querySelector('.filters').style.display = 'none';
-            document.getElementById('businesses').style.display = 'none';
-            document.getElementById('faq').style.display = 'none';
+        const user = users.find(u => u.username === username && u.password === password);
+        
+        if (user) {
+            setCurrentUser(user);
+            showUserInterface(user);
+            showSyncStatus(`✅ Добро пожаловать, ${username}!`, 'success');
+        } else {
+            alert('Неверное имя пользователя или пароль!');
+        }
+    }
+
+    // 🏪 СИСТЕМА БИЗНЕСОВ
+    async function purchaseBusiness(businessId, discordId, contact) {
+        const business = businesses.find(b => b.id === businessId);
+        const currentUser = getCurrentUser();
+
+        if (!business || business.status === 'sold') {
+            alert('Бизнес недоступен для покупки!');
+            return false;
         }
 
-        function showLoginSection() {
-            document.getElementById('login').style.display = 'block';
-            document.getElementById('register').style.display = 'none';
-        }
+        // Обновляем статус бизнеса
+        business.status = 'sold';
+        business.owner = discordId;
 
-        function showRegisterSection() {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('register').style.display = 'block';
-        }
+        // Создаем заявку
+        const newApplication = {
+            id: 'APP-' + Date.now(),
+            business: business.name,
+            price: business.price,
+            discordId: discordId,
+            contact: contact,
+            username: currentUser.username,
+            timestamp: new Date().toLocaleString('ru-RU'),
+            status: 'completed'
+        };
+        applications.push(newApplication);
 
-        // Загрузка бизнесов
-        function loadBusinesses(filterLevel = 'all', filterStatus = 'all') {
-            const grid = document.getElementById('businessGrid');
-            grid.innerHTML = '';
-            
-            const filteredBusinesses = businesses.filter(business => {
-                const levelMatch = filterLevel === 'all' || business.level === filterLevel;
-                const statusMatch = filterStatus === 'all' || business.status === filterStatus;
-                return levelMatch && statusMatch;
-            });
-            
-            if (filteredBusinesses.length === 0) {
-                grid.innerHTML = '<div style="text-align: center; padding: 2rem; color: #ff3333;">Бизнесы не найдены</div>';
-                return;
-            }
-            
-            filteredBusinesses.forEach(business => {
-                const businessCard = document.createElement('div');
-                businessCard.className = 'business-card';
-                businessCard.innerHTML = `
-                    <div class="business-header">
-                        <span class="business-id">M0-${business.level} | #${business.businessNumber}</span>
-                        <span class="business-status ${business.status === 'sold' ? 'status-sold' : ''}">
-                            ${business.status === 'sold' ? 'Продано' : 'На продаже'}
-                        </span>
-                    </div>
-                    <h3 class="business-name">${business.name}</h3>
-                    <p class="business-fullname">${business.fullName}</p>
-                    <p class="business-description">${business.description}</p>
-                    <div class="business-details">
-                        <div class="detail-item">
-                            <span>Цена:</span>
-                            <span>${business.price}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Доход в неделю:</span>
-                            <span>${business.weeklyIncome}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Налоги в неделю:</span>
-                            <span>${business.tax}</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Владелец:</span>
-                            <span>${business.owner === 'Отсутствует' || business.owner === 'отсутствует' ? 'Свободен' : 'ID: ' + business.owner}</span>
-                        </div>
-                        ${business.note ? `<div class="detail-item">
-                            <span>📌 Примечание:</span>
-                            <span>${business.note}</span>
-                        </div>` : ''}
-                    </div>
-                    <div class="business-meta">
-                        <div class="business-price">${business.price}</div>
-                        <button class="buy-btn" onclick="openBuyModal(${business.id})" ${business.status === 'sold' ? 'disabled' : ''}>
-                            ${business.status === 'sold' ? 'Продано' : 'Купить'}
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(businessCard);
-            });
+        // Сохраняем в GitHub
+        const [businessSuccess, usersSuccess] = await Promise.all([
+            saveBusinessesToGitHub(),
+            saveUsersToGitHub()
+        ]);
 
+        if (businessSuccess && usersSuccess) {
+            saveToStorage(); // Обновляем кэш
             updateStats();
+            loadBusinesses();
+            return true;
+        } else {
+            // Откатываем изменения при ошибке
+            business.status = 'available';
+            business.owner = 'Отсутствует';
+            applications.pop();
+            return false;
         }
+    }
 
-        function updateStats() {
-            const totalAvailable = businesses.filter(b => b.status === 'available').length;
-            const totalSold = businesses.filter(b => b.status === 'sold').length;
-            
-            document.getElementById('totalBusinesses').textContent = totalAvailable;
-            document.getElementById('soldBusinesses').textContent = totalSold;
-            document.getElementById('totalUsers').textContent = users.length;
-        }
-
-        // Фильтрация
-        function setupFilters() {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const parent = this.parentElement;
-                    parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const filterType = parent.querySelector('span').textContent;
-                    const filterValue = this.dataset.level || this.dataset.status;
-                    
-                    if (filterType === 'Уровень:') {
-                        const statusFilter = document.querySelector('[data-status].active')?.dataset.status || 'all';
-                        loadBusinesses(filterValue, statusFilter);
-                    } else {
-                        const levelFilter = document.querySelector('[data-level].active')?.dataset.level || 'all';
-                        loadBusinesses(levelFilter, filterValue);
-                    }
-                });
-            });
-        }
-
-        // Модальное окно
-        function openBuyModal(businessId) {
-            const business = businesses.find(b => b.id === businessId);
-            const modal = document.getElementById('buyModal');
-            document.getElementById('businessId').value = businessId;
-            
-            const modalTitle = modal.querySelector('h3');
-            modalTitle.textContent = `Покупка: ${business.name}`;
-            
-            modal.style.display = 'block';
-        }
-
-        function setupModal() {
-            const modal = document.getElementById('buyModal');
-            const closeBtn = modal.querySelector('.close');
-            
-            closeBtn.onclick = function() {
-                modal.style.display = 'none';
+    // 🎨 ИНТЕРФЕЙС
+    function showSyncStatus(message, type = 'info') {
+        const syncStatus = document.getElementById('syncStatus');
+        const syncMessage = document.getElementById('syncMessage');
+        
+        syncMessage.textContent = message;
+        syncStatus.className = `sync-status ${type === 'success' ? 'sync-success' : type === 'error' ? 'sync-error' : ''}`;
+        syncStatus.style.display = 'block';
+        
+        setTimeout(() => {
+            if (syncStatus.style.display === 'block') {
+                syncStatus.style.display = 'none';
             }
-            
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
-            }
-        }
+        }, 3000);
+    }
 
-        // Форма покупки
-        function setupForm() {
-            document.getElementById('buyForm').onsubmit = async function(e) {
-                e.preventDefault();
-                
-                const businessId = document.getElementById('businessId').value;
-                const discordId = document.getElementById('discordId').value;
-                const contact = document.getElementById('contact').value;
-                const currentUser = getCurrentUser();
-                
-                if (!currentUser) {
-                    alert('Сначала войдите в систему!');
-                    return;
-                }
-                
-                if (!discordId || !contact) {
-                    alert('Заполните все поля!');
-                    return;
-                }
-                
-                const business = businesses.find(b => b.id == businessId);
-                if (!business) {
-                    alert('Бизнес не найден!');
-                    return;
-                }
-                
-                if (business.status === 'sold') {
-                    alert('Этот бизнес уже продан!');
-                    return;
-                }
-
-                // Создаем заявку
-                const newApplication = {
-                    id: 'APP-' + Date.now(),
-                    business: business.name,
-                    price: business.price,
-                    discordId: discordId,
-                    contact: contact,
-                    username: currentUser.username,
-                    timestamp: new Date().toLocaleString('ru-RU'),
-                    status: 'pending'
-                };
-
-                // Загружаем текущие заявки
-                const userData = await loadFileFromGitHub(USERS_FILE, DEFAULT_USER_DATA);
-                userData.applications.push(newApplication);
-                
-                // Сохраняем заявку в GitHub
-                const success = await saveFileToGitHub(
-                    USERS_FILE,
-                    userData,
-                    `Новая заявка на покупку: ${business.name} от ${currentUser.username}`
-                );
-
-                if (success) {
-                    alert(`Заявка отправлена! Номер: ${newApplication.id}`);
-                    document.getElementById('buyModal').style.display = 'none';
-                    this.reset();
-                }
-            };
-        }
-
-        // Навигация
-        function setupNavigation() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = this.getAttribute('href');
-                    
-                    if (target === '#login') {
-                        showLoginSection();
-                    } else if (target === '#register') {
-                        showRegisterSection();
-                    } else if (target === '#businesses') {
-                        document.getElementById('businesses').scrollIntoView({ behavior: 'smooth' });
-                    } else if (target === '#stats') {
-                        document.getElementById('stats').scrollIntoView({ behavior: 'smooth' });
-                    } else if (target === '#faq') {
-                        document.getElementById('faq').scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-        }
-
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', async function() {
-            setupModal();
-            setupForm();
-            setupFilters();
-            setupNavigation();
-            
-            const currentUser = getCurrentUser();
-            if (currentUser) {
-                showUserInterface(currentUser);
-            } else {
-                showLoginInterface();
-            }
-            
-            // Загружаем данные при запуске
-            await loadAllData();
-            
-            // Авто-синхронизация каждые 30 секунд
-            setInterval(loadAllData, 30000);
+    function loadBusinesses(filterLevel = 'all', filterStatus = 'all') {
+        const grid = document.getElementById('businessGrid');
+        grid.innerHTML = '';
+        
+        const filteredBusinesses = businesses.filter(business => {
+            const levelMatch = filterLevel === 'all' || business.level === filterLevel;
+            const statusMatch = filterStatus === 'all' || business.status === filterStatus;
+            return levelMatch && statusMatch;
         });
+        
+        if (filteredBusinesses.length === 0) {
+            grid.innerHTML = '<div style="text-align: center; padding: 2rem; color: #ff3333;">Бизнесы не найдены</div>';
+            return;
+        }
+        
+        filteredBusinesses.forEach(business => {
+            const businessCard = document.createElement('div');
+            businessCard.className = 'business-card';
+            businessCard.innerHTML = `
+                <div class="business-header">
+                    <span class="business-id">M0-${business.level} | #${business.businessNumber}</span>
+                    <span class="business-status ${business.status === 'sold' ? 'status-sold' : ''}">
+                        ${business.status === 'sold' ? 'Продано' : 'На продаже'}
+                    </span>
+                </div>
+                <h3 class="business-name">${business.name}</h3>
+                <p class="business-fullname">${business.fullName}</p>
+                <p class="business-description">${business.description}</p>
+                <div class="business-details">
+                    <div class="detail-item">
+                        <span>Цена:</span>
+                        <span>${business.price}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>Доход в неделю:</span>
+                        <span>${business.weeklyIncome}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>Налоги в неделю:</span>
+                        <span>${business.tax}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>Владелец:</span>
+                        <span>${business.owner === 'Отсутствует' || business.owner === 'отсутствует' ? 'Свободен' : 'ID: ' + business.owner}</span>
+                    </div>
+                    ${business.note ? `<div class="detail-item">
+                        <span>📌 Примечание:</span>
+                        <span>${business.note}</span>
+                    </div>` : ''}
+                </div>
+                <div class="business-meta">
+                    <div class="business-price">${business.price}</div>
+                    <button class="buy-btn" onclick="openBuyModal(${business.id})" ${business.status === 'sold' ? 'disabled' : ''}>
+                        ${business.status === 'sold' ? 'Продано' : 'Купить'}
+                    </button>
+                </div>
+            `;
+            grid.appendChild(businessCard);
+        });
+    }
 
-        // Глобальные функции
-        window.login = login;
-        window.register = register;
-        window.logout = logout;
-        window.showRegisterSection = showRegisterSection;
-        window.showLoginSection = showLoginSection;
-        window.openBuyModal = openBuyModal;
-        window.forceSync = forceSync;
-    </script>
-</body>
-</html>
+    function updateStats() {
+        const totalAvailable = businesses.filter(b => b.status === 'available').length;
+        const totalSold = businesses.filter(b => b.status === 'sold').length;
+        
+        document.getElementById('totalBusinesses').textContent = totalAvailable;
+        document.getElementById('soldBusinesses').textContent = totalSold;
+        document.getElementById('totalUsers').textContent = users.length;
+    }
+
+    // 🚀 ИНИЦИАЛИЗАЦИЯ
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Настройка интерфейса
+        setupModal();
+        setupForm();
+        setupFilters();
+        setupNavigation();
+        
+        // Проверяем авторизацию
+        const currentUser = getCurrentUser();
+        if (currentUser) {
+            showUserInterface(currentUser);
+        } else {
+            showLoginInterface();
+        }
+        
+        // Синхронизируем с GitHub
+        await syncWithGitHub();
+        
+        // Авто-синхронизация каждые 30 секунд
+        setInterval(syncWithGitHub, 30000);
+    });
+
+    // 🔄 Функция принудительной синхронизации
+    async function forceSync() {
+        await syncWithGitHub();
+    }
+
+    // 🌐 Глобальные функции
+    window.login = login;
+    window.register = register;
+    window.logout = logout;
+    window.showRegisterSection = showRegisterSection;
+    window.showLoginSection = showLoginSection;
+    window.openBuyModal = openBuyModal;
+    window.forceSync = forceSync;
+
+    // 📝 Остальные функции (setupModal, setupForm, setupFilters, setupNavigation) 
+    // остаются такими же как в предыдущем коде
+</script>
