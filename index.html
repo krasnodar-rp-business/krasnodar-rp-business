@@ -84,149 +84,6 @@
             --accent-color: #00ff88;
         }
 
-        /* 🎨 ТЕМА ЗОЛОТАЯ */
-        .theme-gold {
-            --primary-color: #ffd700;
-            --secondary-color: #ff9500;
-            --background-color: #1a1400;
-            --card-bg: #2a2200;
-            --text-color: #fff9c4;
-            --border-color: #5c4f00;
-            --accent-color: #ffeb3b;
-        }
-
-        /* 🎨 ТЕМА ЛЕТНЯЯ */
-        .theme-summer {
-            --primary-color: #ff6b35;
-            --secondary-color: #ffa500;
-            --background-color: #1a0f00;
-            --card-bg: #2a1a00;
-            --text-color: #fff3e0;
-            --border-color: #5c3c00;
-            --accent-color: #ff9800;
-        }
-
-        /* 🎨 ТЕМА ОКЕАН */
-        .theme-ocean {
-            --primary-color: #00bcd4;
-            --secondary-color: #0066cc;
-            --background-color: #001a33;
-            --card-bg: #00264d;
-            --text-color: #e0f7fa;
-            --border-color: #004080;
-            --accent-color: #00e5ff;
-        }
-
-        /* 🎨 ТЕМА ЛЕСНАЯ */
-        .theme-forest {
-            --primary-color: #4caf50;
-            --secondary-color: #2e7d32;
-            --background-color: #0a1a0a;
-            --card-bg: #1a2a1a;
-            --text-color: #e8f5e9;
-            --border-color: #2d4d2d;
-            --accent-color: #66bb6a;
-        }
-
-        /* 🎨 ТЕМА ПУРПУРНАЯ */
-        .theme-purple {
-            --primary-color: #9c27b0;
-            --secondary-color: #673ab7;
-            --background-color: #1a001a;
-            --card-bg: #2a0f2a;
-            --text-color: #f3e5f5;
-            --border-color: #4a235a;
-            --accent-color: #ba68c8;
-        }
-
-        /* 🎨 ТЕМА РОЗОВАЯ */
-        .theme-pink {
-            --primary-color: #e91e63;
-            --secondary-color: #ad1457;
-            --background-color: #1a0012;
-            --card-bg: #2a0f1f;
-            --text-color: #fce4ec;
-            --border-color: #5c2a45;
-            --accent-color: #f06292;
-        }
-
-        /* 🎨 ТЕМА СТАЛЬНАЯ */
-        .theme-steel {
-            --primary-color: #607d8b;
-            --secondary-color: #455a64;
-            --background-color: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --text-color: #eceff1;
-            --border-color: #37474f;
-            --accent-color: #90a4ae;
-        }
-
-        /* 🎨 ТЕМА КОСМОС */
-        .theme-cosmic {
-            --primary-color: #7e57c2;
-            --secondary-color: #512da8;
-            --background-color: #0a001a;
-            --card-bg: #1a0f2a;
-            --text-color: #ede7f6;
-            --border-color: #4527a0;
-            --accent-color: #b39ddb;
-        }
-
-        /* 🎨 ТЕМА САПФИР */
-        .theme-sapphire {
-            --primary-color: #1976d2;
-            --secondary-color: #0d47a1;
-            --background-color: #000a1a;
-            --card-bg: #001a33;
-            --text-color: #e3f2fd;
-            --border-color: #0d47a1;
-            --accent-color: #42a5f5;
-        }
-
-        /* 🎨 ТЕМА АМЕТИСТ */
-        .theme-amethyst {
-            --primary-color: #ab47bc;
-            --secondary-color: #7b1fa2;
-            --background-color: #0f001a;
-            --card-bg: #1f0f2a;
-            --text-color: #f3e5f5;
-            --border-color: #6a1b9a;
-            --accent-color: #ce93d8;
-        }
-
-        /* 🎨 ТЕМА ИЗУМРУД */
-        .theme-emerald {
-            --primary-color: #00c853;
-            --secondary-color: #009624;
-            --background-color: #001a00;
-            --card-bg: #002a00;
-            --text-color: #e8f5e9;
-            --border-color: #006400;
-            --accent-color: #69f0ae;
-        }
-
-        /* 🎨 ТЕМА РУБИНОВАЯ */
-        .theme-ruby {
-            --primary-color: #d32f2f;
-            --secondary-color: #b71c1c;
-            --background-color: #1a0000;
-            --card-bg: #2a0000;
-            --text-color: #ffebee;
-            --border-color: #8b0000;
-            --accent-color: #ef5350;
-        }
-
-        /* 🎨 ТЕМА АКВАМАРИН */
-        .theme-aquamarine {
-            --primary-color: #26a69a;
-            --secondary-color: #00695c;
-            --background-color: #001a14;
-            --card-bg: #002a22;
-            --text-color: #e0f2f1;
-            --border-color: #004d40;
-            --accent-color: #4db6ac;
-        }
-
         /* 🎭 ОСНОВНЫЕ СТИЛИ */
         * {
             margin: 0;
@@ -967,7 +824,7 @@
             padding: 20px;
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
-            width: 320px;
+            width: 280px;
             display: none;
             backdrop-filter: blur(10px);
         }
@@ -987,11 +844,8 @@
 
         .theme-options {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 5px;
         }
 
         .theme-option {
@@ -1025,146 +879,6 @@
         .theme-name {
             font-size: 12px;
             font-weight: 600;
-        }
-
-        /* 👤 ПАНЕЛЬ КАСТОМИЗАЦИИ ПРОФИЛЯ */
-        .profile-customization {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin: 20px 0;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .profile-customization::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient);
-        }
-
-        .customization-section {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .customization-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .customization-section h4 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .color-picker-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .color-option {
-            padding: 10px;
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            text-align: center;
-            background: var(--background-color);
-        }
-
-        .color-option:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary-color);
-        }
-
-        .color-option.active {
-            border-color: var(--primary-color);
-            box-shadow: var(--shadow);
-        }
-
-        .color-preview {
-            width: 100%;
-            height: 30px;
-            border-radius: 6px;
-            margin-bottom: 5px;
-        }
-
-        .color-name {
-            font-size: 10px;
-            font-weight: 600;
-        }
-
-        .profile-preview {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 20px;
-            background: var(--background-color);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            margin-top: 15px;
-        }
-
-        .profile-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .profile-info {
-            flex: 1;
-        }
-
-        .profile-name {
-            font-size: 1.2em;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .profile-role {
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin-bottom: 5px;
-        }
-
-        .profile-stats {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .profile-stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .stat-label {
-            font-size: 0.8em;
-            opacity: 0.7;
         }
 
         /* БЕЙДЖИ ДЛЯ ТЕМ */
@@ -1206,162 +920,6 @@
 
         .green-badge {
             background: linear-gradient(135deg, #00cc66, #008040);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .gold-badge {
-            background: linear-gradient(135deg, #ffd700, #ff9500);
-            color: #1a1400;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .summer-badge {
-            background: linear-gradient(135deg, #ff6b35, #ffa500);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .ocean-badge {
-            background: linear-gradient(135deg, #00bcd4, #0066cc);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .forest-badge {
-            background: linear-gradient(135deg, #4caf50, #2e7d32);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .purple-badge {
-            background: linear-gradient(135deg, #9c27b0, #673ab7);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .pink-badge {
-            background: linear-gradient(135deg, #e91e63, #ad1457);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .steel-badge {
-            background: linear-gradient(135deg, #607d8b, #455a64);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .cosmic-badge {
-            background: linear-gradient(135deg, #7e57c2, #512da8);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .sapphire-badge {
-            background: linear-gradient(135deg, #1976d2, #0d47a1);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .amethyst-badge {
-            background: linear-gradient(135deg, #ab47bc, #7b1fa2);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .emerald-badge {
-            background: linear-gradient(135deg, #00c853, #009624);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .ruby-badge {
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .aquamarine-badge {
-            background: linear-gradient(135deg, #26a69a, #00695c);
             color: white;
             padding: 3px 8px;
             border-radius: 12px;
@@ -1629,16 +1187,8 @@
             }
             
             .theme-panel {
-                width: 280px;
+                width: 260px;
                 right: -10px;
-            }
-            
-            .theme-options {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .color-picker-grid {
-                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -1664,10 +1214,6 @@
             
             .theme-options {
                 grid-template-columns: 1fr;
-            }
-            
-            .color-picker-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1766,58 +1312,6 @@
                     <div class="theme-preview" style="background: linear-gradient(135deg, #00cc66, #008040);"></div>
                     <div class="theme-name">Зеленая</div>
                 </div>
-                <div class="theme-option" onclick="changeTheme('gold')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #ffd700, #ff9500);"></div>
-                    <div class="theme-name">Золотая</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('summer')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #ff6b35, #ffa500);"></div>
-                    <div class="theme-name">Летняя</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('ocean')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #00bcd4, #0066cc);"></div>
-                    <div class="theme-name">Океан</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('forest')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #4caf50, #2e7d32);"></div>
-                    <div class="theme-name">Лесная</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('purple')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #9c27b0, #673ab7);"></div>
-                    <div class="theme-name">Пурпурная</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('pink')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #e91e63, #ad1457);"></div>
-                    <div class="theme-name">Розовая</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('steel')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #607d8b, #455a64);"></div>
-                    <div class="theme-name">Стальная</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('cosmic')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #7e57c2, #512da8);"></div>
-                    <div class="theme-name">Космос</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('sapphire')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #1976d2, #0d47a1);"></div>
-                    <div class="theme-name">Сапфир</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('amethyst')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #ab47bc, #7b1fa2);"></div>
-                    <div class="theme-name">Аметист</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('emerald')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #00c853, #009624);"></div>
-                    <div class="theme-name">Изумруд</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('ruby')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #d32f2f, #b71c1c);"></div>
-                    <div class="theme-name">Рубиновая</div>
-                </div>
-                <div class="theme-option" onclick="changeTheme('aquamarine')">
-                    <div class="theme-preview" style="background: linear-gradient(135deg, #26a69a, #00695c);"></div>
-                    <div class="theme-name">Аквамарин</div>
-                </div>
             </div>
         </div>
     </div>
@@ -1904,11 +1398,6 @@
                 <span>Фильтры</span>
             </div>
             
-            <div class="menu-item" onclick="showSection('profile')">
-                <i class="fas fa-user-cog"></i>
-                <span>Кастомизация</span>
-            </div>
-            
             <div class="menu-divider"></div>
             
             <div class="menu-item" onclick="exportData()">
@@ -1952,10 +1441,6 @@
                 <button class="btn btn-secondary" onclick="openThemeSettings()">
                     <i class="fas fa-palette"></i>
                     <span>Тема</span>
-                </button>
-                <button class="btn btn-secondary" onclick="showSection('profile')">
-                    <i class="fas fa-user-cog"></i>
-                    <span>Профиль</span>
                 </button>
                 <button class="btn btn-success" onclick="exportData()">
                     <i class="fas fa-download"></i>
@@ -2114,115 +1599,6 @@
                     </button>
                     <button class="btn btn-danger" onclick="toggleBetaTheme()">
                         <i class="fas fa-flask"></i> Бета-тема
-                    </button>
-                </div>
-            </div>
-
-            <!-- Секция кастомизации профиля -->
-            <div class="profile-customization hidden" id="profileSection">
-                <h3><i class="fas fa-user-cog"></i> Кастомизация профиля</h3>
-                
-                <div class="profile-preview" id="profilePreview">
-                    <div class="profile-avatar" id="profileAvatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="profile-info">
-                        <div class="profile-name" id="profileName">Имя пользователя</div>
-                        <div class="profile-role" id="profileRole">Роль: Пользователь</div>
-                        <div class="profile-stats">
-                            <div class="profile-stat">
-                                <div class="stat-value" id="statBusinesses">0</div>
-                                <div class="stat-label">Бизнесы</div>
-                            </div>
-                            <div class="profile-stat">
-                                <div class="stat-value" id="statBalance">0 ₽</div>
-                                <div class="stat-label">Баланс</div>
-                            </div>
-                            <div class="profile-stat">
-                                <div class="stat-value" id="statLevel">1</div>
-                                <div class="stat-label">Уровень</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="customization-section">
-                    <h4><i class="fas fa-paint-brush"></i> Цветовая схема</h4>
-                    <div class="color-picker-grid">
-                        <div class="color-option" onclick="changeProfileColor('primary', '#ff4444')">
-                            <div class="color-preview" style="background: #ff4444;"></div>
-                            <div class="color-name">Основной</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#00ff88')">
-                            <div class="color-preview" style="background: #00ff88;"></div>
-                            <div class="color-name">Неоновый</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#9d4edd')">
-                            <div class="color-preview" style="background: #9d4edd;"></div>
-                            <div class="color-name">Фиолетовый</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#ffd700')">
-                            <div class="color-preview" style="background: #ffd700;"></div>
-                            <div class="color-name">Золотой</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#00bcd4')">
-                            <div class="color-preview" style="background: #00bcd4;"></div>
-                            <div class="color-name">Бирюзовый</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#4caf50')">
-                            <div class="color-preview" style="background: #4caf50;"></div>
-                            <div class="color-name">Зеленый</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#e91e63')">
-                            <div class="color-preview" style="background: #e91e63;"></div>
-                            <div class="color-name">Розовый</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#607d8b')">
-                            <div class="color-preview" style="background: #607d8b;"></div>
-                            <div class="color-name">Серый</div>
-                        </div>
-                        <div class="color-option" onclick="changeProfileColor('primary', '#7e57c2')">
-                            <div class="color-preview" style="background: #7e57c2;"></div>
-                            <div class="color-name">Космический</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="customization-section">
-                    <h4><i class="fas fa-user-circle"></i> Аватар профиля</h4>
-                    <div class="avatar-options">
-                        <div class="filter-controls">
-                            <select class="filter-select" id="avatarType" onchange="updateAvatarPreview()">
-                                <option value="icon">Иконка</option>
-                                <option value="gradient">Градиент</option>
-                                <option value="pattern">Узор</option>
-                            </select>
-                            <select class="filter-select" id="avatarIcon" onchange="updateAvatarPreview()">
-                                <option value="user">👤 Пользователь</option>
-                                <option value="crown">👑 Корона</option>
-                                <option value="star">⭐ Звезда</option>
-                                <option value="rocket">🚀 Ракета</option>
-                                <option value="diamond">💎 Алмаз</option>
-                                <option value="fire">🔥 Огонь</option>
-                                <option value="robot">🤖 Робот</option>
-                                <option value="ninja">🥷 Ниндзя</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="customization-section">
-                    <h4><i class="fas fa-id-card"></i> Информация профиля</h4>
-                    <div class="form-group">
-                        <label for="customUsername"><i class="fas fa-user"></i> Отображаемое имя:</label>
-                        <input type="text" id="customUsername" placeholder="Введите имя для отображения">
-                    </div>
-                    <div class="form-group">
-                        <label for="customTitle"><i class="fas fa-tag"></i> Заголовок профиля:</label>
-                        <input type="text" id="customTitle" placeholder="Введите заголовок профиля">
-                    </div>
-                    <button class="btn btn-primary" onclick="saveProfileCustomization()">
-                        <i class="fas fa-save"></i> Сохранить настройки
                     </button>
                 </div>
             </div>
@@ -2736,7 +2112,6 @@
             level: 'all'
         };
         let isAdminPanelActive = false;
-        let userProfileSettings = {};
 
         // 🔧 ПЕРЕМЕННЫЕ ДЛЯ DISCORD POPUP
         let discordPopupTimer;
@@ -2753,9 +2128,6 @@
             
             // Загружаем сохраненную тему
             loadTheme();
-            
-            // Загружаем настройки профиля
-            loadProfileSettings();
             
             // Проверяем OAuth callback при загрузке
             setTimeout(() => {
@@ -2795,10 +2167,7 @@
 
         function changeTheme(themeName) {
             // Убираем все классы тем
-            document.body.classList.remove('theme-standard', 'theme-beta', 'theme-night', 'theme-red', 'theme-green', 
-                'theme-gold', 'theme-summer', 'theme-ocean', 'theme-forest', 'theme-purple', 'theme-pink', 
-                'theme-steel', 'theme-cosmic', 'theme-sapphire', 'theme-amethyst', 'theme-emerald', 
-                'theme-ruby', 'theme-aquamarine');
+            document.body.classList.remove('theme-standard', 'theme-beta', 'theme-night', 'theme-red', 'theme-green');
             
             // Добавляем выбранную тему
             document.body.classList.add(`theme-${themeName}`);
@@ -2829,20 +2198,7 @@
                 'beta': 'Бета-тема', 
                 'night': 'Ночная',
                 'red': 'Красная',
-                'green': 'Зеленая',
-                'gold': 'Золотая',
-                'summer': 'Летняя',
-                'ocean': 'Океан',
-                'forest': 'Лесная',
-                'purple': 'Пурпурная',
-                'pink': 'Розовая',
-                'steel': 'Стальная',
-                'cosmic': 'Космос',
-                'sapphire': 'Сапфир',
-                'amethyst': 'Аметист',
-                'emerald': 'Изумруд',
-                'ruby': 'Рубиновая',
-                'aquamarine': 'Аквамарин'
+                'green': 'Зеленая'
             };
             return themes[themeKey] || 'Стандартная';
         }
@@ -2867,45 +2223,6 @@
             } else if (themeName === 'green') {
                 premiumBadge.classList.add('green-badge');
                 premiumBadge.textContent = 'GREEN';
-            } else if (themeName === 'gold') {
-                premiumBadge.classList.add('gold-badge');
-                premiumBadge.textContent = 'GOLD';
-            } else if (themeName === 'summer') {
-                premiumBadge.classList.add('summer-badge');
-                premiumBadge.textContent = 'SUMMER';
-            } else if (themeName === 'ocean') {
-                premiumBadge.classList.add('ocean-badge');
-                premiumBadge.textContent = 'OCEAN';
-            } else if (themeName === 'forest') {
-                premiumBadge.classList.add('forest-badge');
-                premiumBadge.textContent = 'FOREST';
-            } else if (themeName === 'purple') {
-                premiumBadge.classList.add('purple-badge');
-                premiumBadge.textContent = 'PURPLE';
-            } else if (themeName === 'pink') {
-                premiumBadge.classList.add('pink-badge');
-                premiumBadge.textContent = 'PINK';
-            } else if (themeName === 'steel') {
-                premiumBadge.classList.add('steel-badge');
-                premiumBadge.textContent = 'STEEL';
-            } else if (themeName === 'cosmic') {
-                premiumBadge.classList.add('cosmic-badge');
-                premiumBadge.textContent = 'COSMIC';
-            } else if (themeName === 'sapphire') {
-                premiumBadge.classList.add('sapphire-badge');
-                premiumBadge.textContent = 'SAPPHIRE';
-            } else if (themeName === 'amethyst') {
-                premiumBadge.classList.add('amethyst-badge');
-                premiumBadge.textContent = 'AMETHYST';
-            } else if (themeName === 'emerald') {
-                premiumBadge.classList.add('emerald-badge');
-                premiumBadge.textContent = 'EMERALD';
-            } else if (themeName === 'ruby') {
-                premiumBadge.classList.add('ruby-badge');
-                premiumBadge.textContent = 'RUBY';
-            } else if (themeName === 'aquamarine') {
-                premiumBadge.classList.add('aquamarine-badge');
-                premiumBadge.textContent = 'AQUA';
             } else {
                 premiumBadge.textContent = 'PREMIUM';
             }
@@ -2936,96 +2253,6 @@
                     }
                 });
             }
-        }
-
-        // 👤 ФУНКЦИИ ДЛЯ КАСТОМИЗАЦИИ ПРОФИЛЯ
-        function loadProfileSettings() {
-            const savedSettings = localStorage.getItem('userProfileSettings');
-            if (savedSettings) {
-                try {
-                    userProfileSettings = JSON.parse(savedSettings);
-                    applyProfileSettings();
-                } catch (e) {
-                    userProfileSettings = {};
-                }
-            }
-        }
-
-        function saveProfileSettings() {
-            localStorage.setItem('userProfileSettings', JSON.stringify(userProfileSettings));
-        }
-
-        function applyProfileSettings() {
-            // Применяем настройки профиля
-            if (userProfileSettings.displayName) {
-                document.getElementById('profileName').textContent = userProfileSettings.displayName;
-            }
-            
-            if (userProfileSettings.title) {
-                document.getElementById('profileRole').textContent = userProfileSettings.title;
-            }
-            
-            if (userProfileSettings.avatarType) {
-                updateAvatarPreview();
-            }
-            
-            // Обновляем статистику профиля
-            updateProfileStats();
-        }
-
-        function updateProfileStats() {
-            // Здесь можно добавить реальную статистику пользователя
-            document.getElementById('statBusinesses').textContent = '0';
-            document.getElementById('statBalance').textContent = '0 ₽';
-            document.getElementById('statLevel').textContent = '1';
-        }
-
-        function changeProfileColor(type, color) {
-            // Здесь можно добавить логику изменения цветов профиля
-            showSyncStatus('Цвет профиля изменен!', 'success');
-        }
-
-        function updateAvatarPreview() {
-            const avatarType = document.getElementById('avatarType').value;
-            const avatarIcon = document.getElementById('avatarIcon').value;
-            const avatarElement = document.getElementById('profileAvatar');
-            
-            let iconClass = 'fas fa-user';
-            
-            switch(avatarIcon) {
-                case 'crown': iconClass = 'fas fa-crown'; break;
-                case 'star': iconClass = 'fas fa-star'; break;
-                case 'rocket': iconClass = 'fas fa-rocket'; break;
-                case 'diamond': iconClass = 'fas fa-gem'; break;
-                case 'fire': iconClass = 'fas fa-fire'; break;
-                case 'robot': iconClass = 'fas fa-robot'; break;
-                case 'ninja': iconClass = 'fas fa-user-ninja'; break;
-            }
-            
-            avatarElement.innerHTML = `<i class="${iconClass}"></i>`;
-            
-            // Сохраняем настройки аватара
-            userProfileSettings.avatarType = avatarType;
-            userProfileSettings.avatarIcon = avatarIcon;
-            saveProfileSettings();
-        }
-
-        function saveProfileCustomization() {
-            const displayName = document.getElementById('customUsername').value;
-            const title = document.getElementById('customTitle').value;
-            
-            if (displayName) {
-                userProfileSettings.displayName = displayName;
-                document.getElementById('profileName').textContent = displayName;
-            }
-            
-            if (title) {
-                userProfileSettings.title = title;
-                document.getElementById('profileRole').textContent = title;
-            }
-            
-            saveProfileSettings();
-            showSyncStatus('Настройки профиля сохранены!', 'success');
         }
 
         // 🏪 ЗАГРУЗКА БИЗНЕСОВ
@@ -3064,9 +2291,6 @@
             document.getElementById('menuToggle').classList.remove('hidden');
             
             document.getElementById('userMenuName').textContent = currentUser.username;
-            
-            // Применяем настройки профиля
-            applyProfileSettings();
             
             // Проверяем права администратора
             if (ADMIN_USERS.includes(currentUser.discordId || currentUser.id)) {
@@ -3720,15 +2944,6 @@
 
         // 📱 ФУНКЦИИ БОКОВОГО МЕНЮ
         function showSection(sectionName) {
-            // Скрываем все секции
-            document.getElementById('adminPanel').classList.add('hidden');
-            document.getElementById('profileSection').classList.add('hidden');
-            
-            // Показываем выбранную секцию
-            if (sectionName === 'profile') {
-                document.getElementById('profileSection').classList.remove('hidden');
-            }
-            
             // Закрываем меню на мобильных устройствах
             if (window.innerWidth <= 768) {
                 document.getElementById('sidebar').classList.remove('open');
