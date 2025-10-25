@@ -626,6 +626,131 @@
             overflow-y: auto;
         }
 
+        /* 🛠️ АДМИН ПАНЕЛЬ */
+        .admin-panel {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .admin-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        /* 🍔 БОКОВОЕ МЕНЮ */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--gradient);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: var(--card-bg);
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 30px 20px 20px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: var(--primary-color);
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 10px 20px;
+        }
+
+        .admin-section {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* 🎨 ТЕМА БЕТА-ТЕСТА */
+        body.theme-beta {
+            --primary-color: #00ff88;
+            --secondary-color: #0088ff;
+            --background-color: #0a0a1a;
+            --card-bg: #1a1a2a;
+            --accent-color: #00ffcc;
+        }
+
+        .beta-badge {
+            background: linear-gradient(135deg, #00ff88, #0088ff);
+            color: #0a0a1a;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
         /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
             .container {
@@ -663,6 +788,11 @@
             .filter-select, .search-input {
                 width: 100%;
             }
+            
+            .sidebar {
+                width: 280px;
+                left: -280px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -676,6 +806,13 @@
             
             .user-menu .btn {
                 width: 100%;
+            }
+            
+            .menu-toggle {
+                top: 10px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
             }
         }
 
@@ -705,6 +842,65 @@
             opacity: 0;
             pointer-events: none;
         }
+
+        /* ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ФОРМ */
+        .success-badge {
+            background: var(--success-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .price-highlight {
+            font-size: 1.5em;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            border: 2px solid var(--primary-color);
+        }
+
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .step-number {
+            background: var(--gradient);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .step-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body class="theme-standard">
@@ -712,6 +908,67 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
         <div class="loading-text" id="loadingWelcome">Загрузка системы...</div>
+    </div>
+
+    <!-- Боковое меню -->
+    <button class="menu-toggle hidden" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Krasnodar RP</h1>
+                    <div class="subtitle">Business System</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="menu-item" onclick="showSection('businesses')">
+                <i class="fas fa-store"></i>
+                <span>Все бизнесы</span>
+            </div>
+            
+            <div class="menu-item" onclick="showSection('stats')">
+                <i class="fas fa-chart-bar"></i>
+                <span>Статистика</span>
+            </div>
+            
+            <div class="menu-item" onclick="showSection('filters')">
+                <i class="fas fa-filter"></i>
+                <span>Фильтры</span>
+            </div>
+            
+            <div class="menu-divider"></div>
+            
+            <div class="menu-item" onclick="exportData()">
+                <i class="fas fa-download"></i>
+                <span>Экспорт данных</span>
+            </div>
+            
+            <div class="menu-item" onclick="openProfileModal()">
+                <i class="fas fa-user-cog"></i>
+                <span>Настройки профиля</span>
+            </div>
+            
+            <div class="menu-divider"></div>
+            
+            <!-- Админ секция -->
+            <div class="menu-item admin-section hidden" id="adminMenuItem" onclick="toggleAdminPanel()">
+                <i class="fas fa-shield-alt"></i>
+                <span>Админ панель</span>
+            </div>
+            
+            <div class="menu-item" onclick="logoutFromSystem()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Выйти из системы</span>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -831,7 +1088,20 @@
         <div class="main-content hidden" id="mainContent">
             <!-- Админ панель -->
             <div class="admin-panel hidden" id="adminPanel">
-                👑 Вы вошли как администратор системы
+                <h3><i class="fas fa-crown"></i> Панель администратора</h3>
+                <p>Добро пожаловать в админ-панель! Здесь вы можете управлять системой.</p>
+                
+                <div class="filter-controls" style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="manageBusinesses()">
+                        <i class="fas fa-edit"></i> Управление бизнесами
+                    </button>
+                    <button class="btn btn-secondary" onclick="manageUsers()">
+                        <i class="fas fa-users"></i> Управление пользователями
+                    </button>
+                    <button class="btn btn-danger" onclick="toggleBetaTheme()">
+                        <i class="fas fa-flask"></i> Бета-тема
+                    </button>
+                </div>
             </div>
 
             <!-- Секция фильтров и сортировки -->
@@ -951,6 +1221,37 @@
         </div>
     </div>
 
+    <!-- Модальное окно админ-авторизации -->
+    <div class="modal hidden" id="adminAuthModal">
+        <div class="modal-content">
+            <h3><i class="fas fa-shield-alt"></i> Авторизация администратора</h3>
+            
+            <div class="form-group">
+                <label for="adminPassword"><i class="fas fa-key"></i> Код доступа:</label>
+                <input type="password" id="adminPassword" placeholder="Введите код доступа">
+            </div>
+            
+            <div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: var(--border-radius-sm);">
+                <h4 style="margin-bottom: 10px; color: var(--info-color);">
+                    <i class="fas fa-info-circle"></i> Информация
+                </h4>
+                <p style="font-size: 14px; opacity: 0.8;">
+                    Для доступа к админ-панели требуется специальный код доступа.
+                    Обратитесь к главному администратору для получения кода.
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="verifyAdminAccess()" style="flex: 1;">
+                    <i class="fas fa-check"></i> Подтвердить
+                </button>
+                <button class="btn btn-secondary" onclick="closeAdminAuthModal()">
+                    <i class="fas fa-times"></i> Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Статус синхронизации -->
     <div class="sync-status" id="syncStatus"></div>
 
@@ -1009,6 +1310,10 @@
             "1262559706317197393"
         ];
 
+        // 🔑 КОДЫ ДОСТУПА
+        const ADMIN_ACCESS_CODE = "EexfAgdK";
+        const BETA_ACCESS_CODE = "BetaTest2024";
+
         // 🎪 ОСНОВНЫЕ ПЕРЕМЕННЫЕ
         let currentUser = null;
         let businessesData = { ...DEFAULT_BUSINESSES };
@@ -1017,6 +1322,7 @@
             status: 'all',
             level: 'all'
         };
+        let isAdminPanelActive = false;
 
         // 🚀 ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
@@ -1038,6 +1344,28 @@
                     hideLoadingScreen();
                 }, 1000);
             }, 500);
+
+            // Инициализация бокового меню
+            initSidebar();
+        }
+
+        // 🍔 ИНИЦИАЛИЗАЦИЯ БОКОВОГО МЕНЮ
+        function initSidebar() {
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('open');
+                });
+                
+                // Закрытие меню при клике вне его
+                document.addEventListener('click', function(event) {
+                    if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            }
         }
 
         // 🏪 ЗАГРУЗКА БИЗНЕСОВ
@@ -1073,11 +1401,13 @@
             document.getElementById('authSection').classList.add('hidden');
             document.getElementById('mainContent').classList.remove('hidden');
             document.getElementById('userMenu').classList.remove('hidden');
+            document.getElementById('menuToggle').classList.remove('hidden');
             
             document.getElementById('userMenuName').textContent = currentUser.username;
             
-            if (ADMIN_USERS.includes(currentUser.id)) {
-                document.getElementById('adminPanel').classList.remove('hidden');
+            // Проверяем права администратора
+            if (ADMIN_USERS.includes(currentUser.discordId || currentUser.id)) {
+                document.getElementById('adminMenuItem').classList.remove('hidden');
             }
             
             hideLoadingScreen();
@@ -1309,7 +1639,10 @@
             
             document.getElementById('mainContent').classList.add('hidden');
             document.getElementById('userMenu').classList.add('hidden');
+            document.getElementById('menuToggle').classList.add('hidden');
             document.getElementById('authSection').classList.remove('hidden');
+            document.getElementById('adminPanel').classList.add('hidden');
+            document.getElementById('sidebar').classList.remove('open');
             
             // Очищаем формы
             document.getElementById('loginUsername').value = '';
@@ -1551,6 +1884,79 @@
             link.click();
             
             showSyncStatus('Данные экспортированы в JSON файл', 'success');
+        }
+
+        // 🛠️ АДМИН ФУНКЦИИ
+        function toggleAdminPanel() {
+            if (!ADMIN_USERS.includes(currentUser.discordId || currentUser.id)) {
+                showSyncStatus('У вас нет прав администратора', 'error');
+                return;
+            }
+            
+            if (!isAdminPanelActive) {
+                openAdminAuthModal();
+            } else {
+                document.getElementById('adminPanel').classList.add('hidden');
+                isAdminPanelActive = false;
+                showSyncStatus('Админ-панель закрыта', 'warning');
+            }
+        }
+
+        function openAdminAuthModal() {
+            document.getElementById('adminAuthModal').classList.remove('hidden');
+        }
+
+        function closeAdminAuthModal() {
+            document.getElementById('adminAuthModal').classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function verifyAdminAccess() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_ACCESS_CODE) {
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('adminAuthModal').classList.add('hidden');
+                isAdminPanelActive = true;
+                document.getElementById('adminPassword').value = '';
+                showSyncStatus('Доступ к админ-панели разрешен! 👑', 'success');
+            } else {
+                showSyncStatus('Неверный код доступа', 'error');
+            }
+        }
+
+        function toggleBetaTheme() {
+            const betaPassword = prompt('Введите код для активации бета-темы:');
+            
+            if (betaPassword === BETA_ACCESS_CODE) {
+                document.body.className = 'theme-beta';
+                document.querySelector('.logo-text h1').innerHTML = 'Krasnodar RP <span class="beta-badge">BETA</span>';
+                showSyncStatus('Бета-тема активирована! 🚀', 'success');
+            } else if (betaPassword) {
+                showSyncStatus('Неверный код бета-темы', 'error');
+            }
+        }
+
+        function manageBusinesses() {
+            showSyncStatus('Функция управления бизнесами в разработке', 'info');
+        }
+
+        function manageUsers() {
+            showSyncStatus('Функция управления пользователями в разработке', 'info');
+        }
+
+        // 📱 ФУНКЦИИ БОКОВОГО МЕНЮ
+        function showSection(sectionName) {
+            // Закрываем меню на мобильных устройствах
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+            
+            showSyncStatus(`Переход в раздел: ${sectionName}`, 'info');
+        }
+
+        function openProfileModal() {
+            showSyncStatus('Функция настроек профиля в разработке', 'info');
         }
 
         // 🔔 УВЕДОМЛЕНИЯ
