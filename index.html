@@ -29,6 +29,114 @@
             --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
+        /* Тема Фурри - более яркая */
+        .theme-furry {
+            --primary-color: #ff1a75;
+            --secondary-color: #ff4da6;
+            --background-color: #0f0810;
+            --card-bg: #1f0f1a;
+            --text-color: #ffffff;
+            --border-color: #ff1a75;
+            --accent-color: #ff66b3;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Океан - более яркая */
+        .theme-ocean {
+            --primary-color: #00e5ff;
+            --secondary-color: #2979ff;
+            --background-color: #001933;
+            --card-bg: #00264d;
+            --text-color: #ffffff;
+            --border-color: #00e5ff;
+            --accent-color: #40c4ff;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Лес - более яркая */
+        .theme-forest {
+            --primary-color: #00e676;
+            --secondary-color: #64dd17;
+            --background-color: #001a00;
+            --card-bg: #003300;
+            --text-color: #ffffff;
+            --border-color: #00e676;
+            --accent-color: #76ff03;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Закат - более яркая */
+        .theme-sunset {
+            --primary-color: #ff5252;
+            --secondary-color: #ff8a50;
+            --background-color: #1a0a0a;
+            --card-bg: #331414;
+            --text-color: #ffffff;
+            --border-color: #ff5252;
+            --accent-color: #ff8a65;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Полночь - более яркая */
+        .theme-midnight {
+            --primary-color: #7c4dff;
+            --secondary-color: #536dfe;
+            --background-color: #0a0a1a;
+            --card-bg: #151530;
+            --text-color: #ffffff;
+            --border-color: #7c4dff;
+            --accent-color: #8c9eff;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Неон - более яркая */
+        .theme-neon {
+            --primary-color: #00ff9d;
+            --secondary-color: #00b8ff;
+            --background-color: #000000;
+            --card-bg: #0a0a0a;
+            --text-color: #ffffff;
+            --border-color: #00ff9d;
+            --accent-color: #ff00ff;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Золото - более яркая */
+        .theme-gold {
+            --primary-color: #ffd700;
+            --secondary-color: #ffa500;
+            --background-color: #1a1400;
+            --card-bg: #2d2400;
+            --text-color: #ffffff;
+            --border-color: #ffd700;
+            --accent-color: #ffcc00;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Пурпурная - новая яркая тема */
+        .theme-purple {
+            --primary-color: #d500f9;
+            --secondary-color: #651fff;
+            --background-color: #0f0014;
+            --card-bg: #1f0a2d;
+            --text-color: #ffffff;
+            --border-color: #d500f9;
+            --accent-color: #e040fb;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Тема Радужная - новая яркая тема */
+        .theme-rainbow {
+            --primary-color: #ff1744;
+            --secondary-color: #3d5afe;
+            --background-color: #000000;
+            --card-bg: #0a0a0a;
+            --text-color: #ffffff;
+            --border-color: #ff1744;
+            --accent-color: #00e676;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
         /* 🎭 ОСНОВНЫЕ СТИЛИ */
         * {
             margin: 0;
@@ -223,6 +331,30 @@
             justify-content: flex-end;
         }
 
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            object-fit: cover;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .user-discriminator {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
         /* 🎯 КНОПКИ */
         .btn {
             padding: 10px 16px;
@@ -275,6 +407,17 @@
 
         .btn-discord:hover {
             background: #4752c4;
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-theme:hover {
+            border-color: var(--primary-color);
             transform: translateY(-2px);
         }
 
@@ -337,7 +480,7 @@
         /* 🏪 КАРТОЧКИ БИЗНЕСОВ */
         .business-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 20px;
             margin-top: 25px;
         }
@@ -410,15 +553,17 @@
             line-height: 1.2;
         }
 
+        .business-fullname {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
         .business-description {
             font-size: 0.9em;
             line-height: 1.5;
             margin-bottom: 15px;
             opacity: 0.9;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
 
         .business-details {
@@ -473,6 +618,15 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+        }
+
+        .business-note {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid var(--warning-color);
+            border-radius: var(--border-radius-sm);
+            padding: 8px 12px;
+            margin-top: 10px;
+            font-size: 0.8em;
         }
 
         /* 🔄 СТАТУС СИНХРОНИЗАЦИИ */
@@ -537,35 +691,17 @@
             background: var(--gradient);
         }
 
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 15px;
+        .discord-login {
             text-align: center;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 14px;
         }
 
-        .auth-tab.active {
-            border-bottom-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
+        .discord-login h3 {
+            margin-bottom: 20px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .discord-features {
@@ -590,34 +726,6 @@
             gap: 8px;
             margin-bottom: 8px;
             font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-color);
-            font-size: 13px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: var(--border-radius-sm);
-            background: var(--background-color);
-            color: var(--text-color);
-            font-size: 16px;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary-color);
-            outline: none;
         }
 
         /* 🌀 АНИМАЦИЯ ЗАГРУЗКИ */
@@ -762,6 +870,14 @@
             background: var(--gradient);
         }
 
+        .admin-access {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--info-color);
+        }
+
         /* 🍔 БОКОВОЕ МЕНЮ */
         .menu-toggle {
             position: fixed;
@@ -846,333 +962,113 @@
             border-left: 4px solid var(--accent-color);
         }
 
-        /* 🎨 ТЕМЫ */
-        body.theme-standard {
-            --primary-color: #ff4444;
-            --secondary-color: #4444ff;
-            --background-color: #1a1a1a;
-            --card-bg: #2d2d2d;
-            --text-color: #ffffff;
-            --border-color: #444;
-            --success-color: #4CAF50;
-            --error-color: #f44336;
-            --warning-color: #ff9800;
-            --accent-color: #ff6b35;
-            --info-color: #2196F3;
-        }
-
-        body.theme-furry {
-            --primary-color: #ff6b9d;
-            --secondary-color: #6b8cff;
-            --background-color: #2a1a2a;
-            --card-bg: #3d2a3d;
-            --text-color: #ffffff;
-            --border-color: #5a3d5a;
-            --success-color: #7ccf7c;
-            --error-color: #ff6b6b;
-            --warning-color: #ffb86b;
-            --accent-color: #ff9d6b;
-            --info-color: #6bb9ff;
-        }
-
-        body.theme-femboy {
-            --primary-color: #ff9dde;
-            --secondary-color: #9dc9ff;
-            --background-color: #2a1a2a;
-            --card-bg: #3a2a3a;
-            --text-color: #ffffff;
-            --border-color: #5a3d5a;
-            --success-color: #a8e6a8;
-            --error-color: #ff9d9d;
-            --warning-color: #ffd69d;
-            --accent-color: #ffb89d;
-            --info-color: #9dd6ff;
-        }
-
-        body.theme-boykisser {
-            --primary-color: #ffcc00;
-            --secondary-color: #ff66aa;
-            --background-color: #331a33;
-            --card-bg: #442a44;
-            --text-color: #ffffff;
-            --border-color: #664466;
-            --success-color: #99ff99;
-            --error-color: #ff6666;
-            --warning-color: #ffcc66;
-            --accent-color: #ff9966;
-            --info-color: #66ccff;
-        }
-
-        body.theme-ocean {
-            --primary-color: #00a8ff;
-            --secondary-color: #0097e6;
-            --background-color: #0a1a2a;
-            --card-bg: #1a2a3a;
-            --text-color: #ffffff;
-            --border-color: #2a3a4a;
-            --success-color: #44bd32;
-            --error-color: #e84118;
-            --warning-color: #fbc531;
-            --accent-color: #8c7ae6;
-            --info-color: #00a8ff;
-        }
-
-        body.theme-forest {
-            --primary-color: #00b894;
-            --secondary-color: #00a085;
-            --background-color: #1a2a1a;
-            --card-bg: #2a3a2a;
-            --text-color: #ffffff;
-            --border-color: #3a4a3a;
-            --success-color: #55efc4;
-            --error-color: #d63031;
-            --warning-color: #fdcb6e;
-            --accent-color: #e17055;
-            --info-color: #74b9ff;
-        }
-
-        body.theme-sunset {
-            --primary-color: #e84393;
-            --secondary-color: #fd79a8;
-            --background-color: #2a1a1a;
-            --card-bg: #3a2a2a;
-            --text-color: #ffffff;
-            --border-color: #5a3a3a;
-            --success-color: #55efc4;
-            --error-color: #d63031;
-            --warning-color: #fdcb6e;
-            --accent-color: #e17055;
-            --info-color: #74b9ff;
-        }
-
-        body.theme-midnight {
-            --primary-color: #8e44ad;
-            --secondary-color: #9b59b6;
-            --background-color: #0a0a1a;
-            --card-bg: #1a1a2a;
-            --text-color: #ffffff;
-            --border-color: #2a2a3a;
-            --success-color: #2ecc71;
-            --error-color: #e74c3c;
-            --warning-color: #f39c12;
-            --accent-color: #e67e22;
-            --info-color: #3498db;
-        }
-
-        body.theme-cotton-candy {
-            --primary-color: #ff9ff3;
-            --secondary-color: #f368e0;
-            --background-color: #2a1a2a;
-            --card-bg: #3a2a3a;
-            --text-color: #ffffff;
-            --border-color: #5a3a5a;
-            --success-color: #a8e6a8;
-            --error-color: #ff9d9d;
-            --warning-color: #ffd69d;
-            --accent-color: #ffb89d;
-            --info-color: #9dd6ff;
-        }
-
-        body.theme-neon {
-            --primary-color: #00ff88;
-            --secondary-color: #0088ff;
-            --background-color: #0a0a1a;
-            --card-bg: #1a1a2a;
-            --text-color: #ffffff;
-            --border-color: #2a2a3a;
-            --success-color: #00ff88;
-            --error-color: #ff0066;
-            --warning-color: #ffcc00;
-            --accent-color: #ff00cc;
-            --info-color: #00ccff;
-        }
-
-        body.theme-gold {
-            --primary-color: #ffd700;
-            --secondary-color: #ffb347;
-            --background-color: #1a1a0a;
-            --card-bg: #2a2a1a;
-            --text-color: #ffffff;
-            --border-color: #4a4a2a;
-            --success-color: #32cd32;
-            --error-color: #ff4500;
-            --warning-color: #ffa500;
-            --accent-color: #ff8c00;
-            --info-color: #1e90ff;
-        }
-
-        body.theme-silver {
-            --primary-color: #c0c0c0;
-            --secondary-color: #a0a0a0;
-            --background-color: #1a1a1a;
-            --card-bg: #2a2a2a;
-            --text-color: #ffffff;
-            --border-color: #4a4a4a;
-            --success-color: #90ee90;
-            --error-color: #ff6b6b;
-            --warning-color: #ffd700;
-            --accent-color: #ffa500;
-            --info-color: #87ceeb;
-        }
-
-        body.theme-ruby {
-            --primary-color: #e0115f;
-            --secondary-color: #b80f3b;
-            --background-color: #1a0a0a;
-            --card-bg: #2a1a1a;
-            --text-color: #ffffff;
-            --border-color: #4a2a2a;
-            --success-color: #32cd32;
-            --error-color: #ff0000;
-            --warning-color: #ffa500;
-            --accent-color: #ff4500;
-            --info-color: #1e90ff;
-        }
-
-        body.theme-sapphire {
-            --primary-color: #0f52ba;
-            --secondary-color: #082567;
-            --background-color: #0a0a1a;
-            --card-bg: #1a1a2a;
-            --text-color: #ffffff;
-            --border-color: #2a2a4a;
-            --success-color: #32cd32;
-            --error-color: #ff0000;
-            --warning-color: #ffa500;
-            --accent-color: #ff4500;
-            --info-color: #1e90ff;
-        }
-
-        body.theme-emerald {
-            --primary-color: #50c878;
-            --secondary-color: #30a14e;
-            --background-color: #0a1a0a;
-            --card-bg: #1a2a1a;
-            --text-color: #ffffff;
-            --border-color: #2a4a2a;
-            --success-color: #32cd32;
-            --error-color: #ff0000;
-            --warning-color: #ffa500;
-            --accent-color: #ff4500;
-            --info-color: #1e90ff;
-        }
-
-        body.theme-amethyst {
-            --primary-color: #9966cc;
-            --secondary-color: #663399;
-            --background-color: #1a0a1a;
-            --card-bg: #2a1a2a;
-            --text-color: #ffffff;
-            --border-color: #4a2a4a;
-            --success-color: #32cd32;
-            --error-color: #ff0000;
-            --warning-color: #ffa500;
-            --accent-color: #ff4500;
-            --info-color: #1e90ff;
-        }
-
-        .theme-badge {
-            background: var(--gradient);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .beta-badge {
-            background: linear-gradient(135deg, #00ff88, #0088ff);
-            color: #0a0a1a;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        /* 📝 ИНСТРУКЦИЯ DISCORD */
-        .discord-instruction {
-            background: rgba(255, 193, 7, 0.1);
-            border: 1px solid var(--warning-color);
-            border-radius: var(--border-radius-sm);
-            padding: 20px;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .discord-instruction::before {
-            content: '💡';
-            position: absolute;
-            top: -15px;
+        /* ТЕМЫ */
+        .theme-selector {
+            position: fixed;
+            bottom: 20px;
             left: 20px;
-            background: var(--warning-color);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .instruction-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 15px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
             padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            width: 250px;
+            backdrop-filter: blur(10px);
+            display: none;
         }
 
-        .step-number {
-            background: var(--gradient);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        .theme-selector.open {
+            display: block;
+            animation: slideInLeft 0.3s ease-out;
+        }
+
+        .theme-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
+            margin-bottom: 15px;
         }
 
-        .step-content {
-            flex: 1;
-        }
-
-        .step-title {
+        .theme-title {
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 5px;
             color: var(--primary-color);
         }
 
-        .step-description {
-            font-size: 0.9em;
-            opacity: 0.8;
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
 
-        .warning-box {
-            background: rgba(244, 67, 54, 0.1);
-            border: 1px solid var(--error-color);
+        .theme-option {
+            padding: 10px;
             border-radius: var(--border-radius-sm);
-            padding: 15px;
-            margin: 15px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid transparent;
         }
 
-        .warning-box h4 {
-            color: var(--error-color);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .theme-option:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-option.active {
+            border-color: var(--primary-color);
+        }
+
+        .theme-standard {
+            background: linear-gradient(135deg, #ff4444, #4444ff);
+            color: white;
+        }
+
+        .theme-furry-option {
+            background: linear-gradient(135deg, #ff1a75, #ff4da6);
+            color: white;
+        }
+
+        .theme-ocean-option {
+            background: linear-gradient(135deg, #00e5ff, #2979ff);
+            color: white;
+        }
+
+        .theme-forest-option {
+            background: linear-gradient(135deg, #00e676, #64dd17);
+            color: white;
+        }
+
+        .theme-sunset-option {
+            background: linear-gradient(135deg, #ff5252, #ff8a50);
+            color: white;
+        }
+
+        .theme-midnight-option {
+            background: linear-gradient(135deg, #7c4dff, #536dfe);
+            color: white;
+        }
+
+        .theme-neon-option {
+            background: linear-gradient(135deg, #00ff9d, #00b8ff);
+            color: white;
+        }
+
+        .theme-gold-option {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: white;
+        }
+
+        .theme-purple-option {
+            background: linear-gradient(135deg, #d500f9, #651fff);
+            color: white;
+        }
+
+        .theme-rainbow-option {
+            background: linear-gradient(135deg, #ff1744, #3d5afe, #00e676);
+            color: white;
         }
 
         /* АДАПТИВНОСТЬ */
@@ -1220,6 +1116,16 @@
             .progress-bar {
                 width: 250px;
             }
+
+            .theme-selector {
+                width: calc(100% - 40px);
+                left: 20px;
+                right: 20px;
+            }
+
+            .theme-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
@@ -1246,6 +1152,10 @@
             .progress-bar {
                 width: 200px;
             }
+
+            .theme-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* АНИМАЦИИ */
@@ -1264,6 +1174,11 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -1272,120 +1187,6 @@
 
         .pulse {
             animation: pulse 2s infinite;
-        }
-
-        /* 🎭 СПЕЦИАЛЬНЫЕ ЭФФЕКТЫ ДЛЯ ТЕМЫ ФУРРИ */
-        .furry-special {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .furry-special::after {
-            content: '🐾';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            opacity: 0.3;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .paw-print {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23ff6b9d" d="M50,15 C60,5 80,10 85,25 C90,40 75,55 65,65 C55,75 45,85 35,75 C25,65 15,55 25,45 C35,35 40,25 50,15 Z"/></svg>');
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        /* 🎪 ПРИВЕТСТВЕННОЕ ОКНО */
-        .welcome-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            flex-direction: column;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .welcome-content {
-            background: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
-            max-width: 500px;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient);
-        }
-
-        .welcome-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .welcome-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome-subtitle {
-            font-size: 16px;
-            opacity: 0.8;
-            margin-bottom: 30px;
-        }
-
-        .welcome-loader {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-
-        .welcome-progress {
-            height: 100%;
-            background: var(--gradient);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .welcome-tip {
-            margin-top: 20px;
-            font-size: 14px;
-            opacity: 0.7;
-            font-style: italic;
         }
     </style>
 </head>
@@ -1405,6 +1206,35 @@
     <button class="menu-toggle" id="menuToggle">
         <i class="fas fa-bars"></i>
     </button>
+
+    <!-- Кнопка выбора темы -->
+    <button class="btn btn-theme" id="themeToggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 999;">
+        <i class="fas fa-palette"></i> Тема
+    </button>
+
+    <!-- Селектор тем -->
+    <div class="theme-selector" id="themeSelector">
+        <div class="theme-header">
+            <div class="theme-title">
+                <i class="fas fa-palette"></i> Выбор темы
+            </div>
+            <button class="btn btn-secondary" id="closeThemeSelector">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="theme-grid">
+            <div class="theme-option theme-standard active" data-theme="standard">Стандартная</div>
+            <div class="theme-option theme-furry-option" data-theme="furry">Фурри</div>
+            <div class="theme-option theme-ocean-option" data-theme="ocean">Океан</div>
+            <div class="theme-option theme-forest-option" data-theme="forest">Лес</div>
+            <div class="theme-option theme-sunset-option" data-theme="sunset">Закат</div>
+            <div class="theme-option theme-midnight-option" data-theme="midnight">Полночь</div>
+            <div class="theme-option theme-neon-option" data-theme="neon">Неон</div>
+            <div class="theme-option theme-gold-option" data-theme="gold">Золото</div>
+            <div class="theme-option theme-purple-option" data-theme="purple">Пурпурная</div>
+            <div class="theme-option theme-rainbow-option" data-theme="rainbow">Радужная</div>
+        </div>
+    </div>
 
     <!-- Боковое меню -->
     <div class="sidebar" id="sidebar">
@@ -1437,49 +1267,31 @@
                 <i class="fas fa-cog"></i>
                 <span>Настройки</span>
             </div>
-            <div class="menu-item" data-section="themes">
-                <i class="fas fa-palette"></i>
-                <span>Темы оформления</span>
-            </div>
             <div class="menu-divider"></div>
             <div class="menu-item admin-section" data-section="admin">
                 <i class="fas fa-shield-alt"></i>
                 <span>Админ-панель</span>
-                <span class="beta-badge">Beta</span>
+                <span class="premium-badge">ADMIN</span>
+            </div>
+            <div class="menu-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Выйти</span>
             </div>
         </div>
     </div>
 
-    <!-- Загрузочный экран -->
+    <!-- Экран загрузки -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
         <div class="loading-text" id="loadingText">Загрузка системы...</div>
-        <div class="loading-subtext" id="loadingSubtext">Подготовка данных для вас</div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
+        <div class="loading-subtext" id="loadingSubtext">Пожалуйста, подождите</div>
     </div>
 
-    <!-- Приветственное окно -->
-    <div class="welcome-modal hidden" id="welcomeModal">
-        <div class="welcome-content">
-            <div class="welcome-icon">
-                <i class="fas fa-store"></i>
-            </div>
-            <h1 class="welcome-title">Добро пожаловать!</h1>
-            <div class="welcome-subtitle" id="welcomeUsername">Загрузка вашего профиля...</div>
-            <div class="welcome-loader">
-                <div class="welcome-progress" id="welcomeProgress"></div>
-            </div>
-            <div class="welcome-tip" id="welcomeTip">Подготовка интерфейса...</div>
-        </div>
-    </div>
-
-    <!-- Основной контент -->
+    <!-- Основной контейнер -->
     <div class="container" id="mainContainer">
-        <!-- Статус синхронизации -->
-        <div class="sync-status" id="syncStatus"></div>
-
         <!-- Шапка -->
         <div class="header">
             <div class="logo">
@@ -1492,122 +1304,54 @@
                 </div>
             </div>
             <div class="user-menu">
-                <button class="btn btn-secondary" id="themeToggle">
-                    <i class="fas fa-palette"></i> Тема
+                <button class="btn btn-secondary" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i> Обновить
                 </button>
-                <button class="btn btn-discord" id="discordBtn">
-                    <i class="fab fa-discord"></i> Discord
+                <button class="btn btn-primary" id="buyBusinessBtn">
+                    <i class="fas fa-shopping-cart"></i> Купить бизнес
                 </button>
-                <button class="btn btn-primary" id="loginBtn">
-                    <i class="fas fa-sign-in-alt"></i> Войти
-                </button>
-                <button class="btn btn-danger hidden" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Выйти
-                </button>
+                <div class="user-info" id="userInfo">
+                    <span id="userName">Гость</span>
+                    <div id="userAvatarContainer" class="hidden">
+                        <img id="userAvatar" class="user-avatar" src="" alt="Аватар">
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Статус синхронизации -->
+        <div class="sync-status" id="syncStatus">
+            <div id="syncMessage">Синхронизация данных...</div>
         </div>
 
         <!-- Секция авторизации -->
         <div class="auth-section" id="authSection">
-            <div class="auth-container">
-                <div class="auth-tabs">
-                    <div class="auth-tab active" data-tab="login">Вход</div>
-                    <div class="auth-tab" data-tab="register">Регистрация</div>
-                </div>
-                
-                <div class="auth-form active" id="loginForm">
-                    <div class="form-group">
-                        <label for="loginUsername">Имя пользователя</label>
-                        <input type="text" id="loginUsername" placeholder="Введите ваш никнейм">
+            <div class="auth-container discord-login">
+                <h3><i class="fab fa-discord"></i> Вход через Discord</h3>
+                <p>Для доступа к системе необходимо войти через Discord</p>
+                <button class="btn btn-discord" id="discordLoginBtn" style="width: 100%; margin-top: 20px;">
+                    <i class="fab fa-discord"></i> Войти через Discord
+                </button>
+                <div class="discord-features">
+                    <h4><i class="fas fa-star"></i> Преимущества входа через Discord</h4>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span>Быстрый и безопасный вход</span>
                     </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Пароль</label>
-                        <input type="password" id="loginPassword" placeholder="Введите ваш пароль">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span>Синхронизация с сервером Discord</span>
                     </div>
-                    <button class="btn btn-primary" id="loginSubmit" style="width: 100%;">
-                        <i class="fas fa-sign-in-alt"></i> Войти в систему
-                    </button>
-                    
-                    <div class="discord-instruction">
-                        <h4>Инструкция по входу через Discord</h4>
-                        <div class="instruction-step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <div class="step-title">Откройте Discord</div>
-                                <div class="step-description">Запустите приложение Discord на вашем устройстве</div>
-                            </div>
-                        </div>
-                        <div class="instruction-step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <div class="step-title">Найдите канал #верификация</div>
-                                <div class="step-description">Перейдите в канал верификации на нашем сервере</div>
-                            </div>
-                        </div>
-                        <div class="instruction-step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <div class="step-title">Введите команду</div>
-                                <div class="step-description">Напишите в чат: <code>/verify ваш_никнейм</code></div>
-                            </div>
-                        </div>
-                        <div class="instruction-step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <div class="step-title">Получите пароль</div>
-                                <div class="step-description">Бот отправит вам пароль для входа в систему</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="warning-box">
-                        <h4><i class="fas fa-exclamation-triangle"></i> Важно!</h4>
-                        <p>Для бета-тестеров и администраторов доступен специальный пароль: <strong>2025</strong></p>
-                    </div>
-                </div>
-                
-                <div class="auth-form" id="registerForm">
-                    <div class="form-group">
-                        <label for="registerUsername">Имя пользователя</label>
-                        <input type="text" id="registerUsername" placeholder="Придумайте никнейм">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Пароль</label>
-                        <input type="password" id="registerPassword" placeholder="Придумайте пароль">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerConfirmPassword">Подтвердите пароль</label>
-                        <input type="password" id="registerConfirmPassword" placeholder="Повторите пароль">
-                    </div>
-                    <button class="btn btn-primary" id="registerSubmit" style="width: 100%;">
-                        <i class="fas fa-user-plus"></i> Зарегистрироваться
-                    </button>
-                    
-                    <div class="discord-features">
-                        <h4><i class="fab fa-discord"></i> Преимущества Discord</h4>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Быстрая верификация</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Доступ к эксклюзивным каналам</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Уведомления о новых бизнесах</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span>Поддержка администрации</span>
-                        </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span>Автоматическое определение ролей</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Основной контент (скрыт до авторизации) -->
-        <div class="main-content hidden" id="mainContent">
+        <!-- Основной контент -->
+        <div id="mainContent" class="hidden">
             <!-- Статистика -->
             <div class="stats-grid">
                 <div class="stat-card">
@@ -1619,24 +1363,24 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-number" id="availableBusinesses">0</div>
+                    <div class="stat-label">Доступно</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
                         <i class="fas fa-dollar-sign"></i>
                     </div>
-                    <div class="stat-number" id="totalValue">$0</div>
-                    <div class="stat-label">Общая стоимость</div>
+                    <div class="stat-number" id="totalRevenue">0</div>
+                    <div class="stat-label">Общий доход</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="stat-number" id="activeUsers">0</div>
-                    <div class="stat-label">Активных игроков</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-number" id="economyIndex">0%</div>
-                    <div class="stat-label">Индекс экономики</div>
+                    <div class="stat-label">Активные пользователи</div>
                 </div>
             </div>
 
@@ -1644,32 +1388,27 @@
             <div class="filter-section">
                 <h3><i class="fas fa-filter"></i> Фильтры бизнесов</h3>
                 <div class="filter-controls">
-                    <select class="filter-select" id="statusFilter">
-                        <option value="all">Все статусы</option>
-                        <option value="available">Доступные</option>
-                        <option value="sold">Проданы</option>
-                    </select>
                     <select class="filter-select" id="typeFilter">
                         <option value="all">Все типы</option>
-                        <option value="shop">Магазины</option>
-                        <option value="service">Услуги</option>
-                        <option value="production">Производство</option>
+                        <option value="casino">Казино</option>
+                        <option value="bank">Банк</option>
+                        <option value="auto">Автосалон</option>
                         <option value="entertainment">Развлечения</option>
                     </select>
                     <select class="filter-select" id="priceFilter">
                         <option value="all">Любая цена</option>
-                        <option value="cheap">До $50,000</option>
-                        <option value="medium">$50,000 - $200,000</option>
-                        <option value="expensive">Свыше $200,000</option>
+                        <option value="cheap">До 500,000 ₽</option>
+                        <option value="medium">500,000 - 2,000,000 ₽</option>
+                        <option value="expensive">Свыше 2,000,000 ₽</option>
                     </select>
                     <input type="text" class="search-input" id="searchInput" placeholder="Поиск по названию...">
                 </div>
                 <div class="filter-actions">
-                    <button class="btn btn-primary" id="applyFilters">
-                        <i class="fas fa-check"></i> Применить фильтры
+                    <button class="btn btn-primary" id="applyFiltersBtn">
+                        <i class="fas fa-check"></i> Применить
                     </button>
-                    <button class="btn btn-secondary" id="resetFilters">
-                        <i class="fas fa-redo"></i> Сбросить фильтры
+                    <button class="btn btn-secondary" id="resetFiltersBtn">
+                        <i class="fas fa-undo"></i> Сбросить
                     </button>
                 </div>
             </div>
@@ -1678,601 +1417,572 @@
             <div class="business-grid" id="businessGrid">
                 <!-- Бизнесы будут загружены здесь -->
             </div>
-        </div>
 
-        <!-- Админ панель -->
-        <div class="admin-panel hidden" id="adminPanel">
-            <h3><i class="fas fa-shield-alt"></i> Админ-панель</h3>
-            <p>Склад (ID: 2) и Банк (ID: 3) теперь принадлежат пользователю с ID 643132158839619642</p>
-            <div class="admin-controls">
-                <button class="btn btn-primary" id="refreshData">
-                    <i class="fas fa-sync"></i> Обновить данные
-                </button>
-                <button class="btn btn-secondary" id="exportData">
-                    <i class="fas fa-download"></i> Экспорт данных
-                </button>
-                <button class="btn btn-danger" id="adminLogout">
-                    <i class="fas fa-sign-out-alt"></i> Выйти из админки
-                </button>
+            <!-- Админ-панель (только для админов) -->
+            <div class="admin-panel hidden" id="adminPanel">
+                <h3><i class="fas fa-shield-alt"></i> Админ-панель</h3>
+                <div class="admin-access">
+                    <h4><i class="fas fa-user-shield"></i> Доступ администратора</h4>
+                    <p>Вы имеете доступ к расширенным функциям управления бизнесами.</p>
+                </div>
+                <div class="filter-controls">
+                    <button class="btn btn-primary" id="addBusinessBtn">
+                        <i class="fas fa-plus"></i> Добавить бизнес
+                    </button>
+                    <button class="btn btn-secondary" id="editBusinessesBtn">
+                        <i class="fas fa-edit"></i> Редактировать бизнесы
+                    </button>
+                    <button class="btn btn-danger" id="deleteBusinessBtn">
+                        <i class="fas fa-trash"></i> Удалить бизнес
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 🔐 КОД ДОСТУПА
-        const ACCESS_CODE = "EexfAgdK";
-        const BETA_PASSWORD = "2025";
-        const ADMIN_USER_ID = "643132158839619642";
+        // Конфигурация Discord OAuth
+        const DISCORD_CONFIG = {
+            clientId: '1416718951647543297',
+            redirectUri: 'https://krasnodar-rp-business.github.io/krasnodar-rp-business/',
+            scope: 'identify email',
+            authUrl: 'https://discord.com/api/oauth2/authorize'
+        };
 
-        // 🎭 ТЕМЫ
-        const themes = [
-            'standard', 'furry', 'femboy', 'boykisser', 'ocean', 'forest', 
-            'sunset', 'midnight', 'cotton-candy', 'neon', 'gold', 'silver',
-            'ruby', 'sapphire', 'emerald', 'amethyst'
+        // ID администраторов
+        const adminIds = [
+            "939782469933236254", // ParadiseWorker 🌴
+            "643132158839619642", // Artmit1
+            "1089226493370060810", // Ceris
+            "1303970428326510645", // ★Flykick
+            "735120136918532258", // ! ПАПА МАГА
+            "816658515082346497", // ★ 𝐛𝐥𝐚𝐜𝐤
+            "1157039781520343152" // ᵇˡᵘᵇʸᵈʸ𝑒𝑐ℎ𝑜🩸
         ];
 
-        // 🏪 ДАННЫЕ БИЗНЕСОВ
+        // Данные бизнесов
         const businesses = [
             {
                 id: 1,
-                name: "24/7 Супермаркет",
-                description: "Круглосуточный магазин продуктов и товаров первой необходимости. Высокий трафик клиентов.",
-                price: 75000,
-                income: 2500,
-                type: "shop",
+                name: "Казино",
+                fullName: "ООО КРГ. Казино",
+                level: "4",
+                businessNumber: "16",
                 status: "available",
-                location: "Центр города",
-                owner: null
+                price: "2.500.000 ₽",
+                weeklyIncome: "260.000 ₽",
+                owner: "Отсутствует",
+                description: "Место где можно пополнить свой счёт, ну или же проиграть..) Куча азартных игр, алкоголя и никотина, все это вы можете встретить в нашем бизнесе Азартных Игр. Станьте владельцем казино, чтобы заработать миллионы и стать успешным.(Или же разориться, вдруг кому то повезет на джекпот)."
             },
             {
                 id: 2,
-                name: "Складские помещения",
-                description: "Большие складские площади для хранения товаров. Идеально для логистических компаний.",
-                price: 150000,
-                income: 4500,
-                type: "service",
+                name: "Склад",
+                fullName: "ООО КРГ. Склад",
+                level: "3",
+                businessNumber: "22",
                 status: "sold",
-                location: "Промзона",
-                owner: ADMIN_USER_ID
+                price: "200.000 ₽",
+                weeklyIncome: "55.000 ₽",
+                owner: "643132158839619642",
+                description: "Для этого обьекта отсуствует какое-либо описание.."
             },
             {
                 id: 3,
-                name: "Банк Краснодара",
-                description: "Финансовое учреждение с полным спектром банковских услуг. Высокий доход.",
-                price: 500000,
-                income: 15000,
-                type: "service",
+                name: "Банк",
+                fullName: "ООО КРГ. Банк",
+                level: "5",
+                businessNumber: "1",
                 status: "sold",
-                location: "Центральный район",
-                owner: ADMIN_USER_ID
+                price: "3.000.000 ₽",
+                weeklyIncome: "350.000 ₽",
+                owner: "643132158839619642",
+                description: "Один из самых крупных бизнесов города Hamburg. Станьте владельцем данного объекта чтобы контролировать все платежи и электронные действия переводов. Ваша задача - охранять самое ценное; деньги, которыми жаждут полакомиться каждый криминал района."
             },
             {
                 id: 4,
-                name: "Завод напитков",
-                description: "Производство безалкогольных напитков. Современное оборудование, стабильный доход.",
-                price: 300000,
-                income: 8000,
-                type: "production",
+                name: "Электроснабжение",
+                fullName: "ООО КРГ. Центр электроснабжения",
+                level: "5",
+                businessNumber: "21",
                 status: "available",
-                location: "Промышленный район",
-                owner: null
+                price: "2.800.000 ₽",
+                weeklyIncome: "290.000 ₽",
+                owner: "отсутствует",
+                description: "Для этого объекта отсутствует какое-либо описание.."
             },
             {
                 id: 5,
-                name: "Ночной клуб 'Vega'",
-                description: "Популярное ночное заведение с баром и танцполом. Высокие вечерние доходы.",
-                price: 200000,
-                income: 6000,
-                type: "entertainment",
+                name: "Отельный комплекс",
+                fullName: "ООО КРГ. Отельный комплекс",
+                level: "4",
+                businessNumber: "17",
                 status: "available",
-                location: "Развлекательный район",
-                owner: null
-            },
-            {
-                id: 6,
-                name: "Автосалон",
-                description: "Продажа новых и подержанных автомобилей. Премиальное расположение.",
-                price: 350000,
-                income: 10000,
-                type: "shop",
-                status: "available",
-                location: "Автомобильный район",
-                owner: null
+                price: "1.000.000 ₽",
+                weeklyIncome: "150.000 ₽",
+                owner: "отсутствует",
+                description: "Отличное место для того чтобы остановиться на пару дней, если у вас нету дома."
             }
         ];
 
-        // 🎮 ПЕМЕННЫЕ СОСТОЯНИЯ
+        // Текущее состояние приложения
         let currentUser = null;
-        let currentTheme = 'standard';
         let isAdmin = false;
+        let currentTheme = 'standard';
         let isLoading = false;
 
-        // 📋 ПОДСКАЗКИ ПРИ ЗАГРУЗКЕ
-        const loadingTips = [
-            "Оптимизация бизнес-процессов...",
-            "Загрузка данных о недвижимости...",
-            "Анализ рыночной ситуации...",
-            "Подготовка финансовых отчетов...",
-            "Синхронизация с Discord...",
-            "Проверка доступных бизнесов...",
-            "Обновление статистики...",
-            "Настройка пользовательского интерфейса...",
-            "Загрузка темы оформления...",
-            "Проверка прав доступа..."
-        ];
+        // DOM элементы
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const loadingText = document.getElementById('loadingText');
+        const loadingSubtext = document.getElementById('loadingSubtext');
+        const progressFill = document.getElementById('progressFill');
+        const mainContainer = document.getElementById('mainContainer');
+        const authSection = document.getElementById('authSection');
+        const mainContent = document.getElementById('mainContent');
+        const businessGrid = document.getElementById('businessGrid');
+        const adminPanel = document.getElementById('adminPanel');
+        const userName = document.getElementById('userName');
+        const userAvatar = document.getElementById('userAvatar');
+        const userAvatarContainer = document.getElementById('userAvatarContainer');
+        const userInfo = document.getElementById('userInfo');
+        const totalBusinesses = document.getElementById('totalBusinesses');
+        const availableBusinesses = document.getElementById('availableBusinesses');
+        const totalRevenue = document.getElementById('totalRevenue');
+        const activeUsers = document.getElementById('activeUsers');
+        const syncStatus = document.getElementById('syncStatus');
+        const syncMessage = document.getElementById('syncMessage');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeSelector = document.getElementById('themeSelector');
+        const closeThemeSelector = document.getElementById('closeThemeSelector');
+        const discordLoginBtn = document.getElementById('discordLoginBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const buyBusinessBtn = document.getElementById('buyBusinessBtn');
+        const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+        const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+        const addBusinessBtn = document.getElementById('addBusinessBtn');
+        const editBusinessesBtn = document.getElementById('editBusinessesBtn');
+        const deleteBusinessBtn = document.getElementById('deleteBusinessBtn');
 
-        // 🎯 ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
+        // Инициализация приложения
         document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
+            initApp();
+            setupEventListeners();
+            handleOAuthCallback();
         });
 
-        // 🚀 ОСНОВНАЯ ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ
-        function initializeApp() {
-            // Показываем экран загрузки
-            showLoadingScreen();
+        // Инициализация приложения
+        function initApp() {
+            showLoadingScreen('Инициализация системы...', 'Пожалуйста, подождите');
             
-            // Инициализируем компоненты
-            initEventListeners();
-            initBusinessGrid();
-            initThemeSystem();
-            
-            // Проверяем авторизацию
-            checkAuthStatus();
-            
-            // Скрываем экран загрузки через 2-3 секунды
-            setTimeout(() => {
-                hideLoadingScreen();
-            }, 2000 + Math.random() * 1000);
-        }
-
-        // 📱 ИНИЦИАЛИЗАЦИЯ СОБЫТИЙ
-        function initEventListeners() {
-            // Меню
-            document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
-            
-            // Авторизация
-            document.getElementById('loginBtn').addEventListener('click', showAuthSection);
-            document.getElementById('logoutBtn').addEventListener('click', logout);
-            document.getElementById('loginSubmit').addEventListener('click', login);
-            document.getElementById('registerSubmit').addEventListener('click', register);
-            
-            // Табы авторизации
-            document.querySelectorAll('.auth-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    switchAuthTab(this.dataset.tab);
-                });
-            });
-            
-            // Темы
-            document.getElementById('themeToggle').addEventListener('click', cycleTheme);
-            
-            // Фильтры
-            document.getElementById('applyFilters').addEventListener('click', applyFilters);
-            document.getElementById('resetFilters').addEventListener('click', resetFilters);
-            
-            // Discord
-            document.getElementById('discordBtn').addEventListener('click', showDiscordInfo);
-            
-            // Админка
-            document.getElementById('adminLogout').addEventListener('click', logout);
-            document.getElementById('refreshData').addEventListener('click', refreshData);
-            
-            // Закрытие меню при клике вне его
-            document.addEventListener('click', function(event) {
-                const sidebar = document.getElementById('sidebar');
-                const menuToggle = document.getElementById('menuToggle');
-                
-                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target) && sidebar.classList.contains('open')) {
-                    sidebar.classList.remove('open');
-                }
-            });
-            
-            // Меню навигации
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const section = this.dataset.section;
-                    navigateToSection(section);
-                    document.getElementById('sidebar').classList.remove('open');
-                });
-            });
-        }
-
-        // 🎨 СИСТЕМА ТЕМ
-        function initThemeSystem() {
-            const savedTheme = localStorage.getItem('krdTheme');
+            // Проверяем, есть ли сохраненная тема
+            const savedTheme = localStorage.getItem('krasnodar-theme');
             if (savedTheme) {
                 setTheme(savedTheme);
             }
-        }
-
-        function cycleTheme() {
-            const currentIndex = themes.indexOf(currentTheme);
-            const nextIndex = (currentIndex + 1) % themes.length;
-            setTheme(themes[nextIndex]);
-        }
-
-        function setTheme(themeName) {
-            document.body.className = `theme-${themeName}`;
-            currentTheme = themeName;
-            localStorage.setItem('krdTheme', themeName);
             
-            // Добавляем специальные эффекты для темы фурри
-            if (themeName === 'furry') {
-                addFurrySpecialEffects();
-            } else {
-                removeFurrySpecialEffects();
+            // Имитируем загрузку данных
+            setTimeout(() => {
+                updateProgress(30);
+                loadingText.textContent = 'Загрузка данных...';
+            }, 800);
+            
+            setTimeout(() => {
+                updateProgress(70);
+                loadingText.textContent = 'Проверка авторизации...';
+            }, 1500);
+            
+            setTimeout(() => {
+                updateProgress(100);
+                checkAuthStatus();
+            }, 2200);
+        }
+
+        // Обработка OAuth callback
+        function handleOAuthCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const error = urlParams.get('error');
+            
+            if (error) {
+                showSyncStatus(`Ошибка авторизации: ${error}`, 'error');
+                // Убираем параметры из URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+                return;
             }
             
-            showSyncStatus(`Тема "${getThemeDisplayName(themeName)}" активирована`, 'success');
+            if (code) {
+                showLoadingScreen('Авторизация через Discord...', 'Обмен кода на токен');
+                exchangeCodeForToken(code);
+            }
         }
 
-        function getThemeDisplayName(themeName) {
-            const names = {
-                'standard': 'Стандартная',
-                'furry': 'Фурри',
-                'femboy': 'Фембой',
-                'boykisser': 'Бойкиссер',
-                'ocean': 'Океан',
-                'forest': 'Лес',
-                'sunset': 'Закат',
-                'midnight': 'Полночь',
-                'cotton-candy': 'Сахарная вата',
-                'neon': 'Неон',
-                'gold': 'Золото',
-                'silver': 'Серебро',
-                'ruby': 'Рубин',
-                'sapphire': 'Сапфир',
-                'emerald': 'Изумруд',
-                'amethyst': 'Аметист'
-            };
-            return names[themeName] || themeName;
+        // Обмен authorization code на access token
+        async function exchangeCodeForToken(code) {
+            try {
+                // В реальном приложении этот запрос должен идти к вашему серверу
+                // для безопасности (чтобы не раскрывать client secret)
+                const response = await fetch('/api/discord/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        code: code,
+                        redirectUri: DISCORD_CONFIG.redirectUri
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.access_token) {
+                        await getUserInfo(data.access_token);
+                        // Убираем параметры из URL
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    }
+                } else {
+                    throw new Error('Failed to exchange code for token');
+                }
+            } catch (error) {
+                console.error('Error exchanging code for token:', error);
+                showSyncStatus('Ошибка авторизации. Попробуйте еще раз.', 'error');
+                hideLoadingScreen();
+            }
         }
 
-        // 🐾 СПЕЦИАЛЬНЫЕ ЭФФЕКТЫ ДЛЯ ТЕМЫ ФУРРИ
-        function addFurrySpecialEffects() {
-            // Добавляем следы лап на бизнес-карточки
-            document.querySelectorAll('.business-card').forEach(card => {
-                if (!card.classList.contains('furry-special')) {
-                    card.classList.add('furry-special');
+        // Получение информации о пользователе
+        async function getUserInfo(accessToken) {
+            try {
+                const response = await fetch('https://discord.com/api/users/@me', {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const userData = await response.json();
+                    
+                    // Сохраняем данные пользователя
+                    localStorage.setItem('discord_user', JSON.stringify(userData));
+                    localStorage.setItem('discord_access_token', accessToken);
+                    
+                    currentUser = userData;
+                    isAdmin = adminIds.includes(userData.id);
+                    
+                    showSyncStatus(`Добро пожаловать, ${userData.username}!`, 'success');
+                    showMainContent();
+                    
+                } else {
+                    throw new Error('Failed to fetch user info');
+                }
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+                showSyncStatus('Ошибка получения данных пользователя', 'error');
+                hideLoadingScreen();
+            }
+        }
+
+        // Функция для авторизации через Discord
+        function loginWithDiscord() {
+            const authUrl = `${DISCORD_CONFIG.authUrl}?client_id=${DISCORD_CONFIG.clientId}&redirect_uri=${encodeURIComponent(DISCORD_CONFIG.redirectUri)}&response_type=code&scope=${DISCORD_CONFIG.scope}`;
+            window.location.href = authUrl;
+        }
+
+        // Настройка обработчиков событий
+        function setupEventListeners() {
+            // Меню
+            menuToggle.addEventListener('click', toggleSidebar);
+            
+            // Темы
+            themeToggle.addEventListener('click', toggleThemeSelector);
+            closeThemeSelector.addEventListener('click', toggleThemeSelector);
+            
+            // Выбор темы
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    setTheme(theme);
+                    toggleThemeSelector();
+                });
+            });
+            
+            // Авторизация
+            discordLoginBtn.addEventListener('click', loginWithDiscord);
+            logoutBtn.addEventListener('click', logout);
+            
+            // Действия
+            refreshBtn.addEventListener('click', refreshData);
+            buyBusinessBtn.addEventListener('click', showBuyBusinessModal);
+            
+            // Фильтры
+            applyFiltersBtn.addEventListener('click', applyFilters);
+            resetFiltersBtn.addEventListener('click', resetFilters);
+            
+            // Админ-панель
+            addBusinessBtn.addEventListener('click', showAddBusinessModal);
+            editBusinessesBtn.addEventListener('click', showEditBusinessesModal);
+            deleteBusinessBtn.addEventListener('click', showDeleteBusinessModal);
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', function(event) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('open');
+                }
+                
+                if (!themeSelector.contains(event.target) && !themeToggle.contains(event.target)) {
+                    themeSelector.classList.remove('open');
                 }
             });
             
-            // Добавляем случайные следы лап на фон
-            const bubbles = document.querySelector('.bubbles');
-            for (let i = 0; i < 10; i++) {
-                const paw = document.createElement('div');
-                paw.className = 'paw-print';
-                paw.style.left = `${Math.random() * 100}%`;
-                paw.style.top = `${Math.random() * 100}%`;
-                paw.style.transform = `rotate(${Math.random() * 360}deg)`;
-                paw.style.opacity = `${0.05 + Math.random() * 0.1}`;
-                bubbles.appendChild(paw);
-            }
-        }
-
-        function removeFurrySpecialEffects() {
-            document.querySelectorAll('.furry-special').forEach(el => {
-                el.classList.remove('furry-special');
-            });
-            
-            document.querySelectorAll('.paw-print').forEach(paw => {
-                paw.remove();
+            // Навигация по меню
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    navigateToSection(section);
+                    sidebar.classList.remove('open');
+                });
             });
         }
 
-        // 🔐 СИСТЕМА АВТОРИЗАЦИИ
+        // Проверка статуса авторизации
         function checkAuthStatus() {
-            const savedUser = localStorage.getItem('krdUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                isAdmin = currentUser.id === ADMIN_USER_ID;
-                updateUIAfterAuth();
-            }
-        }
-
-        function login() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
+            const userData = localStorage.getItem('discord_user');
             
-            if (!username || !password) {
-                showSyncStatus('Пожалуйста, заполните все поля', 'error');
-                return;
-            }
-            
-            // Проверяем код доступа для бета-тестеров и админов
-            if (password === BETA_PASSWORD) {
-                currentUser = {
-                    username: username,
-                    id: username === 'admin' ? ADMIN_USER_ID : `user_${Date.now()}`,
-                    isBeta: true
-                };
-                
-                isAdmin = username === 'admin';
-                
-                localStorage.setItem('krdUser', JSON.stringify(currentUser));
-                showWelcomeScreen();
-                return;
-            }
-            
-            // Обычная проверка пароля (в реальном приложении здесь был бы запрос к серверу)
-            if (password.length >= 4) {
-                currentUser = {
-                    username: username,
-                    id: `user_${Date.now()}`,
-                    isBeta: false
-                };
-                
-                localStorage.setItem('krdUser', JSON.stringify(currentUser));
-                showWelcomeScreen();
+            if (userData) {
+                currentUser = JSON.parse(userData);
+                isAdmin = adminIds.includes(currentUser.id);
+                showMainContent();
             } else {
-                showSyncStatus('Неверный пароль. Для бета-теста используйте: 2025', 'error');
+                showAuthScreen();
             }
         }
 
-        function register() {
-            const username = document.getElementById('registerUsername').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            
-            if (!username || !password || !confirmPassword) {
-                showSyncStatus('Пожалуйста, заполните все поля', 'error');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showSyncStatus('Пароли не совпадают', 'error');
-                return;
-            }
-            
-            if (password.length < 4) {
-                showSyncStatus('Пароль должен содержать минимум 4 символа', 'error');
-                return;
-            }
-            
-            currentUser = {
-                username: username,
-                id: `user_${Date.now()}`,
-                isBeta: false
-            };
-            
-            localStorage.setItem('krdUser', JSON.stringify(currentUser));
-            showSyncStatus('Регистрация успешна!', 'success');
-            switchAuthTab('login');
+        // Показать экран авторизации
+        function showAuthScreen() {
+            hideLoadingScreen();
+            authSection.classList.remove('hidden');
+            mainContent.classList.add('hidden');
         }
 
+        // Показать основной контент
+        function showMainContent() {
+            hideLoadingScreen();
+            authSection.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+            
+            // Обновляем интерфейс
+            updateUserInfo();
+            renderBusinesses();
+            updateStats();
+            
+            // Показываем админ-панель если пользователь админ
+            if (isAdmin) {
+                adminPanel.classList.remove('hidden');
+                showAdminWelcome();
+            } else {
+                showUserWelcome();
+            }
+        }
+
+        // Выход из системы
         function logout() {
+            localStorage.removeItem('discord_user');
+            localStorage.removeItem('discord_access_token');
             currentUser = null;
             isAdmin = false;
-            localStorage.removeItem('krdUser');
-            updateUIAfterAuth();
-            showSyncStatus('Вы вышли из системы', 'warning');
+            showAuthScreen();
+            showSyncStatus('Вы успешно вышли из системы', 'success');
         }
 
-        // 🎪 ЭКРАН ПРИВЕТСТВИЯ
-        function showWelcomeScreen() {
-            const welcomeModal = document.getElementById('welcomeModal');
-            const welcomeUsername = document.getElementById('welcomeUsername');
-            const welcomeProgress = document.getElementById('welcomeProgress');
-            const welcomeTip = document.getElementById('welcomeTip');
-            
-            welcomeUsername.textContent = currentUser.username;
-            welcomeModal.classList.remove('hidden');
-            
-            // Случайное время загрузки от 5 до 15 секунд
-            const loadTime = 5000 + Math.random() * 10000;
-            const progressInterval = 50;
-            const totalSteps = loadTime / progressInterval;
-            let currentStep = 0;
-            
-            const progressIntervalId = setInterval(() => {
-                currentStep++;
-                const progress = (currentStep / totalSteps) * 100;
-                welcomeProgress.style.width = `${progress}%`;
-                
-                // Меняем подсказки каждые 25%
-                if (currentStep % (totalSteps / 4) === 0) {
-                    const randomTip = loadingTips[Math.floor(Math.random() * loadingTips.length)];
-                    welcomeTip.textContent = randomTip;
-                }
-                
-                if (currentStep >= totalSteps) {
-                    clearInterval(progressIntervalId);
-                    setTimeout(() => {
-                        welcomeModal.classList.add('hidden');
-                        updateUIAfterAuth();
-                        showSyncStatus(`Добро пожаловать, ${currentUser.username}!`, 'success');
-                    }, 500);
-                }
-            }, progressInterval);
-        }
-
-        // 📊 ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ПОСЛЕ АВТОРИЗАЦИИ
-        function updateUIAfterAuth() {
-            const authSection = document.getElementById('authSection');
-            const mainContent = document.getElementById('mainContent');
-            const loginBtn = document.getElementById('loginBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const adminPanel = document.getElementById('adminPanel');
-            
+        // Обновление информации о пользователе
+        function updateUserInfo() {
             if (currentUser) {
-                authSection.classList.add('hidden');
-                mainContent.classList.remove('hidden');
-                loginBtn.classList.add('hidden');
-                logoutBtn.classList.remove('hidden');
+                userName.textContent = currentUser.username;
                 
-                if (isAdmin) {
-                    adminPanel.classList.remove('hidden');
-                    showSyncStatus('Режим администратора активирован', 'success');
-                } else {
-                    adminPanel.classList.add('hidden');
+                // Отображаем аватар если есть
+                if (currentUser.avatar) {
+                    const avatarUrl = `https://cdn.discordapp.com/avatars/${currentUser.id}/${currentUser.avatar}.png`;
+                    userAvatar.src = avatarUrl;
+                    userAvatarContainer.classList.remove('hidden');
                 }
-                
-                updateBusinessGrid();
-                updateStats();
-            } else {
-                authSection.classList.remove('hidden');
-                mainContent.classList.add('hidden');
-                loginBtn.classList.remove('hidden');
-                logoutBtn.classList.add('hidden');
-                adminPanel.classList.add('hidden');
             }
         }
 
-        // 🏪 ОБНОВЛЕНИЕ СЕТКИ БИЗНЕСОВ
-        function initBusinessGrid() {
-            updateBusinessGrid();
+        // Показать приветствие для админа
+        function showAdminWelcome() {
+            showSyncStatus('Админ-панель загружена. Добро пожаловать!', 'success');
         }
 
-        function updateBusinessGrid() {
-            const businessGrid = document.getElementById('businessGrid');
+        // Показать приветствие для обычного пользователя
+        function showUserWelcome() {
+            showSyncStatus('Данные успешно загружены. Добро пожаловать!', 'success');
+        }
+
+        // Обновление статистики
+        function updateStats() {
+            const total = businesses.length;
+            const available = businesses.filter(b => b.status === 'available').length;
+            const revenue = businesses.reduce((sum, business) => {
+                // Извлекаем числовое значение из строки дохода
+                const incomeValue = parseInt(business.weeklyIncome.replace(/[^\d]/g, ''));
+                return sum + (isNaN(incomeValue) ? 0 : incomeValue);
+            }, 0);
+            
+            totalBusinesses.textContent = total;
+            availableBusinesses.textContent = available;
+            totalRevenue.textContent = `${revenue.toLocaleString()} ₽`;
+            activeUsers.textContent = Math.floor(Math.random() * 50) + 10; // Случайное число
+        }
+
+        // Отображение бизнесов
+        function renderBusinesses(filteredBusinesses = businesses) {
             businessGrid.innerHTML = '';
             
-            businesses.forEach(business => {
-                const businessCard = createBusinessCard(business);
-                businessGrid.appendChild(businessCard);
-            });
-            
-            // Применяем специальные эффекты для темы фурри, если активна
-            if (currentTheme === 'furry') {
-                addFurrySpecialEffects();
-            }
-        }
-
-        function createBusinessCard(business) {
-            const card = document.createElement('div');
-            card.className = 'business-card';
-            card.innerHTML = `
-                <div class="business-header">
-                    <span class="business-id">ID: ${business.id}</span>
-                    <span class="business-status status-${business.status}">
-                        ${business.status === 'available' ? 'Доступен' : 'Продан'}
-                    </span>
-                </div>
-                <h3 class="business-name">${business.name}</h3>
-                <p class="business-description">${business.description}</p>
-                <div class="business-details">
-                    <div class="detail-item">
-                        <span>Тип:</span>
-                        <span>${getBusinessTypeName(business.type)}</span>
+            if (filteredBusinesses.length === 0) {
+                businessGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-color); opacity: 0.7;">
+                        <i class="fas fa-search" style="font-size: 48px; margin-bottom: 15px;"></i>
+                        <h3>Бизнесы не найдены</h3>
+                        <p>Попробуйте изменить параметры фильтрации</p>
                     </div>
-                    <div class="detail-item">
-                        <span>Расположение:</span>
-                        <span>${business.location}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span>Доход в день:</span>
-                        <span>$${business.income.toLocaleString()}</span>
-                    </div>
-                </div>
-                <div class="business-meta">
-                    <div class="business-price">$${business.price.toLocaleString()}</div>
-                    <button class="buy-btn" ${business.status === 'sold' ? 'disabled' : ''}>
-                        ${business.status === 'available' ? 'Купить' : 'Продано'}
-                    </button>
-                </div>
-            `;
-            
-            // Добавляем обработчик покупки
-            const buyBtn = card.querySelector('.buy-btn');
-            if (buyBtn && !buyBtn.disabled) {
-                buyBtn.addEventListener('click', () => purchaseBusiness(business.id));
-            }
-            
-            return card;
-        }
-
-        function getBusinessTypeName(type) {
-            const types = {
-                'shop': 'Магазин',
-                'service': 'Услуги',
-                'production': 'Производство',
-                'entertainment': 'Развлечения'
-            };
-            return types[type] || type;
-        }
-
-        function purchaseBusiness(businessId) {
-            if (!currentUser) {
-                showSyncStatus('Для покупки бизнеса необходимо авторизоваться', 'error');
+                `;
                 return;
             }
             
-            const business = businesses.find(b => b.id === businessId);
-            if (business && business.status === 'available') {
-                business.status = 'sold';
-                business.owner = currentUser.id;
-                updateBusinessGrid();
-                updateStats();
-                showSyncStatus(`Бизнес "${business.name}" успешно приобретен!`, 'success');
-            }
+            filteredBusinesses.forEach(business => {
+                const businessCard = document.createElement('div');
+                businessCard.className = 'business-card';
+                
+                businessCard.innerHTML = `
+                    <div class="business-header">
+                        <div class="business-id">ID: ${business.id} | Уровень: ${business.level}</div>
+                        <div class="business-status status-${business.status}">
+                            ${business.status === 'available' ? 'Доступен' : 'Продано'}
+                        </div>
+                    </div>
+                    <div class="business-name">${business.name}</div>
+                    <div class="business-fullname">${business.fullName}</div>
+                    <div class="business-description">${business.description}</div>
+                    <div class="business-details">
+                        <div class="detail-item">
+                            <span>Бизнес №:</span>
+                            <span>${business.businessNumber}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Владелец:</span>
+                            <span>${business.owner}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Доход в неделю:</span>
+                            <span>${business.weeklyIncome}</span>
+                        </div>
+                    </div>
+                    ${business.note ? `<div class="business-note"><i class="fas fa-info-circle"></i> ${business.note}</div>` : ''}
+                    <div class="business-meta">
+                        <div class="business-price">${business.price}</div>
+                        <button class="buy-btn" ${business.status !== 'available' ? 'disabled' : ''}>
+                            ${business.status === 'available' ? 'Купить' : 'Продано'}
+                        </button>
+                    </div>
+                `;
+                
+                businessGrid.appendChild(businessCard);
+            });
         }
 
-        // 📈 ОБНОВЛЕНИЕ СТАТИСТИКИ
-        function updateStats() {
-            const totalBusinesses = businesses.length;
-            const availableBusinesses = businesses.filter(b => b.status === 'available').length;
-            const totalValue = businesses.reduce((sum, b) => sum + b.price, 0);
-            const totalIncome = businesses.reduce((sum, b) => sum + b.income, 0);
-            
-            document.getElementById('totalBusinesses').textContent = totalBusinesses;
-            document.getElementById('totalValue').textContent = `$${totalValue.toLocaleString()}`;
-            document.getElementById('activeUsers').textContent = currentUser ? '1' : '0';
-            document.getElementById('economyIndex').textContent = `${Math.round((availableBusinesses / totalBusinesses) * 100)}%`;
-        }
-
-        // 🔄 ФИЛЬТРЫ
+        // Применение фильтров
         function applyFilters() {
-            // В реальном приложении здесь была бы фильтрация бизнесов
-            showSyncStatus('Фильтры применены', 'success');
+            const typeFilter = document.getElementById('typeFilter').value;
+            const priceFilter = document.getElementById('priceFilter').value;
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            
+            let filtered = businesses;
+            
+            // Фильтр по типу
+            if (typeFilter !== 'all') {
+                filtered = filtered.filter(business => {
+                    const name = business.name.toLowerCase();
+                    if (typeFilter === 'casino') return name.includes('казино');
+                    if (typeFilter === 'bank') return name.includes('банк');
+                    if (typeFilter === 'auto') return name.includes('авто');
+                    if (typeFilter === 'entertainment') {
+                        return name.includes('клуб') || name.includes('стрип') || name.includes('кальян');
+                    }
+                    return false;
+                });
+            }
+            
+            // Фильтр по цене
+            if (priceFilter !== 'all') {
+                filtered = filtered.filter(business => {
+                    const priceValue = parseInt(business.price.replace(/[^\d]/g, ''));
+                    if (priceFilter === 'cheap') return priceValue < 500000;
+                    if (priceFilter === 'medium') return priceValue >= 500000 && priceValue <= 2000000;
+                    if (priceFilter === 'expensive') return priceValue > 2000000;
+                    return true;
+                });
+            }
+            
+            // Поиск по названию
+            if (searchQuery) {
+                filtered = filtered.filter(business => 
+                    business.name.toLowerCase().includes(searchQuery) || 
+                    business.fullName.toLowerCase().includes(searchQuery)
+                );
+            }
+            
+            renderBusinesses(filtered);
+            showSyncStatus(`Найдено бизнесов: ${filtered.length}`, 'success');
         }
 
+        // Сброс фильтров
         function resetFilters() {
-            document.getElementById('statusFilter').value = 'all';
             document.getElementById('typeFilter').value = 'all';
             document.getElementById('priceFilter').value = 'all';
             document.getElementById('searchInput').value = '';
+            renderBusinesses();
             showSyncStatus('Фильтры сброшены', 'success');
         }
 
-        // 🌀 ЭКРАН ЗАГРУЗКИ
-        function showLoadingScreen() {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            const loadingText = document.getElementById('loadingText');
-            const loadingSubtext = document.getElementById('loadingSubtext');
-            const progressFill = document.getElementById('progressFill');
+        // Обновление данных
+        function refreshData() {
+            showSyncStatus('Обновление данных...', 'warning');
             
+            // Имитация обновления данных
+            setTimeout(() => {
+                updateStats();
+                renderBusinesses();
+                showSyncStatus('Данные успешно обновлены', 'success');
+            }, 1500);
+        }
+
+        // Показать экран загрузки
+        function showLoadingScreen(text, subtext) {
+            isLoading = true;
+            loadingText.textContent = text;
+            loadingSubtext.textContent = subtext;
             loadingOverlay.style.display = 'flex';
-            
-            // Меняем подсказки каждые 2 секунды
-            let tipIndex = 0;
-            const tipInterval = setInterval(() => {
-                loadingSubtext.textContent = loadingTips[tipIndex];
-                tipIndex = (tipIndex + 1) % loadingTips.length;
-                
-                // Обновляем прогресс-бар
-                const progress = (tipIndex / loadingTips.length) * 100;
-                progressFill.style.width = `${progress}%`;
-            }, 2000);
-            
-            // Останавливаем при скрытии
-            setTimeout(() => {
-                clearInterval(tipInterval);
-            }, 10000);
+            document.body.style.overflow = 'hidden';
         }
 
+        // Скрыть экран загрузки
         function hideLoadingScreen() {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            loadingOverlay.style.opacity = '0';
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 500);
+            isLoading = false;
+            loadingOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
-        // 💬 СТАТУС СИНХРОНИЗАЦИИ
+        // Обновление прогресс-бара
+        function updateProgress(percent) {
+            progressFill.style.width = `${percent}%`;
+        }
+
+        // Показать статус синхронизации
         function showSyncStatus(message, type = 'info') {
-            const syncStatus = document.getElementById('syncStatus');
-            syncStatus.textContent = message;
-            syncStatus.className = `sync-status sync-${type}`;
+            syncMessage.textContent = message;
+            syncStatus.className = 'sync-status';
+            syncStatus.classList.add(`sync-${type}`);
             syncStatus.style.display = 'block';
             
             setTimeout(() => {
@@ -2280,63 +1990,65 @@
             }, 5000);
         }
 
-        // 🍔 БОКОВОЕ МЕНЮ
+        // Переключение бокового меню
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
+            sidebar.classList.toggle('open');
         }
 
+        // Переключение селектора тем
+        function toggleThemeSelector() {
+            themeSelector.classList.toggle('open');
+        }
+
+        // Установка темы
+        function setTheme(theme) {
+            // Удаляем старые классы тем
+            document.body.classList.remove(
+                'theme-standard', 'theme-furry', 'theme-ocean', 
+                'theme-forest', 'theme-sunset', 'theme-midnight',
+                'theme-neon', 'theme-gold', 'theme-purple', 'theme-rainbow'
+            );
+            
+            // Добавляем новый класс темы
+            document.body.classList.add(`theme-${theme}`);
+            
+            // Обновляем активную тему в селекторе
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-theme') === theme) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Сохраняем тему
+            localStorage.setItem('krasnodar-theme', theme);
+            currentTheme = theme;
+        }
+
+        // Навигация по разделам
         function navigateToSection(section) {
-            // В реальном приложении здесь была бы навигация по разделам
+            // В реальном приложении здесь будет навигация по разным разделам
             showSyncStatus(`Переход в раздел: ${section}`, 'info');
         }
 
-        // 💾 ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-        function showAuthSection() {
-            document.getElementById('authSection').classList.remove('hidden');
+        // Показать модальное окно покупки бизнеса
+        function showBuyBusinessModal() {
+            showSyncStatus('Функция покупки бизнеса в разработке', 'warning');
         }
 
-        function switchAuthTab(tab) {
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-            
-            document.querySelector(`.auth-tab[data-tab="${tab}"]`).classList.add('active');
-            document.getElementById(`${tab}Form`).classList.add('active');
+        // Показать модальное окно добавления бизнеса
+        function showAddBusinessModal() {
+            showSyncStatus('Функция добавления бизнеса в разработке', 'warning');
         }
 
-        function showDiscordInfo() {
-            showSyncStatus('Присоединяйтесь к нашему Discord-серверу для получения помощи!', 'info');
+        // Показать модальное окно редактирования бизнесов
+        function showEditBusinessesModal() {
+            showSyncStatus('Функция редактирования бизнесов в разработке', 'warning');
         }
 
-        function refreshData() {
-            showSyncStatus('Данные успешно обновлены', 'success');
-            updateStats();
-        }
-
-        // 📱 ОПТИМИЗАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
-        // Убираем бесконечную загрузку на мобилках
-        window.addEventListener('load', function() {
-            // Гарантируем, что загрузка завершится даже на мобильных устройствах
-            setTimeout(() => {
-                const loadingOverlay = document.getElementById('loadingOverlay');
-                if (loadingOverlay.style.display !== 'none') {
-                    hideLoadingScreen();
-                }
-            }, 5000); // Максимум 5 секунд на загрузку
-        });
-
-        // Предотвращаем масштабирование при двойном тапе (для лучшего UX на мобильных)
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Оптимизация для мобильных устройств
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            document.body.classList.add('mobile');
+        // Показать модальное окно удаления бизнеса
+        function showDeleteBusinessModal() {
+            showSyncStatus('Функция удаления бизнеса в разработке', 'warning');
         }
     </script>
 </body>
