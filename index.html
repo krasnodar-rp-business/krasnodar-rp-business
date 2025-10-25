@@ -751,6 +751,86 @@
             letter-spacing: 0.3px;
         }
 
+        /* 📝 ИНСТРУКЦИЯ DISCORD */
+        .discord-instruction {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid var(--warning-color);
+            border-radius: var(--border-radius-sm);
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .discord-instruction::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--warning-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .step-number {
+            background: var(--gradient);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .step-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .warning-box {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid var(--error-color);
+            border-radius: var(--border-radius-sm);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-box h4 {
+            color: var(--error-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
             .container {
@@ -862,44 +942,6 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: var(--border-radius);
             border: 2px solid var(--primary-color);
-        }
-
-        .instruction-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: var(--border-radius-sm);
-        }
-
-        .step-number {
-            background: var(--gradient);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .step-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
-        .step-description {
-            font-size: 0.9em;
-            opacity: 0.8;
         }
     </style>
 </head>
@@ -1049,6 +1091,42 @@
                     <h3 style="text-align: center; margin-bottom: 20px;">
                         <i class="fab fa-discord"></i> Вход через Discord
                     </h3>
+                    
+                    <!-- Инструкция по Discord авторизации -->
+                    <div class="discord-instruction">
+                        <h4 style="margin-bottom: 15px; color: var(--warning-color);">
+                            <i class="fas fa-info-circle"></i> Важная информация
+                        </h4>
+                        
+                        <div class="instruction-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Нажмите кнопку "Войти с помощью Discord"</div>
+                                <div class="step-description">Вы будете перенаправлены на страницу авторизации Discord</div>
+                            </div>
+                        </div>
+
+                        <div class="instruction-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Авторизуйтесь в Discord</div>
+                                <div class="step-description">Введите свои данные Discord и разрешите доступ приложению</div>
+                            </div>
+                        </div>
+
+                        <div class="instruction-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Вернитесь на сайт</div>
+                                <div class="step-description">После авторизации в Discord вернитесь на этот сайт вручную</div>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Внимание!</h4>
+                            <p>После авторизации в Discord вы можете увидеть ошибку 404 - это нормально! Просто вернитесь на сайт <strong>https://krasnodar-rp-business.github.io</strong> вручную.</p>
+                        </div>
+                    </div>
                     
                     <button class="btn btn-discord" onclick="loginWithDiscord()" 
                             style="width: 100%; padding: 15px; margin: 10px 0; font-size: 16px;">
@@ -1515,6 +1593,11 @@
             const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}&state=${state}&prompt=none`;
             
             showSyncStatus('Перенаправление на авторизацию Discord...', 'info');
+            
+            // Показываем дополнительное уведомление
+            setTimeout(() => {
+                alert('💡 ВАЖНО: После авторизации в Discord просто вернитесь на сайт https://krasnodar-rp-business.github.io вручную. Ошибка 404 - это нормально!');
+            }, 500);
             
             // Редирект на Discord авторизацию
             window.location.href = authUrl;
