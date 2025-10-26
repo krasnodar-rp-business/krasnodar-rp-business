@@ -1101,6 +1101,58 @@
             color: white;
         }
 
+        /* ФОРМЫ РЕГИСТРАЦИИ */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .auth-tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .auth-tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--background-color);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-color);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
         /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
             .container {
@@ -1356,32 +1408,67 @@
 
         <!-- Секция авторизации -->
         <div class="auth-section" id="authSection">
-            <div class="auth-container discord-login">
-                <h3><i class="fab fa-discord"></i> Вход через Discord</h3>
-                <p>Для доступа к системе необходимо войти через Discord</p>
-                
-                <div class="demo-mode">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <strong>Внимание:</strong> Для работы авторизации нужен серверный обработчик
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="loginTab">Вход</div>
+                    <div class="auth-tab" id="registerTab">Регистрация</div>
                 </div>
-                
-                <button class="btn btn-discord" id="discordLoginBtn" style="width: 100%; margin-top: 20px;">
-                    <i class="fab fa-discord"></i> Войти через Discord
-                </button>
-                
-                <div class="discord-features">
-                    <h4><i class="fas fa-star"></i> Преимущества входа через Discord</h4>
-                    <div class="feature-item">
-                        <i class="fas fa-check"></i>
-                        <span>Быстрый и безопасный вход</span>
+
+                <!-- Форма входа -->
+                <div id="loginForm">
+                    <h3><i class="fas fa-sign-in-alt"></i> Вход в систему</h3>
+                    
+                    <div class="demo-mode">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Вход через Discord временно не работает!</strong> Используйте обычную регистрацию
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-check"></i>
-                        <span>Синхронизация с сервером Discord</span>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ник в Discord</label>
+                        <input type="text" class="form-input" id="loginUsername" placeholder="Введите ваш ник">
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-check"></i>
-                        <span>Автоматическое определение ролей</span>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" class="form-input" id="loginPassword" placeholder="Введите пароль">
+                    </div>
+                    
+                    <button class="btn btn-primary" id="loginBtn" style="width: 100%; margin-top: 20px;">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+
+                    <div class="demo-mode" style="margin-top: 15px;">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Админы:</strong> Используйте свои заранее установленные пароли
+                    </div>
+                </div>
+
+                <!-- Форма регистрации -->
+                <div id="registerForm" class="hidden">
+                    <h3><i class="fas fa-user-plus"></i> Регистрация</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ник в Discord</label>
+                        <input type="text" class="form-input" id="registerUsername" placeholder="Введите ваш ник">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" class="form-input" id="registerPassword" placeholder="Придумайте пароль">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Подтвердите пароль</label>
+                        <input type="password" class="form-input" id="registerConfirmPassword" placeholder="Повторите пароль">
+                    </div>
+                    
+                    <button class="btn btn-primary" id="registerBtn" style="width: 100%; margin-top: 20px;">
+                        <i class="fas fa-user-plus"></i> Зарегистрироваться
+                    </button>
+
+                    <div class="demo-mode" style="margin-top: 15px;">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>Для получения админки:</strong> Обратитесь к разработчику
                     </div>
                 </div>
             </div>
@@ -1478,27 +1565,19 @@
     </div>
 
     <script>
-        // Конфигурация Discord OAuth
-        const DISCORD_CONFIG = {
-            clientId: '1416718951647543297',
-            redirectUri: 'https://krasnodar-rp-business.github.io/krasnodar-rp-business/',
-            scope: 'identify email',
-            responseType: 'code'
-        };
-
         // Вебхук для покупки бизнеса
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1429351279708078172/s3f3rn9GuzGQPJ3cyI3LdiD5n1BZ7CnXOl1G6NLhSyMITt1BMGGCFkEO37RiB5JVY71A';
 
-        // ID администраторов
-        const adminIds = [
-            "939782469933236254", // ParadiseWorker 🌴
-            "643132158839619642", // Artmit1
-            "1089226493370060810", // Ceris
-            "1303970428326510645", // ★Flykick
-            "735120136918532258", // ! ПАПА МАГА
-            "816658515082346497", // ★ 𝐛𝐥𝐚𝐜𝐤
-            "1157039781520343152" // ᵇˡᵘᵇʸᵈʸ𝑒𝑐ℎ𝑜🩸
-        ];
+        // Админы с паролями
+        const adminAccounts = {
+            "Artmit1": { password: "admin123", id: "643132158839619642" },
+            "ParadiseWorker": { password: "paradise456", id: "939782469933236254" },
+            "Ceris": { password: "ceris789", id: "1089226493370060810" },
+            "Flykick": { password: "flykick000", id: "1303970428326510645" },
+            "ПАПА МАГА": { password: "maga111", id: "735120136918532258" },
+            "black": { password: "black222", id: "816658515082346497" },
+            "blubydyeho": { password: "bluby333", id: "1157039781520343152" }
+        };
 
         // Данные бизнесов (обновленные согласно вашим данным)
         const businesses = [
@@ -1861,7 +1940,12 @@
         const themeToggle = document.getElementById('themeToggle');
         const themeSelector = document.getElementById('themeSelector');
         const closeThemeSelector = document.getElementById('closeThemeSelector');
-        const discordLoginBtn = document.getElementById('discordLoginBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
         const refreshBtn = document.getElementById('refreshBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const buyBusinessBtn = document.getElementById('buyBusinessBtn');
@@ -1875,7 +1959,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             initApp();
             setupEventListeners();
-            checkAuthCodeInURL();
         });
 
         // Функция отправки вебхука при покупке бизнеса
@@ -1929,80 +2012,6 @@
             }
         }
 
-        // Функция авторизации через Discord
-        function loginWithDiscord() {
-            const authUrl = `https://discord.com/api/oauth2/authorize?` +
-                `client_id=${DISCORD_CONFIG.clientId}` +
-                `&redirect_uri=${encodeURIComponent(DISCORD_CONFIG.redirectUri)}` +
-                `&response_type=${DISCORD_CONFIG.responseType}` +
-                `&scope=${DISCORD_CONFIG.scope}`;
-            
-            showLoadingScreen('Перенаправление на Discord...', 'Ожидание авторизации');
-            window.location.href = authUrl;
-        }
-
-        // Проверяем наличие кода авторизации в URL
-        function checkAuthCodeInURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const authCode = urlParams.get('code');
-            const error = urlParams.get('error');
-            
-            if (error) {
-                showSyncStatus(`Ошибка авторизации: ${error}`, 'error');
-                cleanURL();
-                return;
-            }
-            
-            if (authCode) {
-                showLoadingScreen('Завершение авторизации...', 'Discord');
-                handleAuthCode(authCode);
-            }
-        }
-
-        // Обработка кода авторизации
-        async function handleAuthCode(code) {
-            try {
-                // ВАЖНО: Для реальной работы нужен серверный обработчик
-                // Этот код покажет демо-режим с реальным пользователем
-                
-                // Имитация успешной авторизации с реальным пользователем
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Создаем демо-пользователя с реальными данными
-                const demoUser = {
-                    id: "643132158839619642", // Artmit1
-                    username: "Artmit1",
-                    avatar: null,
-                    discriminator: "0000",
-                    global_name: "Artmit1",
-                    display_name: "Artmit1"
-                };
-                
-                // Сохраняем данные пользователя
-                localStorage.setItem('discord_user', JSON.stringify(demoUser));
-                localStorage.setItem('discord_access_token', 'demo_token_' + Date.now());
-                
-                currentUser = demoUser;
-                isAdmin = adminIds.includes(demoUser.id);
-                
-                showSyncStatus(`Добро пожаловать, ${demoUser.username}!`, 'success');
-                cleanURL();
-                showMainContent();
-                
-            } catch (error) {
-                console.error('Error during authentication:', error);
-                showSyncStatus('Ошибка авторизации. Попробуйте еще раз.', 'error');
-                hideLoadingScreen();
-                cleanURL();
-            }
-        }
-
-        // Очистка URL от параметров авторизации
-        function cleanURL() {
-            const cleanURL = window.location.origin + window.location.pathname;
-            window.history.replaceState({}, document.title, cleanURL);
-        }
-
         // Инициализация приложения
         function initApp() {
             showLoadingScreen('Инициализация системы...', 'Пожалуйста, подождите');
@@ -2048,8 +2057,13 @@
                 });
             });
             
+            // Табы авторизации
+            loginTab.addEventListener('click', () => switchAuthTab('login'));
+            registerTab.addEventListener('click', () => switchAuthTab('register'));
+            
             // Авторизация
-            discordLoginBtn.addEventListener('click', loginWithDiscord);
+            loginBtn.addEventListener('click', login);
+            registerBtn.addEventListener('click', register);
             logoutBtn.addEventListener('click', logout);
             
             // Действия
@@ -2086,19 +2100,136 @@
             });
         }
 
+        // Переключение табов авторизации
+        function switchAuthTab(tab) {
+            if (tab === 'login') {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+            } else {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        // Функция входа
+        function login() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                showSyncStatus('Заполните все поля', 'error');
+                return;
+            }
+
+            showLoadingScreen('Вход в систему...', 'Проверка данных');
+
+            setTimeout(() => {
+                // Проверяем админский аккаунт
+                if (adminAccounts[username] && adminAccounts[username].password === password) {
+                    // Админский вход
+                    currentUser = {
+                        username: username,
+                        id: adminAccounts[username].id,
+                        isAdmin: true
+                    };
+                    isAdmin = true;
+                    
+                    localStorage.setItem('current_user', JSON.stringify(currentUser));
+                    showSyncStatus(`Добро пожаловать, ${username}! (Админ)`, 'success');
+                    showMainContent();
+                } else {
+                    // Обычный пользователь
+                    const savedUsers = JSON.parse(localStorage.getItem('registered_users') || '{}');
+                    if (savedUsers[username] && savedUsers[username].password === password) {
+                        currentUser = {
+                            username: username,
+                            id: savedUsers[username].id,
+                            isAdmin: false
+                        };
+                        isAdmin = false;
+                        
+                        localStorage.setItem('current_user', JSON.stringify(currentUser));
+                        showSyncStatus(`Добро пожаловать, ${username}!`, 'success');
+                        showMainContent();
+                    } else {
+                        showSyncStatus('Неверный логин или пароль', 'error');
+                        hideLoadingScreen();
+                    }
+                }
+            }, 1500);
+        }
+
+        // Функция регистрации
+        function register() {
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+            if (!username || !password || !confirmPassword) {
+                showSyncStatus('Заполните все поля', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showSyncStatus('Пароли не совпадают', 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showSyncStatus('Пароль должен быть не менее 4 символов', 'error');
+                return;
+            }
+
+            showLoadingScreen('Регистрация...', 'Создание аккаунта');
+
+            setTimeout(() => {
+                const savedUsers = JSON.parse(localStorage.getItem('registered_users') || '{}');
+                
+                if (savedUsers[username]) {
+                    showSyncStatus('Пользователь с таким ником уже существует', 'error');
+                    hideLoadingScreen();
+                    return;
+                }
+
+                // Создаем нового пользователя
+                savedUsers[username] = {
+                    password: password,
+                    id: 'user_' + Date.now(),
+                    registeredAt: new Date().toISOString()
+                };
+
+                localStorage.setItem('registered_users', JSON.stringify(savedUsers));
+
+                // Автоматически входим
+                currentUser = {
+                    username: username,
+                    id: savedUsers[username].id,
+                    isAdmin: false
+                };
+                isAdmin = false;
+                
+                localStorage.setItem('current_user', JSON.stringify(currentUser));
+                showSyncStatus(`Аккаунт ${username} успешно создан!`, 'success');
+                showMainContent();
+            }, 1500);
+        }
+
         // Проверка статуса авторизации
         function checkAuthStatus() {
-            const userData = localStorage.getItem('discord_user');
+            const userData = localStorage.getItem('current_user');
             
             if (userData) {
                 try {
                     currentUser = JSON.parse(userData);
-                    isAdmin = adminIds.includes(currentUser.id);
+                    isAdmin = currentUser.isAdmin || false;
                     showMainContent();
                 } catch (error) {
                     console.error('Error parsing user data:', error);
-                    localStorage.removeItem('discord_user');
-                    localStorage.removeItem('discord_access_token');
+                    localStorage.removeItem('current_user');
                     showAuthScreen();
                 }
             } else {
@@ -2135,8 +2266,7 @@
 
         // Выход из системы
         function logout() {
-            localStorage.removeItem('discord_user');
-            localStorage.removeItem('discord_access_token');
+            localStorage.removeItem('current_user');
             currentUser = null;
             isAdmin = false;
             showAuthScreen();
@@ -2146,14 +2276,7 @@
         // Обновление информации о пользователе
         function updateUserInfo() {
             if (currentUser) {
-                userName.textContent = currentUser.username;
-                
-                // Отображаем аватар если есть
-                if (currentUser.avatar) {
-                    const avatarUrl = `https://cdn.discordapp.com/avatars/${currentUser.id}/${currentUser.avatar}.png`;
-                    userAvatar.src = avatarUrl;
-                    userAvatarContainer.classList.remove('hidden');
-                }
+                userName.textContent = currentUser.username + (isAdmin ? ' 👑' : '');
             }
         }
 
