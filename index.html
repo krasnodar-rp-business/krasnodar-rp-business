@@ -1486,6 +1486,9 @@
             responseType: 'code'
         };
 
+        // Вебхук для покупки бизнеса
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1429351279708078172/s3f3rn9GuzGQPJ3cyI3LdiD5n1BZ7CnXOl1G6NLhSyMITt1BMGGCFkEO37RiB5JVY71A';
+
         // ID администраторов
         const adminIds = [
             "939782469933236254", // ParadiseWorker 🌴
@@ -1875,6 +1878,57 @@
             checkAuthCodeInURL();
         });
 
+        // Функция отправки вебхука при покупке бизнеса
+        async function sendPurchaseWebhook(businessName, price, userName) {
+            try {
+                const webhookData = {
+                    content: null,
+                    embeds: [
+                        {
+                            title: "🛒 Покупка бизнеса",
+                            description: `Пользователь **${userName}** купил бизнес`,
+                            color: 0x00ff00,
+                            fields: [
+                                {
+                                    name: "Бизнес",
+                                    value: businessName,
+                                    inline: true
+                                },
+                                {
+                                    name: "Цена",
+                                    value: price,
+                                    inline: true
+                                },
+                                {
+                                    name: "Покупатель",
+                                    value: userName,
+                                    inline: true
+                                }
+                            ],
+                            timestamp: new Date().toISOString(),
+                            footer: {
+                                text: "Krasnodar RP Business System"
+                            }
+                        }
+                    ]
+                };
+
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(webhookData)
+                });
+
+                if (!response.ok) {
+                    console.error('Ошибка отправки вебхука:', response.status);
+                }
+            } catch (error) {
+                console.error('Ошибка отправки вебхука:', error);
+            }
+        }
+
         // Функция авторизации через Discord
         function loginWithDiscord() {
             const authUrl = `https://discord.com/api/oauth2/authorize?` +
@@ -2174,7 +2228,7 @@
                     ${business.note ? `<div class="business-note"><i class="fas fa-info-circle"></i> ${business.note}</div>` : ''}
                     <div class="business-meta">
                         <div class="business-price">${business.price}</div>
-                        <button class="buy-btn" ${business.status !== 'available' ? 'disabled' : ''}>
+                        <button class="buy-btn" ${business.status !== 'available' ? 'disabled' : ''} data-business-id="${business.id}" data-business-name="${business.name}" data-business-price="${business.price}">
                             ${business.status === 'available' ? 'Купить' : 'Продано'}
                         </button>
                     </div>
@@ -2182,6 +2236,37 @@
                 
                 businessGrid.appendChild(businessCard);
             });
+
+            // Добавляем обработчики для кнопок покупки
+            document.querySelectorAll('.buy-btn:not(:disabled)').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const businessId = this.getAttribute('data-business-id');
+                    const businessName = this.getAttribute('data-business-name');
+                    const businessPrice = this.getAttribute('data-business-price');
+                    purchaseBusiness(businessId, businessName, businessPrice);
+                });
+            });
+        }
+
+        // Функция покупки бизнеса
+        function purchaseBusiness(businessId, businessName, businessPrice) {
+            if (!currentUser) {
+                showSyncStatus('Для покупки бизнеса необходимо авторизоваться', 'error');
+                return;
+            }
+
+            showSyncStatus(`Покупка бизнеса: ${businessName}...`, 'warning');
+            
+            // Имитация процесса покупки
+            setTimeout(() => {
+                // Отправляем вебхук
+                sendPurchaseWebhook(businessName, businessPrice, currentUser.username);
+                
+                showSyncStatus(`Бизнес "${businessName}" успешно куплен!`, 'success');
+                
+                // Обновляем интерфейс
+                refreshData();
+            }, 2000);
         }
 
         // Применение фильтров
@@ -2320,7 +2405,7 @@
 
         // Показать модальное окно покупки бизнеса
         function showBuyBusinessModal() {
-            showSyncStatus('Функция покупки бизнеса в разработке', 'warning');
+            showSyncStatus('Выберите бизнес из списка для покупки', 'info');
         }
 
         // Показать модальное окно добавления бизнеса
